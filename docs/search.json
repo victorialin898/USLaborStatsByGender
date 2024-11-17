@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "US Labor Stats By Gender",
     "section": "",
-    "text": "1 Introduction",
+    "text": "1 Introduction\nIn discussions about wage disparity, the statistic that women make 77 cents on the dollar vs men is consistently cited. However, at such a high level, this statistic fails to address trends, facets, and stories about the underlying data. For example, how do factors like childcare, time spent doing housework, and occupation type affect the statistics? We strongly feel that the intersectionalities of (1) gender and familial responsibilities, (2) gender and occupation, and (3) gender and ethnicity have interesting (and potentially devastating) dynamics with regards to labor outcomes that are not illuminated by the simple “77 cent on the dollar” statistic. Thus for our final project, we will be exploring the effects of gender, familial status, ethnicity, and occupation types on labor outcomes, in order to unearth insights into what makes up this “77 cents on the dollar” claim. We will be using data from nationwide surveys conducted by the Bureau of Labor Statistics for our analysis. These surveys contain measures of interest such as the aggregate employment status of the population by sex, marital status, and presence/age of children under 18, wage and salary of women and men by major occupational groups, and earnings by gender and ethnicity.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
