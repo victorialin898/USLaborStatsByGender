@@ -6,11 +6,11 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE"
+  title: "US Labor Stats By Gender"
   author:
-    - AUTHOR1 (UNI1)
-    - AUTHOR2 (UNI2)
-  repo-url: https://github.com/YOUR_GITHUB_ACCOUNT/REPO_NAME
+    - Marissa Inga (mi2548)
+    - Victoria Lin (vl2534)
+  repo-url: https://github.com/victorialin898/USLaborStatsByGender
   date: today
   page-footer:
     right: |
