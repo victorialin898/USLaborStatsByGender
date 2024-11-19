@@ -1,0 +1,21 @@
+Gender,Marital_Status,Characteristic,Number_of_workers_thousands,Median_weekly_earnings,Standard_error_of_median
+Women,"married spouse present","Total",26956,1143,4
+Women,"married spouse present","With children under 18 years old",12337,1190,10
+Women,"married spouse present","With children 6 to 17 none younger",7369,1175,11
+Women,"married spouse present","With children under 6 years old",4968,1213,15
+Women,"married spouse present","With no children under 18 years old",14619,1100,8
+Women,"other marital statuses","Total",27251,906,3
+Women,"other marital statuses","With children under 18 years old",5805,844,9
+Women,"other marital statuses","With children 6 to 17 none younger",3748,901,10
+Women,"other marital statuses","With children under 6 years old",2057,772,8
+Women,"other marital statuses","With no children under 18 years old",21446,921,4
+Men,"married spouse present","Total",36963,1421,6
+Men,"married spouse present","With children under 18 years old",18953,1458,9
+Men,"married spouse present","With children 6 to 17 none younger",10664,1496,13
+Men,"married spouse present","With children under 6 years old",8288,1414,13
+Men,"married spouse present","With no children under 18 years old",18010,1387,8
+Men,"other marital statuses","Total",29737,993,4
+Men,"other marital statuses","With children under 18 years old",2896,1014,9
+Men,"other marital statuses","With children 6 to 17 none younger",1541,1157,19
+Men,"other marital statuses","With children under 6 years old",1355,928,16
+Men,"other marital statuses","With no children under 18 years old",26842,990,4

@@ -7,55 +7,81 @@ For this project, we will draw on several key datasets from the U.S. Bureau of L
 
 The main dataset we will use comes out of the Current Population Survey (CPS). The CPS is a monthly survey conducted by the U.S. Census Bureau on behalf of the BLS, collecting data from approximately 60,000 eligible households across the United States. It provides detailed information on employment, earnings, demographic characteristics, and other labor market factors. Data is gathered through household interviews using a rotating panel design to ensure both consistency and coverage of the U.S. civilian noninstitutional population aged 16 and older. The CPS data includes a rich set of variables, such as employment status, wages, hours worked, and demographic factors like gender, ethnicity, and family structure (https://www.bls.gov/cps/earnings-faqs.htm#blscensus). The data we are looking at is aggregated yearly.
 
-The data is available in multiple formats, including public-use files and through the BLS Public Data API, which offers programmatic access to time-series datasets. To streamline the data retrieval process, we will use the blsAPI package developed by Mike A. Silva, which simplifies API interactions in R. This package allows us to query specific series IDs, retrieve data in JSON format, and convert it into structured data frames for analysis. (https://github.com/mikeasilva/blsAPI).
+We will also use data from the the American Time Use Survey (ATUS). ATUS is a national survey conducted by BLS that collects data on how people aged 15 and older allocate their time across various activities, such as work, leisure, and household chores, through a 24-hour time diary recall to better understand patterns of time use across different demographic groups. This is also aggregated yearly (https://www.bls.gov/tus/documents.htm)
 
-A known challenge with the blsAPI package is the need to specify series IDs, which are alphanumeric codes that identify specific datasets (e.g., wage or employment data for a demographic group). These series IDs are published on the BLS website, but are not intuitive (e.g., "LNS14000003" is for the unemployment rate for women). This requires us to navigate complex BLS documentation and can lead to errors if the wrong ID is selected. To address this, we will carefully identify the correct series IDs using BLS resources and document them for transparency and reproducibility. Also, the BLS has information from 1979-2023 on its site, but the API only has access from 2003-2023.
+Both datasets several limitations, including nonresponse bias, misclassification of employment status, and recall bias due to reliance on self-reporting. Additionally, CPS struggles with accurately capturing nontraditional employment, has limited detail on job quality, and may be affected by changes in methodology and question design over time, which complicates long-term comparisons.
 
-The api pulls data in a way where we see the period the data was pulled for (timeframe and frequency) and the value of the data of interest. Again, the value of interest is based on the series ID, so we need to keep a careful mapping.
+These datasets are both available through the BLS data finder (https://www.bls.gov/data/tools.htm).
+We have decided to save the data from the BLS site as CSVs and import into R for this project.
 
-### Example Data Pull from blsAPI
-
-Below is an example data pull from the blsAPI.
-
-```{r}
-# Install needed packages
-install.packages("httr")
-install.packages("jsonlite")
-install.packages("dplyr")
-install.packages("ggplot2")
-
-library(httr)
-library(jsonlite)
-library(dplyr)
-library(ggplot2)
-
-install.packages("devtools")
-remotes::install_github("mikeasilva/blsAPI")
-
-library(blsAPI)
-
-```
-
-```{r}
-
-# FMUP2378862 - Employment-population ratio - Women with own children 6 to 17, none younger
-
-payload <- list(
-  'seriesid' = c('FMUP2378862'),
-  'startyear' = 2018,
-  'endyear' = 2022
-)
-response <- blsAPI(payload)
-parsed_data <- fromJSON(response)
-
-res <- parsed_data$Results
-series <- res$series
-print(series$data)
-
-```
 
 ## Missing value analysis
 
 
+```{r}
+# Add libraries and read in data
+library(readr)
+library(dplyr)
+library(naniar)   # For missing data visualization and summaries
+library(visdat)
+library(ggplot2)
+
+
+ATUS2023 <- read_csv("data/ATUS2023.csv", show_col_types = FALSE)
+MedianWeeklyEarningByPresenceOfChildren <- read_csv("data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv", show_col_types = FALSE)
+MedianWeeklyEarningByRace <- read_csv("data/MedianWeeklyEarningByRaceTable18.csv", show_col_types = FALSE)
+MedianWeeklyEarningsByGenderEducation <- read_csv("data/MedianWeeklyEarningsByGenderEducationTable24.csv", show_col_types = FALSE)
+MedianHourlyEarningsHispanicByAge <- read_csv("data/MedianHourlyEarningsHispanicByAgeTable25.csv", show_col_types = FALSE)
+MedianHoursWorkedByRaceGender <- read_csv("data/MedianHoursWorkedByRaceGenderTable26.csv", show_col_types = FALSE)
+
+```
+
+
+```{r}
+library(patchwork)
+
+ATUS2023Missing <- gg_miss_var(ATUS2023) + ggtitle("ATUS2023") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+
+MedianWeeklyEarningByPresenceOfChildrenMissing <- gg_miss_var(MedianWeeklyEarningByPresenceOfChildren) + ggtitle("MedianWeeklyEarningByPresenceOfChildrenMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+
+MedianWeeklyEarningByRaceMissing <- gg_miss_var(MedianWeeklyEarningByRace) + ggtitle("MedianWeeklyEarningByRace") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+
+MedianWeeklyEarningsByGenderEducationMissing <- gg_miss_var(MedianWeeklyEarningsByGenderEducation) + ggtitle("MedianWeeklyEarningsByGenderEducationMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+
+MedianHourlyEarningsHispanicByAgeMissing <- gg_miss_var(MedianHourlyEarningsHispanicByAge) + ggtitle("MedianHourlyEarningsHispanicByAgeMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+
+MedianHoursWorkedByRaceGenderMissing <- gg_miss_var(MedianHoursWorkedByRaceGender) + ggtitle("MedianHoursWorkedByRaceGender") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+
+firstThird <- (ATUS2023Missing | MedianWeeklyEarningByPresenceOfChildrenMissing)
+secondThird <- (MedianWeeklyEarningByRaceMissing | MedianWeeklyEarningsByGenderEducationMissing)
+thirdThird <- (MedianHourlyEarningsHispanicByAgeMissing | MedianHoursWorkedByRaceGenderMissing)
+
+( firstThird/ secondThird/ thirdThird) + plot_annotation(title="Missing Value Frequencies Across Datasets in Use")
+```
+
+`gg_miss_var`can help us visualize the frequency of missing data.
+For most datasets we see no missing data. The exception is for the MedianWeeklyEarningByRace and MedianHoursWorkedByRaceGender sets.
+Below, we plot this out and see BLS only started including the Asian group in the Current Population Survey in 2000, vs started with the rest in 1979.
+
+
+```{r}
+# Plot "Asian" variable by "Year"
+ggplot(MedianWeeklyEarningByRace, aes(x = Year, y = Asian)) +
+  geom_line(color = "blue", size = 1) +  # Line plot, blue color
+  geom_point(color = "red") +             # Optional: Add points for each year
+  labs(title = "Median Weekly Earnings for Asian Group by Year",
+       x = "Year",
+       y = "Median Weekly Earnings (Asian)") +
+  theme_minimal()
+
+
+ggplot(MedianHoursWorkedByRaceGender, aes(x = Year, y = Asian)) +
+  geom_line(color = "blue", size = 1) +  # Line plot, blue color
+  geom_point(color = "red") +             # Optional: Add points for each year
+  labs(title = "Median Hours Worked By for Asian Group By Year",
+       x = "Year",
+       y = "Median Hours Worked (Asian)") +
+  theme_minimal()
+```
 
 
