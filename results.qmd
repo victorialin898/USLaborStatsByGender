@@ -1,1 +1,9 @@
 # Results
+
+Our analysis of the American Time Use Survey (ATUS) and the Current Population Survey (CPS) provides insight into how various demographic factors such as child status, race, and occupation shape the wage gap. We also explore how these relationships have evolved over time. Below, we summarize the key findings from our analysis, illustrated through various visualizations.
+
+
+## Visualizing the Gender Wage Gap
+
+
+
