@@ -1,1 +1,62 @@
 # Results
+
+
+```{r}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(forcats)
+
+data <- MedianWeeklyEarningsByOccupationAggregate
+
+# Reshape the data to long format for easier plotting
+data_long <- data %>%
+  gather(key = "gender", value = "workers", men_number_of_workers, women_number_of_workers) %>%
+  gather(key = "earnings_gender", value = "earnings", men_median_weekly_earnings, women_median_weekly_earnings) %>%
+  separate(earnings_gender, into = c("gender_earnings", "gender_type"), sep = "_") %>%
+  select(-gender_earnings)
+
+# Limit the data to top 15 occupations, lump the rest into 'Other' after reshaping
+data_long$occupation2 <- fct_lump(data_long$occupation, n = 5)
+
+# Plot 1: Bar plot of men vs women participation (number of workers) in the top 15 occupations
+ggplot(data_long, aes(x = occupation2, y = workers, fill = gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Men vs Women Participation in Occupations", 
+       x = "Occupation", 
+       y = "Number of Workers") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x labels by 45 degrees
+  scale_fill_manual(values = c("skyblue", "pink")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 10),  # Adjust size for better readability
+        plot.title = element_text(size = 14, face = "bold")) # Title formatting
+```
+
+
+```{r}
+
+# Reshape the data to long format for ggplot
+data <- MedianWeeklyEarningsByOccupationAggregate
+
+# Reshape the data to long format for easier plotting
+data_long <- data |>
+  gather(key = "gender", value = "workers", men_number_of_workers, women_number_of_workers) %>%
+  gather(key = "earnings_gender", value = "earnings", men_median_weekly_earnings, women_median_weekly_earnings) %>%
+  separate(earnings_gender, into = c("gender_earnings", "gender_type"), sep = "_") %>%
+  select(-gender_earnings)
+
+
+# Create the bar plot using ggplot2
+ggplot(data_long, aes(x = Occupation, y = Median_Weekly_Earnings, fill = Gender)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7) +
+  scale_fill_manual(values = c("blue", "pink")) +  # Set colors for men and women
+  labs(title = "Median Weekly Earnings by Occupation (Men vs. Women)",
+       x = "occupation",
+       y = "Median Weekly Earnings ($)",
+       fill = "Gender") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels
+        legend.position = "top") +
+  coord_flip()
+
+```
