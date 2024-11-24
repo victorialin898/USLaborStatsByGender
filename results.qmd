@@ -1,62 +1,68 @@
 # Results
 
-
 ```{r}
-library(ggplot2)
-library(tidyr)
-library(dplyr)
-library(forcats)
 
-data <- MedianWeeklyEarningsByOccupationAggregate
-
-# Reshape the data to long format for easier plotting
-data_long <- data %>%
-  gather(key = "gender", value = "workers", men_number_of_workers, women_number_of_workers) %>%
-  gather(key = "earnings_gender", value = "earnings", men_median_weekly_earnings, women_median_weekly_earnings) %>%
-  separate(earnings_gender, into = c("gender_earnings", "gender_type"), sep = "_") %>%
-  select(-gender_earnings)
-
-# Limit the data to top 15 occupations, lump the rest into 'Other' after reshaping
-data_long$occupation2 <- fct_lump(data_long$occupation, n = 5)
-
-# Plot 1: Bar plot of men vs women participation (number of workers) in the top 15 occupations
-ggplot(data_long, aes(x = occupation2, y = workers, fill = gender)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Men vs Women Participation in Occupations", 
-       x = "Occupation", 
-       y = "Number of Workers") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x labels by 45 degrees
-  scale_fill_manual(values = c("skyblue", "pink")) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 10),  # Adjust size for better readability
-        plot.title = element_text(size = 14, face = "bold")) # Title formatting
-```
-
-
-```{r}
 
 # Reshape the data to long format for ggplot
 data <- MedianWeeklyEarningsByOccupationAggregate
 
-# Reshape the data to long format for easier plotting
-data_long <- data |>
-  gather(key = "gender", value = "workers", men_number_of_workers, women_number_of_workers) %>%
-  gather(key = "earnings_gender", value = "earnings", men_median_weekly_earnings, women_median_weekly_earnings) %>%
-  separate(earnings_gender, into = c("gender_earnings", "gender_type"), sep = "_") %>%
-  select(-gender_earnings)
 
+# Reshape the data to long format
+data_long <- data %>%
+  select(occupation, men_median_weekly_earnings, women_median_weekly_earnings) %>%
+  gather(key = "gender", value = "median_weekly_earnings", men_median_weekly_earnings, women_median_weekly_earnings) %>%
+  mutate(gender = factor(gender, levels = c("men_median_weekly_earnings", "women_median_weekly_earnings"), 
+                        labels = c("Men", "Women")))
 
-# Create the bar plot using ggplot2
-ggplot(data_long, aes(x = Occupation, y = Median_Weekly_Earnings, fill = Gender)) +
+# Create the bar plot
+ggplot(data_long, aes(x = occupation, y = median_weekly_earnings, fill = gender)) +
   geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7) +
-  scale_fill_manual(values = c("blue", "pink")) +  # Set colors for men and women
+  scale_fill_manual(values = c("blue", "pink")) +  # Assign colors for men and women
   labs(title = "Median Weekly Earnings by Occupation (Men vs. Women)",
-       x = "occupation",
+       x = "Occupation",
        y = "Median Weekly Earnings ($)",
        fill = "Gender") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels for readability
         legend.position = "top") +
   coord_flip()
+```
+
+```{r}
+# weighted to see which industries contribute to the disparity the most
+
+# Compute the weighted median earnings for men and women
+# Weighted median earnings for men
+data$weighted_men_earnings <- (data$men_median_weekly_earnings * data$men_number_of_workers)
+
+# Weighted median earnings for women
+data$weighted_women_earnings <- (data$women_median_weekly_earnings * data$women_number_of_workers)
+
+# Calculate total number of workers for each occupation (for normalization)
+data$total_workers <- data$men_number_of_workers + data$women_number_of_workers
+
+# Compute the weighted average earnings for men and women
+data$weighted_avg_men_earnings <- data$weighted_men_earnings / data$men_number_of_workers
+data$weighted_avg_women_earnings <- data$weighted_women_earnings / data$women_number_of_workers
+
+# Reshape the data to long format
+data_long <- data %>%
+  select(occupation, weighted_avg_men_earnings, weighted_avg_women_earnings) %>%
+  gather(key = "gender", value = "weighted_avg_earnings", weighted_avg_men_earnings, weighted_avg_women_earnings) %>%
+  mutate(gender = factor(gender, levels = c("weighted_avg_men_earnings", "weighted_avg_women_earnings"), 
+                        labels = c("Men", "Women")))
+
+# Create the weighted bar plot
+ggplot(data_long, aes(x = occupation, y = weighted_avg_earnings, fill = gender)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7) +
+  scale_fill_manual(values = c("blue", "pink")) +  # Assign colors for men and women
+  labs(title = "Weighted Median Weekly Earnings by Occupation (Men vs. Women)",
+       x = "Occupation",
+       y = "Weighted Median Weekly Earnings ($)",
+       fill = "Gender") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels for readability
+        legend.position = "top") +
+  coord_flip()  # Flip coordinates for better readability of occupation names
 
 ```
