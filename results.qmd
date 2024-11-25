@@ -66,3 +66,78 @@ ggplot(data_long, aes(x = occupation, y = weighted_avg_earnings, fill = gender))
   coord_flip()  # Flip coordinates for better readability of occupation names
 
 ```
+
+
+
+```{r}
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Assuming 'MedianWeeklyEarningsByOccupation' is your data frame, first filter for legal occupations
+legal_data <- MedianWeeklyEarningsByOccupation %>%
+  filter(occupation_group == "Legal occupations") %>%
+  select(occupation, 
+         total_number_of_workers, 
+         total_median_weekly_earnings, 
+         men_number_of_workers, 
+         men_median_weekly_earnings, 
+         women_number_of_workers, 
+         women_median_weekly_earnings)
+
+# Clean the data (remove commas and convert to numeric where needed)
+legal_data <- legal_data %>%
+  mutate(
+    men_median_weekly_earnings = as.numeric(gsub(",", "", men_median_weekly_earnings)),
+    women_median_weekly_earnings = as.numeric(gsub(",", "", women_median_weekly_earnings)),
+    men_number_of_workers = as.numeric(gsub(",", "", men_number_of_workers)),
+    women_number_of_workers = as.numeric(gsub(",", "", women_number_of_workers))
+  )
+
+# Calculate the pay gap ratio (women's earnings divided by men's earnings)
+legal_data$pay_gap_ratio <- legal_data$women_median_weekly_earnings / legal_data$men_median_weekly_earnings
+
+# Create a plot comparing the pay gap ratio for all occupations, including legal ones
+ggplot(legal_data, aes(x = occupation, y = pay_gap_ratio, fill = "Pay Gap Ratio")) +
+  geom_bar(stat = "identity", width = 0.7, fill = "purple") +
+  geom_hline(yintercept = 0.77, linetype = "dashed", color = "red", size = 1) +  # 77% pay gap line
+  labs(title = "Pay Gap Ratio by Occupation",
+       x = "Occupation",
+       y = "Pay Gap Ratio (Women to Men)",
+       fill = "Pay Gap Ratio") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels for readability
+        legend.position = "none") +
+  coord_flip()  # Flip coordinates for better readability of occupation names
+
+
+```
+
+
+```{r}
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+data <- MedianWeeklyEarningsByOccupationAggregate
+
+# Calculate the pay gap ratio (women's earnings divided by men's earnings)
+data$pay_gap_ratio <- data$women_median_weekly_earnings / data$men_median_weekly_earnings
+
+# Create a plot comparing the pay gap ratio for all occupations, including legal ones
+ggplot(data, aes(x = occupation, y = pay_gap_ratio, fill = "Pay Gap Ratio")) +
+  geom_bar(stat = "identity", width = 0.7, fill = "purple") +
+  geom_hline(yintercept = 0.77, linetype = "dashed", color = "red", size = 1) +  # 77% pay gap line
+  labs(title = "Pay Gap Ratio by Occupation",
+       x = "Occupation",
+       y = "Pay Gap Ratio (Women to Men)",
+       fill = "Pay Gap Ratio") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels for readability
+        legend.position = "none") +
+  coord_flip()  # Flip coordinates for better readability of occupation names
+
+
+```
