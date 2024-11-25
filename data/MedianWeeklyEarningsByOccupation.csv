@@ -1,254 +1,567 @@
-occupation,total_number_of_workers,total_median_weekly_earnings,men_number_of_workers,men_median_weekly_earnings,women_number_of_workers,women_median_weekly_earnings
-"Management, professional, and related occupations","56,077","1,527","27,070","1,778","29,007","1,349"
-"Management, business, and financial operations occupations","23,989","1,630","12,425","1,868","11,564","1,449"
-Management occupations,"15,762","1,730","8,731","1,900","7,032","1,483"
-Chief executives,"1,261","2,901",854,"2,983",407,"2,520"
-General and operations managers,"1,222","1,544",767,"1,689",456,"1,347"
-Legislators,6,–,3,–,3,–
-Advertising and promotions managers,47,–,29,–,18,–
-Marketing managers,508,"1,812",188,"1,911",320,"1,746"
-Sales managers,566,"2,004",390,"2,297",176,"1,688"
-Public relations and fundraising managers,114,"1,889",39,–,75,"1,733"
-Administrative services managers,75,"1,405",25,–,49,–
-Facilities managers,145,"1,436",114,"1,575",32,–
-Computer and information systems managers,781,"2,303",569,"2,313",212,"2,192"
-Financial managers,"1,355","1,757",607,"2,100",748,"1,497"
-Compensation and benefits managers,16,–,4,–,12,–
-Human resources managers,324,"1,756",79,"1,891",245,"1,706"
-Training and development managers,58,"1,976",27,–,31,–
-Industrial production managers,260,"1,875",212,"1,884",48,–
-Purchasing managers,234,"1,741",129,"1,879",105,"1,585"
-"Transportation, storage, and distribution managers",360,"1,262",277,"1,318",83,"1,219"
-"Farmers, ranchers, and other agricultural managers",116,"1,171",86,"1,216",30,–
-Construction managers,693,"1,680",611,"1,747",82,"1,431"
-Education and childcare administrators,941,"1,565",294,"1,870",647,"1,469"
-Architectural and engineering managers,174,"2,904",150,"2,887",24,–
-Food service managers,720,988,384,"1,121",336,924
-Funeral home managers,5,–,3,–,2,–
-Entertainment and recreation managers,53,"1,035",32,–,21,–
-Lodging managers,116,"1,257",42,–,74,"1,069"
-Medical and health services managers,767,"1,634",224,"1,914",543,"1,540"
-Natural sciences managers,36,–,14,–,22,–
-Postmasters and mail superintendents,16,–,4,–,12,–
-"Property, real estate, and community association managers",489,"1,263",189,"1,521",300,"1,143"
-Social and community service managers,410,"1,382",113,"1,501",297,"1,341"
-Emergency management directors,13,–,8,–,4,–
-"Personal service managers, all other",10,–,2,–,9,–
-"Managers, all other","3,872","1,738","2,263","1,887","1,609","1,536"
-Business and financial operations occupations,"8,227","1,517","3,694","1,674","4,533","1,406"
-"Agents and business managers of artists, performers, and athletes",29,–,15,–,14,–
-"Buyers and purchasing agents, farm products",8,–,5,–,3,–
-"Wholesale and retail buyers, except farm products",141,"1,125",57,"1,270",84,"1,029"
-"Purchasing agents, except wholesale, retail, and farm products",287,"1,370",134,"1,514",153,"1,216"
-"Claims adjusters, appraisers, examiners, and investigators",367,"1,370",153,"1,468",214,"1,306"
-Compliance officers,314,"1,458",145,"1,597",169,"1,377"
-Cost estimators,134,"1,355",114,"1,401",20,–
-Human resources workers,893,"1,273",226,"1,367",667,"1,259"
-"Compensation, benefits, and job analysis specialists",68,"1,252",16,–,51,"1,266"
-Training and development specialists,144,"1,342",63,"1,648",80,"1,222"
-Logisticians,182,"1,130",105,"1,207",78,994
-Project management specialists,886,"1,811",481,"1,919",405,"1,661"
-Management analysts,714,"1,890",360,"1,993",354,"1,817"
-"Meeting, convention, and event planners",98,"1,234",25,–,73,"1,203"
-Fundraisers,91,"1,481",22,–,69,"1,489"
-Market research analysts and marketing specialists,416,"1,590",164,"1,771",252,"1,552"
-"Business operations specialists, all other",474,"1,465",212,"1,737",262,"1,224"
-Accountants and auditors,"1,394","1,553",587,"1,644",807,"1,504"
-Property appraisers and assessors,53,"1,568",34,–,19,–
-Budget analysts,37,–,21,–,16,–
-Credit analysts,47,–,31,–,16,–
-Financial and investment analysts,358,"1,668",181,"1,760",177,"1,643"
-Personal financial advisors,412,"1,884",258,"2,082",154,"1,552"
-Insurance underwriters,96,"1,367",42,–,54,"1,224"
-Financial examiners,19,–,9,–,9,–
-Credit counselors and loan officers,304,"1,360",139,"1,457",165,"1,294"
-"Tax examiners and collectors, and revenue agents",78,"1,396",32,–,46,–
-Tax preparers,63,"1,154",14,–,49,–
-Other financial specialists,120,"1,481",51,"2,386",69,"1,233"
-Professional and related occupations,"32,088","1,458","14,645","1,736","17,443","1,278"
-Computer and mathematical occupations,"6,129","1,890","4,522","1,976","1,607","1,628"
-Computer and information research scientists,38,–,26,–,12,–
-Computer systems analysts,485,"1,701",291,"1,894",195,"1,487"
-Information security analysts,209,"2,133",169,"2,306",40,–
-Computer programmers,375,"1,889",300,"1,906",75,"1,760"
-Software developers,"2,104","2,283","1,682","2,296",422,"2,020"
-Software quality assurance analysts and testers,73,"1,751",44,–,29,–
-Web developers,57,"2,197",49,–,8,–
-Web and digital interface designers,59,"1,423",30,–,29,–
-Computer support specialists,616,"1,424",454,"1,478",162,"1,348"
-Database administrators and architects,108,"2,113",78,"2,283",30,–
-Network and computer systems administrators,200,"1,670",169,"1,830",30,–
-Computer network architects,97,"1,913",90,"1,967",8,–
-"Computer occupations, all other","1,104","1,597",833,"1,631",271,"1,430"
-Actuaries,45,–,27,–,18,–
-Mathematicians,4,–,4,–,0,–
-Operations research analysts,142,"1,917",65,"2,208",77,"1,665"
-Statisticians,44,–,25,–,18,–
-Other mathematical science occupations,369,"1,595",188,"1,668",181,"1,474"
-Architecture and engineering occupations,"3,374","1,785","2,821","1,864",553,"1,635"
-"Architects, except landscape and naval",162,"1,831",108,"1,893",55,"1,691"
-Landscape architects,19,–,11,–,9,–
-"Surveyors, cartographers, and photogrammetrists",37,–,31,–,6,–
-Aerospace engineers,177,"2,071",152,"2,086",25,–
-Agricultural engineers,4,–,4,–,0,–
-Bioengineers and biomedical engineers,27,–,21,–,6,–
-Chemical engineers,86,"2,285",67,"2,300",19,–
-Civil engineers,479,"1,752",401,"1,839",78,"1,465"
-Computer hardware engineers,69,"2,277",65,"2,252",4,–
-Electrical and electronics engineers,244,"2,056",216,"2,101",28,–
-Environmental engineers,29,–,22,–,7,–
-"Industrial engineers, including health and safety",278,"1,740",209,"1,766",69,"1,682"
-Marine engineers and naval architects,11,–,11,–,0,–
-Materials engineers,52,"2,220",46,–,6,–
-Mechanical engineers,423,"1,890",381,"1,901",43,–
-"Mining and geological engineers, including mining safety engineers",9,–,9,–,0,–
-Nuclear engineers,4,–,4,–,0,–
-Petroleum engineers,10,–,10,–,0,–
-"Engineers, all other",620,"1,938",528,"1,953",93,"1,904"
-Architectural and civil drafters,23,–,19,–,4,–
-Other drafters,73,"1,326",58,"1,259",15,–
-Electrical and electronic engineering technologists and technicians,93,"1,429",82,"1,442",12,–
-"Other engineering technologists and technicians, except drafters",359,"1,217",296,"1,287",63,982
-Surveying and mapping technicians,83,"1,001",73,"1,023",10,–
-"Life, physical, and social science occupations","1,583","1,541",830,"1,658",753,"1,445"
-Agricultural and food scientists,22,–,13,–,10,–
-Biological scientists,104,"1,404",47,–,57,"1,352"
-Conservation scientists and foresters,29,–,19,–,10,–
-Medical scientists,138,"1,826",69,"2,290",69,"1,537"
-"Life scientists, all other",8,–,3,–,5,–
-Astronomers and physicists,24,–,19,–,5,–
-Atmospheric and space scientists,13,–,9,–,4,–
-Chemists and materials scientists,96,"1,913",63,"2,180",33,–
-"Environmental scientists and specialists, including health",49,–,26,–,23,–
-"Geoscientists and hydrologists, except geographers",31,–,21,–,10,–
-"Physical scientists, all other",399,"1,731",220,"1,742",179,"1,649"
-Economists,22,–,14,–,8,–
-Survey researchers,3,–,2,–,2,–
-Clinical and counseling psychologists,5,–,2,–,3,–
-School psychologists,46,–,5,–,41,–
-Other psychologists,65,"1,726",16,–,49,–
-Sociologists,6,–,1,–,4,–
-Urban and regional planners,34,–,23,–,12,–
-Miscellaneous social scientists and related workers,42,–,20,–,22,–
-Agricultural and food science technicians,34,–,20,–,15,–
-Biological technicians,26,–,15,–,11,–
-Chemical technicians,58,"1,377",39,–,18,–
-Environmental science and geoscience technicians,13,–,11,–,2,–
-Nuclear technicians,8,–,3,–,5,–
-Social science research assistants,4,–,3,–,1,–
-"Other life, physical, and social science technicians",240,"1,306",99,"1,430",141,"1,275"
-Occupational health and safety specialists and technicians,63,"1,437",49,–,14,–
-Community and social service occupations,"2,334","1,147",735,"1,157","1,599","1,144"
-Substance abuse and behavioral disorder counselors,103,"1,138",24,–,79,"1,130"
-"Educational, guidance, and career counselors and advisors",338,"1,167",73,"1,227",264,"1,158"
-Marriage and family therapists,14,–,1,–,13,–
-Mental health counselors,123,"1,316",32,–,91,"1,372"
-Rehabilitation counselors,13,–,5,–,8,–
-"Counselors, all other",182,"1,070",51,"1,248",132,"1,011"
-"Child, family, and school social workers",64,"1,064",6,–,57,"1,080"
-Healthcare social workers,68,"1,028",18,–,50,"1,028"
-Mental health and substance abuse social workers,11,–,3,–,8,–
-"Social workers, all other",654,"1,233",113,"1,253",541,"1,228"
-Probation officers and correctional treatment specialists,79,"1,196",33,–,46,–
-Social and human service assistants,200,963,54,967,146,962
-Other community and social service specialists,82,"1,045",23,–,60,"1,055"
-Clergy,308,"1,084",261,"1,074",47,–
-"Directors, religious activities and education",58,"1,244",21,–,37,–
-"Religious workers, all other",37,–,17,–,20,–
-Legal occupations,"1,490","1,880",667,"2,301",823,"1,543"
-Lawyers,887,"2,438",514,"2,505",374,"2,330"
-Judicial law clerks,13,–,1,–,13,–
-"Judges, magistrates, and other judicial workers",66,"2,196",32,–,34,–
-Paralegals and legal assistants,371,"1,159",68,"1,425",303,"1,125"
-"Title examiners, abstractors, and searchers",83,"1,143",25,–,58,"1,030"
-"Legal support workers, all other",70,"1,320",28,–,42,–
-"Education, training, and library occupations","7,524","1,180","2,070","1,376","5,455","1,134"
-Postsecondary teachers,828,"1,723",462,"1,852",366,"1,565"
-Preschool and kindergarten teachers,523,791,18,–,505,789
-Elementary and middle school teachers,"3,117","1,243",673,"1,370","2,444","1,220"
-Secondary school teachers,859,"1,271",367,"1,347",493,"1,213"
-Special education teachers,308,"1,164",42,–,266,"1,156"
-Tutors,28,–,8,–,20,–
-Other teachers and instructors,584,"1,165",229,"1,242",355,"1,124"
-"Archivists, curators, and museum technicians",57,"1,289",22,–,35,–
-Librarians and media collections specialists,117,"1,118",24,–,93,"1,174"
-Library technicians,15,–,5,–,11,–
-Teaching assistants,940,698,184,772,757,685
-Other educational instruction and library workers,148,"1,310",37,–,111,"1,291"
-"Arts, design, entertainment, sports, and media occupations","1,858","1,343","1,036","1,381",822,"1,271"
-Artists and related workers,94,"1,543",57,"1,458",37,–
-Commercial and industrial designers,13,–,11,–,2,–
-Fashion designers,25,–,6,–,19,–
-Floral designers,25,–,6,–,19,–
-Graphic designers,248,"1,253",119,"1,294",130,"1,221"
-Interior designers,50,"1,256",10,–,40,–
-Merchandise displayers and window trimmers,18,–,7,–,11,–
-Other designers,272,"1,482",178,"1,495",94,"1,408"
-Actors,17,–,7,–,11,–
-Producers and directors,130,"1,467",58,"1,312",72,"1,609"
-Athletes and sports competitors,28,–,23,–,5,–
-Coaches and scouts,113,"1,168",85,"1,336",29,–
-"Umpires, referees, and other sports officials",2,–,2,–,0,–
-Dancers and choreographers,5,–,2,–,3,–
-Music directors and composers,18,–,13,–,4,–
-Musicians and singers,36,–,30,–,6,–
-"Disc jockeys, except radio",12,–,12,–,0,–
-"Entertainers and performers, sports and related workers, all other",6,–,1,–,4,–
-Broadcast announcers and radio disc jockeys,20,–,12,–,8,–
-"News analysts, reporters, and journalists",46,–,25,–,21,–
-Public relations specialists,126,"1,544",36,–,90,"1,541"
-Editors,82,"1,440",36,–,46,–
-Technical writers,46,–,17,–,29,–
-Writers and authors,101,"1,322",57,"1,551",44,–
-Interpreters and translators,55,964,18,–,36,–
-Court reporters and simultaneous captioners,12,–,2,–,10,–
-"Media and communication workers, all other",22,–,18,–,4,–
-"Broadcast, sound, and lighting technicians",80,"1,387",73,"1,397",6,–
-Photographers,62,"1,135",46,–,16,–
-"Television, video, and film camera operators and editors",93,"1,259",67,"1,254",26,–
-"Media and communication equipment workers, all other",2,–,2,–,0,–
-Healthcare practitioners and technical occupations,"7,795","1,404","1,963","1,682","5,832","1,341"
-Chiropractors,13,–,5,–,9,–
-Dentists,64,"2,837",33,–,31,–
-Dietitians and nutritionists,84,"1,137",16,–,69,"1,147"
-Optometrists,16,–,6,–,11,–
-Pharmacists,316,"2,208",134,"2,238",182,"2,180"
-Emergency medicine physicians,21,–,9,–,11,–
-Radiologists,18,–,13,–,5,–
-Other physicians,715,"2,914",398,"2,920",317,"2,907"
-Surgeons,52,"3,300",42,–,10,–
-Physician assistants,137,"2,006",45,–,92,"1,852"
-Podiatrists,3,–,0,–,3,–
-Audiologists,14,–,1,–,13,–
-Occupational therapists,116,"1,447",14,–,102,"1,431"
-Physical therapists,234,"1,607",89,"1,715",145,"1,526"
-Radiation therapists,15,–,2,–,13,–
-Recreational therapists,7,–,1,–,6,–
-Respiratory therapists,78,"1,371",36,–,42,–
-Speech-language pathologists,140,"1,433",11,–,128,"1,435"
-Exercise physiologists,6,–,3,–,4,–
-"Therapists, all other",178,"1,257",31,–,147,"1,257"
-Veterinarians,53,"2,020",17,–,36,–
-Registered nurses,"2,817","1,442",404,"1,657","2,413","1,409"
-Nurse anesthetists,14,–,6,–,8,–
-Nurse midwives,3,–,0,–,3,–
-Nurse practitioners,212,"2,079",20,–,191,"2,031"
-Acupuncturists,3,–,2,–,1,–
-"Healthcare diagnosing or treating practitioners, all other",4,–,2,–,3,–
-Clinical laboratory technologists and technicians,251,"1,117",55,"1,172",197,"1,089"
-Dental hygienists,106,"1,326",5,–,100,"1,276"
-Cardiovascular technologists and technicians,33,–,14,–,18,–
-Diagnostic medical sonographers,87,"1,343",29,–,58,"1,286"
-Radiologic technologists and technicians,204,"1,412",68,"1,483",136,"1,321"
-Magnetic resonance imaging technologists,41,–,8,–,33,–
-Nuclear medicine technologists and medical dosimetrists,35,–,19,–,16,–
-Emergency medical technicians,119,"1,101",78,"1,170",41,–
-Paramedics,102,"1,318",70,"1,349",32,–
-Pharmacy technicians,244,903,55,992,189,886
-Psychiatric technicians,99,885,37,–,62,895
-Surgical technologists,95,"1,244",18,–,77,"1,235"
-Veterinary technologists and technicians,99,829,11,–,88,817
-Dietetic technicians and ophthalmic medical technicians,46,–,14,–,32,–
-Licensed practical and licensed vocational nurses,479,988,59,"1,018",420,984
-Medical records specialists,184,918,22,–,162,946
-"Opticians, dispensing",37,–,7,–,30,–
+occupation_group,occupation,total_number_of_workers,total_median_weekly_earnings,men_number_of_workers,men_median_weekly_earnings,women_number_of_workers,women_median_weekly_earnings
+Management occupations,Chief executives,"1,261","2,901",854,"2,983",407,"2,520"
+Management occupations,General and operations managers,"1,222","1,544",767,"1,689",456,"1,347"
+Management occupations,Legislators,6,–,3,–,3,–
+Management occupations,Advertising and promotions managers,47,–,29,–,18,–
+Management occupations,Marketing managers,508,"1,812",188,"1,911",320,"1,746"
+Management occupations,Sales managers,566,"2,004",390,"2,297",176,"1,688"
+Management occupations,Public relations and fundraising managers,114,"1,889",39,–,75,"1,733"
+Management occupations,Administrative services managers,75,"1,405",25,–,49,–
+Management occupations,Facilities managers,145,"1,436",114,"1,575",32,–
+Management occupations,Computer and information systems managers,781,"2,303",569,"2,313",212,"2,192"
+Management occupations,Financial managers,"1,355","1,757",607,"2,100",748,"1,497"
+Management occupations,Compensation and benefits managers,16,–,4,–,12,–
+Management occupations,Human resources managers,324,"1,756",79,"1,891",245,"1,706"
+Management occupations,Training and development managers,58,"1,976",27,–,31,–
+Management occupations,Industrial production managers,260,"1,875",212,"1,884",48,–
+Management occupations,Purchasing managers,234,"1,741",129,"1,879",105,"1,585"
+Management occupations,"Transportation, storage, and distribution managers",360,"1,262",277,"1,318",83,"1,219"
+Management occupations,"Farmers, ranchers, and other agricultural managers",116,"1,171",86,"1,216",30,–
+Management occupations,Construction managers,693,"1,680",611,"1,747",82,"1,431"
+Management occupations,Education and childcare administrators,941,"1,565",294,"1,870",647,"1,469"
+Management occupations,Architectural and engineering managers,174,"2,904",150,"2,887",24,–
+Management occupations,Food service managers,720,988,384,"1,121",336,924
+Management occupations,Funeral home managers,5,–,3,–,2,–
+Management occupations,Entertainment and recreation managers,53,"1,035",32,–,21,–
+Management occupations,Lodging managers,116,"1,257",42,–,74,"1,069"
+Management occupations,Medical and health services managers,767,"1,634",224,"1,914",543,"1,540"
+Management occupations,Natural sciences managers,36,–,14,–,22,–
+Management occupations,Postmasters and mail superintendents,16,–,4,–,12,–
+Management occupations,"Property, real estate, and community association managers",489,"1,263",189,"1,521",300,"1,143"
+Management occupations,Social and community service managers,410,"1,382",113,"1,501",297,"1,341"
+Management occupations,Emergency management directors,13,–,8,–,4,–
+Management occupations,"Personal service managers, all other",10,–,2,–,9,–
+Management occupations,"Managers, all other","3,872","1,738","2,263","1,887","1,609","1,536"
+Business and financial operations occupations,"Agents and business managers of artists, performers, and athletes",29,–,15,–,14,–
+Business and financial operations occupations,"Buyers and purchasing agents, farm products",8,–,5,–,3,–
+Business and financial operations occupations,"Wholesale and retail buyers, except farm products",141,"1,125",57,"1,270",84,"1,029"
+Business and financial operations occupations,"Purchasing agents, except wholesale, retail, and farm products",287,"1,370",134,"1,514",153,"1,216"
+Business and financial operations occupations,"Claims adjusters, appraisers, examiners, and investigators",367,"1,370",153,"1,468",214,"1,306"
+Business and financial operations occupations,Compliance officers,314,"1,458",145,"1,597",169,"1,377"
+Business and financial operations occupations,Cost estimators,134,"1,355",114,"1,401",20,–
+Business and financial operations occupations,Human resources workers,893,"1,273",226,"1,367",667,"1,259"
+Business and financial operations occupations,"Compensation, benefits, and job analysis specialists",68,"1,252",16,–,51,"1,266"
+Business and financial operations occupations,Training and development specialists,144,"1,342",63,"1,648",80,"1,222"
+Business and financial operations occupations,Logisticians,182,"1,130",105,"1,207",78,994
+Business and financial operations occupations,Project management specialists,886,"1,811",481,"1,919",405,"1,661"
+Business and financial operations occupations,Management analysts,714,"1,890",360,"1,993",354,"1,817"
+Business and financial operations occupations,"Meeting, convention, and event planners",98,"1,234",25,–,73,"1,203"
+Business and financial operations occupations,Fundraisers,91,"1,481",22,–,69,"1,489"
+Business and financial operations occupations,Market research analysts and marketing specialists,416,"1,590",164,"1,771",252,"1,552"
+Business and financial operations occupations,"Business operations specialists, all other",474,"1,465",212,"1,737",262,"1,224"
+Business and financial operations occupations,Accountants and auditors,"1,394","1,553",587,"1,644",807,"1,504"
+Business and financial operations occupations,Property appraisers and assessors,53,"1,568",34,–,19,–
+Business and financial operations occupations,Budget analysts,37,–,21,–,16,–
+Business and financial operations occupations,Credit analysts,47,–,31,–,16,–
+Business and financial operations occupations,Financial and investment analysts,358,"1,668",181,"1,760",177,"1,643"
+Business and financial operations occupations,Personal financial advisors,412,"1,884",258,"2,082",154,"1,552"
+Business and financial operations occupations,Insurance underwriters,96,"1,367",42,–,54,"1,224"
+Business and financial operations occupations,Financial examiners,19,–,9,–,9,–
+Business and financial operations occupations,Credit counselors and loan officers,304,"1,360",139,"1,457",165,"1,294"
+Business and financial operations occupations,"Tax examiners and collectors, and revenue agents",78,"1,396",32,–,46,–
+Business and financial operations occupations,Tax preparers,63,"1,154",14,–,49,–
+Business and financial operations occupations,Other financial specialists,120,"1,481",51,"2,386",69,"1,233"
+Business and financial operations occupations,Professional and related occupations,"32,088","1,458","14,645","1,736","17,443","1,278"
+Computer and mathematical occupations,Computer and information research scientists,38,–,26,–,12,–
+Computer and mathematical occupations,Computer systems analysts,485,"1,701",291,"1,894",195,"1,487"
+Computer and mathematical occupations,Information security analysts,209,"2,133",169,"2,306",40,–
+Computer and mathematical occupations,Computer programmers,375,"1,889",300,"1,906",75,"1,760"
+Computer and mathematical occupations,Software developers,"2,104","2,283","1,682","2,296",422,"2,020"
+Computer and mathematical occupations,Software quality assurance analysts and testers,73,"1,751",44,–,29,–
+Computer and mathematical occupations,Web developers,57,"2,197",49,–,8,–
+Computer and mathematical occupations,Web and digital interface designers,59,"1,423",30,–,29,–
+Computer and mathematical occupations,Computer support specialists,616,"1,424",454,"1,478",162,"1,348"
+Computer and mathematical occupations,Database administrators and architects,108,"2,113",78,"2,283",30,–
+Computer and mathematical occupations,Network and computer systems administrators,200,"1,670",169,"1,830",30,–
+Computer and mathematical occupations,Computer network architects,97,"1,913",90,"1,967",8,–
+Computer and mathematical occupations,"Computer occupations, all other","1,104","1,597",833,"1,631",271,"1,430"
+Computer and mathematical occupations,Actuaries,45,–,27,–,18,–
+Computer and mathematical occupations,Mathematicians,4,–,4,–,0,–
+Computer and mathematical occupations,Operations research analysts,142,"1,917",65,"2,208",77,"1,665"
+Computer and mathematical occupations,Statisticians,44,–,25,–,18,–
+Computer and mathematical occupations,Other mathematical science occupations,369,"1,595",188,"1,668",181,"1,474"
+Architecture and engineering occupations,"Architects, except landscape and naval",162,"1,831",108,"1,893",55,"1,691"
+Architecture and engineering occupations,Landscape architects,19,–,11,–,9,–
+Architecture and engineering occupations,"Surveyors, cartographers, and photogrammetrists",37,–,31,–,6,–
+Architecture and engineering occupations,Aerospace engineers,177,"2,071",152,"2,086",25,–
+Architecture and engineering occupations,Agricultural engineers,4,–,4,–,0,–
+Architecture and engineering occupations,Bioengineers and biomedical engineers,27,–,21,–,6,–
+Architecture and engineering occupations,Chemical engineers,86,"2,285",67,"2,300",19,–
+Architecture and engineering occupations,Civil engineers,479,"1,752",401,"1,839",78,"1,465"
+Architecture and engineering occupations,Computer hardware engineers,69,"2,277",65,"2,252",4,–
+Architecture and engineering occupations,Electrical and electronics engineers,244,"2,056",216,"2,101",28,–
+Architecture and engineering occupations,Environmental engineers,29,–,22,–,7,–
+Architecture and engineering occupations,"Industrial engineers, including health and safety",278,"1,740",209,"1,766",69,"1,682"
+Architecture and engineering occupations,Marine engineers and naval architects,11,–,11,–,0,–
+Architecture and engineering occupations,Materials engineers,52,"2,220",46,–,6,–
+Architecture and engineering occupations,Mechanical engineers,423,"1,890",381,"1,901",43,–
+Architecture and engineering occupations,"Mining and geological engineers, including mining safety engineers",9,–,9,–,0,–
+Architecture and engineering occupations,Nuclear engineers,4,–,4,–,0,–
+Architecture and engineering occupations,Petroleum engineers,10,–,10,–,0,–
+Architecture and engineering occupations,"Engineers, all other",620,"1,938",528,"1,953",93,"1,904"
+Architecture and engineering occupations,Architectural and civil drafters,23,–,19,–,4,–
+Architecture and engineering occupations,Other drafters,73,"1,326",58,"1,259",15,–
+Architecture and engineering occupations,Electrical and electronic engineering technologists and technicians,93,"1,429",82,"1,442",12,–
+Architecture and engineering occupations,"Other engineering technologists and technicians, except drafters",359,"1,217",296,"1,287",63,982
+Architecture and engineering occupations,Surveying and mapping technicians,83,"1,001",73,"1,023",10,–
+"Life, physical, and social science occupations",Agricultural and food scientists,22,–,13,–,10,–
+"Life, physical, and social science occupations",Biological scientists,104,"1,404",47,–,57,"1,352"
+"Life, physical, and social science occupations",Conservation scientists and foresters,29,–,19,–,10,–
+"Life, physical, and social science occupations",Medical scientists,138,"1,826",69,"2,290",69,"1,537"
+"Life, physical, and social science occupations","Life scientists, all other",8,–,3,–,5,–
+"Life, physical, and social science occupations",Astronomers and physicists,24,–,19,–,5,–
+"Life, physical, and social science occupations",Atmospheric and space scientists,13,–,9,–,4,–
+"Life, physical, and social science occupations",Chemists and materials scientists,96,"1,913",63,"2,180",33,–
+"Life, physical, and social science occupations","Environmental scientists and specialists, including health",49,–,26,–,23,–
+"Life, physical, and social science occupations","Geoscientists and hydrologists, except geographers",31,–,21,–,10,–
+"Life, physical, and social science occupations","Physical scientists, all other",399,"1,731",220,"1,742",179,"1,649"
+"Life, physical, and social science occupations",Economists,22,–,14,–,8,–
+"Life, physical, and social science occupations",Survey researchers,3,–,2,–,2,–
+"Life, physical, and social science occupations",Clinical and counseling psychologists,5,–,2,–,3,–
+"Life, physical, and social science occupations",School psychologists,46,–,5,–,41,–
+"Life, physical, and social science occupations",Other psychologists,65,"1,726",16,–,49,–
+"Life, physical, and social science occupations",Sociologists,6,–,1,–,4,–
+"Life, physical, and social science occupations",Urban and regional planners,34,–,23,–,12,–
+"Life, physical, and social science occupations",Miscellaneous social scientists and related workers,42,–,20,–,22,–
+"Life, physical, and social science occupations",Agricultural and food science technicians,34,–,20,–,15,–
+"Life, physical, and social science occupations",Biological technicians,26,–,15,–,11,–
+"Life, physical, and social science occupations",Chemical technicians,58,"1,377",39,–,18,–
+"Life, physical, and social science occupations",Environmental science and geoscience technicians,13,–,11,–,2,–
+"Life, physical, and social science occupations",Nuclear technicians,8,–,3,–,5,–
+"Life, physical, and social science occupations",Social science research assistants,4,–,3,–,1,–
+"Life, physical, and social science occupations","Other life, physical, and social science technicians",240,"1,306",99,"1,430",141,"1,275"
+"Life, physical, and social science occupations",Occupational health and safety specialists and technicians,63,"1,437",49,–,14,–
+Community and social service occupations,Community and social service occupations,"2,334","1,147",735,"1,157","1,599","1,144"
+Community and social service occupations,Substance abuse and behavioral disorder counselors,103,"1,138",24,–,79,"1,130"
+Community and social service occupations,"Educational, guidance, and career counselors and advisors",338,"1,167",73,"1,227",264,"1,158"
+Community and social service occupations,Marriage and family therapists,14,–,1,–,13,–
+Community and social service occupations,Mental health counselors,123,"1,316",32,–,91,"1,372"
+Community and social service occupations,Rehabilitation counselors,13,–,5,–,8,–
+Community and social service occupations,"Counselors, all other",182,"1,070",51,"1,248",132,"1,011"
+Community and social service occupations,"Child, family, and school social workers",64,"1,064",6,–,57,"1,080"
+Community and social service occupations,Healthcare social workers,68,"1,028",18,–,50,"1,028"
+Community and social service occupations,Mental health and substance abuse social workers,11,–,3,–,8,–
+Community and social service occupations,"Social workers, all other",654,"1,233",113,"1,253",541,"1,228"
+Community and social service occupations,Probation officers and correctional treatment specialists,79,"1,196",33,–,46,–
+Community and social service occupations,Social and human service assistants,200,963,54,967,146,962
+Community and social service occupations,Other community and social service specialists,82,"1,045",23,–,60,"1,055"
+Community and social service occupations,Clergy,308,"1,084",261,"1,074",47,–
+Community and social service occupations,"Directors, religious activities and education",58,"1,244",21,–,37,–
+Community and social service occupations,"Religious workers, all other",37,–,17,–,20,–
+Legal occupations,Lawyers,887,"2,438",514,"2,505",374,"2,330"
+Legal occupations,Judicial law clerks,13,–,1,–,13,–
+Legal occupations,"Judges, magistrates, and other judicial workers",66,"2,196",32,–,34,–
+Legal occupations,Paralegals and legal assistants,371,"1,159",68,"1,425",303,"1,125"
+Legal occupations,"Title examiners, abstractors, and searchers",83,"1,143",25,–,58,"1,030"
+Legal occupations,"Legal support workers, all other",70,"1,320",28,–,42,–
+"Education, training, and library occupations",Postsecondary teachers,828,"1,723",462,"1,852",366,"1,565"
+"Education, training, and library occupations",Preschool and kindergarten teachers,523,791,18,–,505,789
+"Education, training, and library occupations",Elementary and middle school teachers,"3,117","1,243",673,"1,370","2,444","1,220"
+"Education, training, and library occupations",Secondary school teachers,859,"1,271",367,"1,347",493,"1,213"
+"Education, training, and library occupations",Special education teachers,308,"1,164",42,–,266,"1,156"
+"Education, training, and library occupations",Tutors,28,–,8,–,20,–
+"Education, training, and library occupations",Other teachers and instructors,584,"1,165",229,"1,242",355,"1,124"
+"Education, training, and library occupations","Archivists, curators, and museum technicians",57,"1,289",22,–,35,–
+"Education, training, and library occupations",Librarians and media collections specialists,117,"1,118",24,–,93,"1,174"
+"Education, training, and library occupations",Library technicians,15,–,5,–,11,–
+"Education, training, and library occupations",Teaching assistants,940,698,184,772,757,685
+"Education, training, and library occupations",Other educational instruction and library workers,148,"1,310",37,–,111,"1,291"
+"Arts, design, entertainment, sports, and media occupations",Artists and related workers,94,"1,543",57,"1,458",37,–
+"Arts, design, entertainment, sports, and media occupations",Commercial and industrial designers,13,–,11,–,2,–
+"Arts, design, entertainment, sports, and media occupations",Fashion designers,25,–,6,–,19,–
+"Arts, design, entertainment, sports, and media occupations",Floral designers,25,–,6,–,19,–
+"Arts, design, entertainment, sports, and media occupations",Graphic designers,248,"1,253",119,"1,294",130,"1,221"
+"Arts, design, entertainment, sports, and media occupations",Interior designers,50,"1,256",10,–,40,–
+"Arts, design, entertainment, sports, and media occupations",Merchandise displayers and window trimmers,18,–,7,–,11,–
+"Arts, design, entertainment, sports, and media occupations",Other designers,272,"1,482",178,"1,495",94,"1,408"
+"Arts, design, entertainment, sports, and media occupations",Actors,17,–,7,–,11,–
+"Arts, design, entertainment, sports, and media occupations",Producers and directors,130,"1,467",58,"1,312",72,"1,609"
+"Arts, design, entertainment, sports, and media occupations",Athletes and sports competitors,28,–,23,–,5,–
+"Arts, design, entertainment, sports, and media occupations",Coaches and scouts,113,"1,168",85,"1,336",29,–
+"Arts, design, entertainment, sports, and media occupations","Umpires, referees, and other sports officials",2,–,2,–,0,–
+"Arts, design, entertainment, sports, and media occupations",Dancers and choreographers,5,–,2,–,3,–
+"Arts, design, entertainment, sports, and media occupations",Music directors and composers,18,–,13,–,4,–
+"Arts, design, entertainment, sports, and media occupations",Musicians and singers,36,–,30,–,6,–
+"Arts, design, entertainment, sports, and media occupations","Disc jockeys, except radio",12,–,12,–,0,–
+"Arts, design, entertainment, sports, and media occupations","Entertainers and performers, sports and related workers, all other",6,–,1,–,4,–
+"Arts, design, entertainment, sports, and media occupations",Broadcast announcers and radio disc jockeys,20,–,12,–,8,–
+"Arts, design, entertainment, sports, and media occupations","News analysts, reporters, and journalists",46,–,25,–,21,–
+"Arts, design, entertainment, sports, and media occupations",Public relations specialists,126,"1,544",36,–,90,"1,541"
+"Arts, design, entertainment, sports, and media occupations",Editors,82,"1,440",36,–,46,–
+"Arts, design, entertainment, sports, and media occupations",Technical writers,46,–,17,–,29,–
+"Arts, design, entertainment, sports, and media occupations",Writers and authors,101,"1,322",57,"1,551",44,–
+"Arts, design, entertainment, sports, and media occupations",Interpreters and translators,55,964,18,–,36,–
+"Arts, design, entertainment, sports, and media occupations",Court reporters and simultaneous captioners,12,–,2,–,10,–
+"Arts, design, entertainment, sports, and media occupations","Media and communication workers, all other",22,–,18,–,4,–
+"Arts, design, entertainment, sports, and media occupations","Broadcast, sound, and lighting technicians",80,"1,387",73,"1,397",6,–
+"Arts, design, entertainment, sports, and media occupations",Photographers,62,"1,135",46,–,16,–
+"Arts, design, entertainment, sports, and media occupations","Television, video, and film camera operators and editors",93,"1,259",67,"1,254",26,–
+"Arts, design, entertainment, sports, and media occupations","Media and communication equipment workers, all other",2,–,2,–,0,–
+Healthcare practitioners and technical occupations,Healthcare practitioners and technical occupations,"7,795","1,404","1,963","1,682","5,832","1,341"
+Healthcare practitioners and technical occupations,Chiropractors,13,–,5,–,9,–
+Healthcare practitioners and technical occupations,Dentists,64,"2,837",33,–,31,–
+Healthcare practitioners and technical occupations,Dietitians and nutritionists,84,"1,137",16,–,69,"1,147"
+Healthcare practitioners and technical occupations,Optometrists,16,–,6,–,11,–
+Healthcare practitioners and technical occupations,Pharmacists,316,"2,208",134,"2,238",182,"2,180"
+Healthcare practitioners and technical occupations,Emergency medicine physicians,21,–,9,–,11,–
+Healthcare practitioners and technical occupations,Radiologists,18,–,13,–,5,–
+Healthcare practitioners and technical occupations,Other physicians,715,"2,914",398,"2,920",317,"2,907"
+Healthcare practitioners and technical occupations,Surgeons,52,"3,300",42,–,10,–
+Healthcare practitioners and technical occupations,Physician assistants,137,"2,006",45,–,92,"1,852"
+Healthcare practitioners and technical occupations,Podiatrists,3,–,0,–,3,–
+Healthcare practitioners and technical occupations,Audiologists,14,–,1,–,13,–
+Healthcare practitioners and technical occupations,Occupational therapists,116,"1,447",14,–,102,"1,431"
+Healthcare practitioners and technical occupations,Physical therapists,234,"1,607",89,"1,715",145,"1,526"
+Healthcare practitioners and technical occupations,Radiation therapists,15,–,2,–,13,–
+Healthcare practitioners and technical occupations,Recreational therapists,7,–,1,–,6,–
+Healthcare practitioners and technical occupations,Respiratory therapists,78,"1,371",36,–,42,–
+Healthcare practitioners and technical occupations,Speech-language pathologists,140,"1,433",11,–,128,"1,435"
+Healthcare practitioners and technical occupations,Exercise physiologists,6,–,3,–,4,–
+Healthcare practitioners and technical occupations,"Therapists, all other",178,"1,257",31,–,147,"1,257"
+Healthcare practitioners and technical occupations,Veterinarians,53,"2,020",17,–,36,–
+Healthcare practitioners and technical occupations,Registered nurses,"2,817","1,442",404,"1,657","2,413","1,409"
+Healthcare practitioners and technical occupations,Nurse anesthetists,14,–,6,–,8,–
+Healthcare practitioners and technical occupations,Nurse midwives,3,–,0,–,3,–
+Healthcare practitioners and technical occupations,Nurse practitioners,212,"2,079",20,–,191,"2,031"
+Healthcare practitioners and technical occupations,Acupuncturists,3,–,2,–,1,–
+Healthcare practitioners and technical occupations,"Healthcare diagnosing or treating practitioners, all other",4,–,2,–,3,–
+Healthcare practitioners and technical occupations,Clinical laboratory technologists and technicians,251,"1,117",55,"1,172",197,"1,089"
+Healthcare practitioners and technical occupations,Dental hygienists,106,"1,326",5,–,100,"1,276"
+Healthcare practitioners and technical occupations,Cardiovascular technologists and technicians,33,–,14,–,18,–
+Healthcare practitioners and technical occupations,Diagnostic medical sonographers,87,"1,343",29,–,58,"1,286"
+Healthcare practitioners and technical occupations,Radiologic technologists and technicians,204,"1,412",68,"1,483",136,"1,321"
+Healthcare practitioners and technical occupations,Magnetic resonance imaging technologists,41,–,8,–,33,–
+Healthcare practitioners and technical occupations,Nuclear medicine technologists and medical dosimetrists,35,–,19,–,16,–
+Healthcare practitioners and technical occupations,Emergency medical technicians,119,"1,101",78,"1,170",41,–
+Healthcare practitioners and technical occupations,Paramedics,102,"1,318",70,"1,349",32,–
+Healthcare practitioners and technical occupations,Pharmacy technicians,244,903,55,992,189,886
+Healthcare practitioners and technical occupations,Psychiatric technicians,99,885,37,–,62,895
+Healthcare practitioners and technical occupations,Surgical technologists,95,"1,244",18,–,77,"1,235"
+Healthcare practitioners and technical occupations,Veterinary technologists and technicians,99,829,11,–,88,817
+Healthcare practitioners and technical occupations,Dietetic technicians and ophthalmic medical technicians,46,–,14,–,32,–
+Healthcare practitioners and technical occupations,Licensed practical and licensed vocational nurses,479,988,59,"1,018",420,984
+Healthcare practitioners and technical occupations,Medical records specialists,184,918,22,–,162,946
+Healthcare practitioners and technical occupations,"Opticians, dispensing",37,–,7,–,30,–
+Healthcare practitioners and technical occupations,Miscellaneous health technologists and technicians,119,"1,035",25,–,94,"1,014"
+Healthcare practitioners and technical occupations,Other healthcare practitioners and technical occupations,80,"1,372",30,–,51,"1,203"
+Healthcare support occupations,Home health aides,330,644,59,709,271,625
+Healthcare support occupations,Personal care aides,903,679,190,751,713,668
+Healthcare support occupations,Nursing assistants,899,700,95,765,804,695
+Healthcare support occupations,Orderlies and psychiatric aides,48,–,19,–,29,–
+Healthcare support occupations,Occupational therapy assistants and aides,22,–,6,–,16,–
+Healthcare support occupations,Physical therapist assistants and aides,75,909,30,–,44,–
+Healthcare support occupations,Massage therapists,34,–,11,–,23,–
+Healthcare support occupations,Dental assistants,235,754,13,–,222,758
+Healthcare support occupations,Medical assistants,490,752,52,904,438,738
+Healthcare support occupations,Medical transcriptionists,25,–,4,–,20,–
+Healthcare support occupations,Pharmacy aides,20,–,6,–,13,–
+Healthcare support occupations,Veterinary assistants and laboratory animal caretakers,67,720,14,–,53,701
+Healthcare support occupations,Phlebotomists,133,730,14,–,119,723
+Healthcare support occupations,Other healthcare support workers,187,833,64,919,124,790
+Protective service occupations,First-line supervisors of correctional officers,59,"1,432",39,–,20,–
+Protective service occupations,First-line supervisors of police and detectives,93,"1,800",83,"1,812",10,–
+Protective service occupations,First-line supervisors of firefighting and prevention workers,47,–,45,–,3,–
+Protective service occupations,First-line supervisors of security workers,70,"1,033",55,"1,060",15,–
+Protective service occupations,"First-line supervisors of protective service workers, all other",3,–,2,–,1,–
+Protective service occupations,Firefighters,297,"1,351",288,"1,357",9,–
+Protective service occupations,Fire inspectors,19,–,14,–,5,–
+Protective service occupations,Bailiffs,12,–,6,–,6,–
+Protective service occupations,Correctional officers and jailers,294,"1,073",203,"1,133",91,914
+Protective service occupations,Detectives and criminal investigators,132,"1,732",101,"1,833",31,–
+Protective service occupations,Fish and game wardens,5,–,4,–,1,–
+Protective service occupations,Parking enforcement workers,7,–,3,–,4,–
+Protective service occupations,Police officers,709,"1,320",605,"1,363",104,"1,034"
+Protective service occupations,Animal control workers,12,–,7,–,5,–
+Protective service occupations,Private detectives and investigators,95,"1,326",57,"1,481",38,–
+Protective service occupations,Security guards and gambling surveillance officers,730,788,562,811,168,717
+Protective service occupations,Crossing guards and flaggers,24,–,11,–,13,–
+Protective service occupations,Transportation security screeners,45,–,25,–,21,–
+Protective service occupations,School bus monitors,9,–,0,–,9,–
+Protective service occupations,Other protective service workers,44,–,32,–,11,–
+Food preparation and serving related occupations,Chefs and head cooks,391,816,304,854,87,690
+Food preparation and serving related occupations,First-line supervisors of food preparation and serving workers,432,728,215,819,217,677
+Food preparation and serving related occupations,Cooks,"1,259",655,813,682,446,608
+Food preparation and serving related occupations,Food preparation workers,484,619,220,645,264,600
+Food preparation and serving related occupations,Bartenders,208,764,129,768,78,745
+Food preparation and serving related occupations,Fast food and counter workers,288,610,109,639,179,595
+Food preparation and serving related occupations,Waiters and waitresses,828,642,281,684,547,617
+Food preparation and serving related occupations,"Food servers, nonrestaurant",91,623,32,–,59,642
+Food preparation and serving related occupations,Dining room and cafeteria attendants and bartender helpers,132,593,62,607,69,588
+Food preparation and serving related occupations,Dishwashers,133,598,106,601,27,–
+Food preparation and serving related occupations,"Hosts and hostesses, restaurant, lounge, and coffee shop",73,594,11,–,62,596
+Food preparation and serving related occupations,"Food preparation and serving related workers, all other",7,–,6,–,1,–
+Building and grounds cleaning and maintenance occupations,Janitors and building cleaners,"1,505",696,999,745,505,626
+Building and grounds cleaning and maintenance occupations,Maids and housekeeping cleaners,834,619,113,686,721,611
+Building and grounds cleaning and maintenance occupations,Pest control workers,90,848,83,858,7,–
+Building and grounds cleaning and maintenance occupations,Landscaping and groundskeeping workers,713,703,673,709,40,–
+Building and grounds cleaning and maintenance occupations,Tree trimmers and pruners,92,775,91,775,1,–
+Building and grounds cleaning and maintenance occupations,Other grounds maintenance workers,18,–,18,–,0,–
+Personal care and service occupations,Supervisors of personal care and service workers,97,855,43,–,54,793
+Personal care and service occupations,Animal trainers,31,–,13,–,18,–
+Personal care and service occupations,Animal caretakers,161,704,38,–,122,687
+Personal care and service occupations,Gambling services workers,66,893,37,–,29,–
+Personal care and service occupations,"Ushers, lobby attendants, and ticket takers",7,–,3,–,4,–
+Personal care and service occupations,Other entertainment attendants and related workers,87,707,39,–,48,–
+Personal care and service occupations,"Embalmers, crematory operators, and funeral attendants",13,–,10,–,3,–
+Personal care and service occupations,"Morticians, undertakers, and funeral arrangers",28,–,17,–,11,–
+Personal care and service occupations,Barbers,69,655,45,–,24,–
+Personal care and service occupations,"Hairdressers, hairstylists, and cosmetologists",239,740,18,–,222,726
+Personal care and service occupations,Manicurists and pedicurists,197,772,35,–,162,748
+Personal care and service occupations,Skincare specialists,46,–,0,–,46,–
+Personal care and service occupations,Other personal appearance workers,11,–,0,–,11,–
+Personal care and service occupations,"Baggage porters, bellhops, and concierges",67,676,51,680,15,–
+Personal care and service occupations,Tour and travel guides,14,–,8,–,6,–
+Personal care and service occupations,Childcare workers,379,635,22,–,356,632
+Personal care and service occupations,Exercise trainers and group fitness instructors,71,956,40,–,31,–
+Personal care and service occupations,Recreation workers,129,776,56,801,74,716
+Personal care and service occupations,Residential advisors,17,–,5,–,12,–
+Personal care and service occupations,"Personal care and service workers, all other",68,761,23,–,45,–
+Sales and related occupations,First-line supervisors of retail sales workers,"2,234",995,"1,274","1,094",960,904
+Sales and related occupations,First-line supervisors of non-retail sales workers,906,"1,345",538,"1,464",367,"1,151"
+Sales and related occupations,Cashiers,"1,147",606,346,616,801,602
+Sales and related occupations,Counter and rental clerks,64,801,46,–,18,–
+Sales and related occupations,Parts salespersons,89,769,65,796,25,–
+Sales and related occupations,Retail salespersons,"1,585",829,963,988,622,710
+Sales and related occupations,Advertising sales agents,101,"1,442",51,"1,728",50,"1,398"
+Sales and related occupations,Insurance sales agents,443,"1,081",183,"1,310",260,927
+Sales and related occupations,"Securities, commodities, and financial services sales agents",184,"2,320",129,"2,412",55,"1,654"
+Sales and related occupations,Travel agents,48,–,8,–,40,–
+Sales and related occupations,"Sales representatives of services, except advertising, insurance, financial services, and travel",577,"1,365",399,"1,451",178,"1,137"
+Sales and related occupations,"Sales representatives, wholesale and manufacturing",999,"1,427",731,"1,535",268,"1,215"
+Sales and related occupations,"Models, demonstrators, and product promoters",10,–,3,–,6,–
+Sales and related occupations,Real estate brokers and sales agents,440,"1,363",188,"1,444",252,"1,215"
+Sales and related occupations,Sales engineers,51,"1,918",51,"1,918",0,–
+Sales and related occupations,Telemarketers,28,–,4,–,24,–
+Sales and related occupations,"Door-to-door sales workers, news and street vendors, and related workers",29,–,16,–,14,–
+Sales and related occupations,"Sales and related workers, all other",213,914,105,"1,019",108,807
+Office and administrative support occupations,First-line supervisors of office and administrative support workers,"1,038","1,114",351,"1,209",687,"1,075"
+Office and administrative support occupations,"Switchboard operators, including answering service",19,–,6,–,14,–
+Office and administrative support occupations,Telephone operators,11,–,5,–,6,–
+Office and administrative support occupations,"Communications equipment operators, all other",1,–,1,–,0,–
+Office and administrative support occupations,Bill and account collectors,84,809,25,–,59,778
+Office and administrative support occupations,Billing and posting clerks,391,826,31,–,360,819
+Office and administrative support occupations,"Bookkeeping, accounting, and auditing clerks",869,943,130,"1,100",738,922
+Office and administrative support occupations,Gambling cage workers,22,–,11,–,11,–
+Office and administrative support occupations,Payroll and timekeeping clerks,119,"1,040",16,–,103,"1,037"
+Office and administrative support occupations,Procurement clerks,41,–,25,–,16,–
+Office and administrative support occupations,Tellers,163,721,44,–,119,711
+Office and administrative support occupations,"Financial clerks, all other",121,"1,078",57,"1,335",65,"1,009"
+Office and administrative support occupations,Brokerage clerks,6,–,4,–,2,–
+Office and administrative support occupations,Correspondence clerks,3,–,0,–,3,–
+Office and administrative support occupations,"Court, municipal, and license clerks",84,928,26,–,58,821
+Office and administrative support occupations,"Credit authorizers, checkers, and clerks",25,–,8,–,17,–
+Office and administrative support occupations,Customer service representatives,"2,157",828,731,918,"1,426",799
+Office and administrative support occupations,"Eligibility interviewers, government programs",96,960,15,–,81,951
+Office and administrative support occupations,File Clerks,86,898,26,–,61,882
+Office and administrative support occupations,"Hotel, motel, and resort desk clerks",87,741,39,–,48,–
+Office and administrative support occupations,"Interviewers, except eligibility and loan",166,789,33,–,133,797
+Office and administrative support occupations,"Library assistants, clerical",33,–,5,–,27,–
+Office and administrative support occupations,Loan interviewers and clerks,128,931,32,–,96,887
+Office and administrative support occupations,New accounts clerks,17,–,8,–,9,–
+Office and administrative support occupations,Order clerks,66,734,30,–,36,–
+Office and administrative support occupations,"Human resources assistants, except payroll and timekeeping",71,988,7,–,64,982
+Office and administrative support occupations,Receptionists and information clerks,827,752,112,770,715,749
+Office and administrative support occupations,Reservation and transportation ticket agents and travel clerks,113,900,64,987,49,–
+Office and administrative support occupations,"Information and record clerks, all other",71,858,14,–,57,802
+Office and administrative support occupations,Cargo and freight agents,25,–,13,–,12,–
+Office and administrative support occupations,Couriers and messengers,547,853,435,885,112,711
+Office and administrative support occupations,Public safety telecommunicators,67,"1,013",11,–,55,964
+Office and administrative support occupations,"Dispatchers, except police, fire, and ambulance",156,898,65,"1,128",91,852
+Office and administrative support occupations,"Meter readers, utilities",20,–,19,–,0,–
+Office and administrative support occupations,Postal service clerks,95,894,46,–,49,–
+Office and administrative support occupations,Postal service mail carriers,279,"1,130",182,"1,194",97,"1,015"
+Office and administrative support occupations,"Postal service mail sorters, processors, and processing machine operators",58,904,26,–,31,–
+Office and administrative support occupations,"Production, planning, and expediting clerks",198,"1,334",109,"1,335",89,"1,333"
+Office and administrative support occupations,"Shipping, receiving, and inventory clerks",555,811,356,827,199,789
+Office and administrative support occupations,"Weighers, measurers, checkers, and samplers, recordkeeping",59,843,36,–,23,–
+Office and administrative support occupations,Executive secretaries and executive administrative assistants,179,"1,272",16,–,163,"1,272"
+Office and administrative support occupations,Legal secretaries and administrative assistants,40,–,3,–,37,–
+Office and administrative support occupations,Medical secretaries and administrative assistants,80,909,6,–,74,914
+Office and administrative support occupations,"Secretaries and administrative assistants, except legal, medical, and executive","1,387",894,130,"1,101","1,257",882
+Office and administrative support occupations,Data entry keyers,185,814,59,819,126,809
+Office and administrative support occupations,Word processors and typists,33,–,3,–,31,–
+Office and administrative support occupations,Desktop publishers,1,–,0,–,1,–
+Office and administrative support occupations,Insurance claims and policy processing clerks,265,912,59,"1,062",206,896
+Office and administrative support occupations,"Mail clerks and mail machine operators, except postal service",37,–,20,–,17,–
+Office and administrative support occupations,"Office clerks, general",926,828,176,867,750,824
+Office and administrative support occupations,"Office machine operators, except computer",15,–,5,–,10,–
+Office and administrative support occupations,Proofreaders and copy markers,4,–,1,–,4,–
+Office and administrative support occupations,Statistical assistants,14,–,11,–,3,–
+Office and administrative support occupations,"Office and administrative support workers, all other",380,"1,007",134,"1,038",246,988
+"Farming, fishing, and forestry occupations","First-line supervisors of farming, fishing, and forestry workers",59,907,48,–,11,–
+"Farming, fishing, and forestry occupations",Agricultural inspectors,24,–,17,–,7,–
+"Farming, fishing, and forestry occupations",Animal breeders,9,–,9,–,0,–
+"Farming, fishing, and forestry occupations","Graders and sorters, agricultural products",39,–,13,–,26,–
+"Farming, fishing, and forestry occupations",Miscellaneous agricultural workers,542,662,412,704,130,598
+"Farming, fishing, and forestry occupations",Fishing and hunting workers,7,–,7,–,0,–
+"Farming, fishing, and forestry occupations",Forest and conservation workers,18,–,9,–,9,–
+"Farming, fishing, and forestry occupations",Logging workers,33,–,33,–,0,–
+Construction and extraction occupations,First-line supervisors of construction trades and extraction workers,537,"1,373",525,"1,361",13,–
+Construction and extraction occupations,Boilermakers,14,–,12,–,3,–
+Construction and extraction occupations,"Brickmasons, blockmasons, and stonemasons",76,850,75,856,1,–
+Construction and extraction occupations,Carpenters,942,928,915,927,27,–
+Construction and extraction occupations,"Carpet, floor, and tile installers and finishers",67,924,61,931,6,–
+Construction and extraction occupations,"Cement masons, concrete finishers, and terrazzo workers",48,–,48,–,0,–
+Construction and extraction occupations,Construction laborers,"1,572",858,"1,498",870,74,711
+Construction and extraction occupations,Construction equipment operators,353,"1,113",351,"1,115",2,–
+Construction and extraction occupations,"Drywall installers, ceiling tile installers, and tapers",90,812,88,815,2,–
+Construction and extraction occupations,Electricians,813,"1,195",793,"1,199",19,–
+Construction and extraction occupations,Glaziers,28,–,25,–,3,–
+Construction and extraction occupations,Insulation workers,61,"1,079",57,973,4,–
+Construction and extraction occupations,Painters and paperhangers,389,810,348,821,41,–
+Construction and extraction occupations,Pipelayers,46,–,46,–,0,–
+Construction and extraction occupations,"Plumbers, pipefitters, and steamfitters",546,"1,063",538,"1,070",8,–
+Construction and extraction occupations,Plasterers and stucco masons,22,–,22,–,0,–
+Construction and extraction occupations,Reinforcing iron and rebar workers,10,–,10,–,0,–
+Construction and extraction occupations,Roofers,187,804,179,808,8,–
+Construction and extraction occupations,Sheet metal workers,112,"1,096",108,"1,095",4,–
+Construction and extraction occupations,Structural iron and steel workers,37,–,35,–,2,–
+Construction and extraction occupations,Solar photovoltaic installers,14,–,14,–,0,–
+Construction and extraction occupations,"Helpers, construction trades",49,–,45,–,4,–
+Construction and extraction occupations,Construction and building inspectors,85,"1,193",78,"1,197",7,–
+Construction and extraction occupations,Elevator and escalator installers and repairers,39,–,39,–,0,–
+Construction and extraction occupations,Fence erectors,26,–,26,–,0,–
+Construction and extraction occupations,Hazardous materials removal workers,21,–,21,–,0,–
+Construction and extraction occupations,Highway maintenance workers,98,941,98,941,0,–
+Construction and extraction occupations,Rail-track laying and maintenance equipment operators,22,–,22,–,0,–
+Construction and extraction occupations,Septic tank servicers and sewer pipe cleaners,7,–,5,–,1,–
+Construction and extraction occupations,Miscellaneous construction and related workers,48,–,44,–,4,–
+Construction and extraction occupations,"Derrick, rotary drill, and service unit operators, oil and gas",21,–,21,–,0,–
+Construction and extraction occupations,"Excavating and loading machine and dragline operators, surface mining",9,–,6,–,3,–
+Construction and extraction occupations,"Earth drillers, except oil and gas",22,–,22,–,0,–
+Construction and extraction occupations,"Explosives workers, ordnance handling experts, and blasters",7,–,7,–,0,–
+Construction and extraction occupations,Underground mining machine operators,43,–,42,–,1,–
+Construction and extraction occupations,"Roustabouts, oil and gas",8,–,8,–,0,–
+Construction and extraction occupations,Other extraction workers,47,–,46,–,1,–
+"Installation, maintenance, and repair occupations","First-line supervisors of mechanics, installers, and repairers",227,"1,246",210,"1,246",17,–
+"Installation, maintenance, and repair occupations","Computer, automated teller, and office machine repairers",109,"1,042",92,"1,072",17,–
+"Installation, maintenance, and repair occupations",Radio and telecommunications equipment installers and repairers,92,"1,042",85,"1,052",7,–
+"Installation, maintenance, and repair occupations",Avionics technicians,10,–,9,–,1,–
+"Installation, maintenance, and repair occupations","Electric motor, power tool, and related repairers",18,–,18,–,0,–
+"Installation, maintenance, and repair occupations","Electrical and electronics installers and repairers, transportation equipment",0,–,0,–,0,–
+"Installation, maintenance, and repair occupations","Electrical and electronics repairers, industrial and utility",8,–,7,–,0,–
+"Installation, maintenance, and repair occupations","Electronic equipment installers and repairers, motor vehicles",3,–,3,–,0,–
+"Installation, maintenance, and repair occupations",Audiovisual equipment installers and repairers,19,–,17,–,2,–
+"Installation, maintenance, and repair occupations",Security and fire alarm systems installers,37,–,36,–,1,–
+"Installation, maintenance, and repair occupations",Aircraft mechanics and service technicians,115,"1,355",112,"1,370",3,–
+"Installation, maintenance, and repair occupations",Automotive body and related repairers,105,"1,025",97,"1,049",8,–
+"Installation, maintenance, and repair occupations",Automotive glass installers and repairers,18,–,17,–,1,–
+"Installation, maintenance, and repair occupations",Automotive service technicians and mechanics,741,994,727,"1,001",15,–
+"Installation, maintenance, and repair occupations",Bus and truck mechanics and diesel engine specialists,281,"1,093",277,"1,095",5,–
+"Installation, maintenance, and repair occupations",Heavy vehicle and mobile equipment service technicians and mechanics,194,"1,206",191,"1,210",3,–
+"Installation, maintenance, and repair occupations",Small engine mechanics,28,–,27,–,1,–
+"Installation, maintenance, and repair occupations","Miscellaneous vehicle and mobile equipment mechanics, installers, and repairers",56,804,55,810,1,–
+"Installation, maintenance, and repair occupations",Control and valve installers and repairers,19,–,18,–,2,–
+"Installation, maintenance, and repair occupations","Heating, air conditioning, and refrigeration mechanics and installers",464,"1,126",458,"1,129",5,–
+"Installation, maintenance, and repair occupations",Home appliance repairers,28,–,27,–,1,–
+"Installation, maintenance, and repair occupations",Industrial and refractory machinery mechanics,397,"1,172",383,"1,183",14,–
+"Installation, maintenance, and repair occupations","Maintenance and repair workers, general",586,"1,007",559,"1,017",27,–
+"Installation, maintenance, and repair occupations","Maintenance workers, machinery",20,–,19,–,2,–
+"Installation, maintenance, and repair occupations",Millwrights,33,–,32,–,1,–
+"Installation, maintenance, and repair occupations",Electrical power-line installers and repairers,122,"1,373",120,"1,374",2,–
+"Installation, maintenance, and repair occupations",Telecommunications line installers and repairers,141,"1,135",134,"1,141",8,–
+"Installation, maintenance, and repair occupations",Precision instrument and equipment repairers,35,–,32,–,4,–
+"Installation, maintenance, and repair occupations",Wind turbine service technicians,9,–,9,–,0,–
+"Installation, maintenance, and repair occupations","Coin, vending, and amusement machine servicers and repairers",26,–,21,–,5,–
+"Installation, maintenance, and repair occupations",Commercial divers,1,–,1,–,0,–
+"Installation, maintenance, and repair occupations",Locksmiths and safe repairers,23,–,23,–,0,–
+"Installation, maintenance, and repair occupations",Manufactured building and mobile home installers,3,–,3,–,0,–
+"Installation, maintenance, and repair occupations",Riggers,15,–,15,–,0,–
+"Installation, maintenance, and repair occupations","Helpers--installation, maintenance, and repair workers",12,–,12,–,0,–
+"Installation, maintenance, and repair occupations","Other installation, maintenance, and repair workers",124,"1,014",123,"1,018",2,–
+Production occupations,First-line supervisors of production and operating workers,714,"1,175",560,"1,263",154,914
+Production occupations,"Aircraft structure, surfaces, rigging, and systems assemblers",14,–,8,–,6,–
+Production occupations,"Electrical, electronics, and electromechanical assemblers",115,824,61,887,54,782
+Production occupations,Engine and other machine assemblers,12,–,11,–,2,–
+Production occupations,Structural metal fabricators and fitters,18,–,18,–,0,–
+Production occupations,Other assemblers and fabricators,961,812,607,852,355,758
+Production occupations,Bakers,139,670,58,726,81,656
+Production occupations,"Butchers and other meat, poultry, and fish processing workers",231,767,161,818,69,696
+Production occupations,"Food and tobacco roasting, baking, and drying machine operators and tenders",2,–,1,–,1,–
+Production occupations,Food batchmakers,57,810,27,–,30,–
+Production occupations,Food cooking machine operators and tenders,8,–,6,–,3,–
+Production occupations,"Food processing workers, all other",137,927,102,970,35,–
+Production occupations,Computer numerically controlled tool operators and programmers,107,"1,055",96,"1,087",11,–
+Production occupations,"Forming machine setters, operators, and tenders, metal and plastic",28,–,20,–,8,–
+Production occupations,"Cutting, punching, and press machine setters, operators, and tenders, metal and plastic",68,780,66,788,2,–
+Production occupations,"Grinding, lapping, polishing, and buffing machine tool setters, operators, and tenders, metal and plastic",35,–,30,–,5,–
+Production occupations,"Other machine tool setters, operators, and tenders, metal and plastic",8,–,6,–,2,–
+Production occupations,Machinists,284,"1,023",263,"1,049",21,–
+Production occupations,"Metal furnace operators, tenders, pourers, and casters",15,–,13,–,2,–
+Production occupations,"Model makers and patternmakers, metal and plastic",5,–,5,–,0,–
+Production occupations,"Molders and molding machine setters, operators, and tenders, metal and plastic",29,–,27,–,2,–
+Production occupations,Tool and die makers,31,–,31,–,0,–
+Production occupations,"Welding, soldering, and brazing workers",498,"1,012",465,"1,019",33,–
+Production occupations,Other metal workers and plastic workers,347,855,278,906,69,684
+Production occupations,Prepress technicians and workers,9,–,9,–,0,–
+Production occupations,Printing press operators,117,869,94,914,24,–
+Production occupations,Print binding and finishing workers,11,–,11,–,0,–
+Production occupations,Laundry and dry-cleaning workers,92,665,24,–,69,636
+Production occupations,"Pressers, textile, garment, and related materials",16,–,10,–,6,–
+Production occupations,Sewing machine operators,103,673,31,–,71,655
+Production occupations,Shoe and leather workers,6,–,3,–,3,–
+Production occupations,"Tailors, dressmakers, and sewers",32,–,5,–,27,–
+Production occupations,"Textile machine setters, operators, and tenders",17,–,7,–,10,–
+Production occupations,Upholsterers,15,–,10,–,5,–
+Production occupations,"Other textile, apparel, and furnishings workers",9,–,4,–,6,–
+Production occupations,Cabinetmakers and bench carpenters,33,–,32,–,2,–
+Production occupations,Furniture finishers,7,–,4,–,2,–
+Production occupations,"Sawing machine setters, operators, and tenders, wood",16,–,14,–,2,–
+Production occupations,"Woodworking machine setters, operators, and tenders, except sawing",28,–,25,–,4,–
+Production occupations,Other woodworkers,15,–,12,–,3,–
+Production occupations,"Power plant operators, distributors, and dispatchers",41,–,40,–,1,–
+Production occupations,Stationary engineers and boiler operators,72,"1,328",70,"1,337",2,–
+Production occupations,Water and wastewater treatment plant and system operators,89,961,81,965,7,–
+Production occupations,Miscellaneous plant and system operators,34,–,33,–,1,–
+Production occupations,"Chemical processing machine setters, operators, and tenders",41,–,37,–,4,–
+Production occupations,"Crushing, grinding, polishing, mixing, and blending workers",94,994,77,"1,020",17,–
+Production occupations,Cutting workers,50,826,35,–,15,–
+Production occupations,"Extruding, forming, pressing, and compacting machine setters, operators, and tenders",14,–,12,–,1,–
+Production occupations,"Furnace, kiln, oven, drier, and kettle operators and tenders",8,–,8,–,0,–
+Production occupations,"Inspectors, testers, sorters, samplers, and weighers",718,921,436,"1,010",282,809
+Production occupations,Jewelers and precious stone and metal workers,33,–,25,–,8,–
+Production occupations,Dental and ophthalmic laboratory technicians and medical appliance technicians,56,722,30,–,26,–
+Production occupations,Packaging and filling machine operators and tenders,264,716,117,752,147,698
+Production occupations,Painting workers,126,816,114,824,12,–
+Production occupations,Photographic process workers and processing machine operators,18,–,9,–,9,–
+Production occupations,Adhesive bonding machine operators and tenders,10,–,7,–,3,–
+Production occupations,Etchers and engravers,5,–,3,–,2,–
+Production occupations,"Molders, shapers, and casters, except metal and plastic",17,–,16,–,1,–
+Production occupations,"Paper goods machine setters, operators, and tenders",15,–,8,–,6,–
+Production occupations,Tire builders,10,–,9,–,1,–
+Production occupations,Helpers--production workers,39,–,29,–,10,–
+Production occupations,Other production equipment operators and tenders,7,–,3,–,4,–
+Production occupations,Other production workers,"1,162",856,862,893,301,771
+Transportation and material moving occupations,Supervisors of transportation and material moving workers,313,"1,016",235,"1,127",78,791
+Transportation and material moving occupations,Aircraft pilots and flight engineers,173,"2,015",158,"2,005",15,–
+Transportation and material moving occupations,Air traffic controllers and airfield operations specialists,38,–,34,–,3,–
+Transportation and material moving occupations,Flight attendants,74,961,19,–,55,815
+Transportation and material moving occupations,"Ambulance drivers and attendants, except emergency medical technicians",13,–,9,–,4,–
+Transportation and material moving occupations,"Bus drivers, school",115,660,46,–,69,650
+Transportation and material moving occupations,"Bus drivers, transit and intercity",224,911,150,979,74,811
+Transportation and material moving occupations,Driver/sales workers and truck drivers,"2,709","1,005","2,560","1,016",149,734
+Transportation and material moving occupations,Shuttle drivers and chauffeurs,47,–,44,–,3,–
+Transportation and material moving occupations,Taxi drivers,218,865,190,925,29,–
+Transportation and material moving occupations,"Motor vehicle operators, all other",114,813,95,865,19,–
+Transportation and material moving occupations,Locomotive engineers and operators,45,–,43,–,1,–
+Transportation and material moving occupations,Railroad conductors and yardmasters,53,"1,642",50,"1,656",3,–
+Transportation and material moving occupations,Other rail transportation workers,27,–,24,–,2,–
+Transportation and material moving occupations,Sailors and marine oilers,16,–,12,–,3,–
+Transportation and material moving occupations,Ship and boat captains and operators,27,–,27,–,0,–
+Transportation and material moving occupations,Ship engineers,3,–,3,–,0,–
+Transportation and material moving occupations,Parking attendants,41,–,37,–,4,–
+Transportation and material moving occupations,Transportation service attendants,44,–,38,–,7,–
+Transportation and material moving occupations,Transportation inspectors,35,–,32,–,4,–
+Transportation and material moving occupations,Passenger attendants,25,–,9,–,16,–
+Transportation and material moving occupations,Other transportation workers,29,–,24,–,5,–
+Transportation and material moving occupations,Crane and tower operators,55,"1,316",54,"1,326",1,–
+Transportation and material moving occupations,"Conveyor, dredge, and hoist and winch operators",21,–,19,–,2,–
+Transportation and material moving occupations,Industrial truck and tractor operators,583,809,526,812,57,786
+Transportation and material moving occupations,Cleaners of vehicles and equipment,299,694,242,704,57,605
+Transportation and material moving occupations,"Laborers and freight, stock, and material movers, hand","1,584",765,"1,235",801,349,685
+Transportation and material moving occupations,Machine feeders and offbearers,29,–,13,–,16,–
+Transportation and material moving occupations,"Packers and packagers, hand",484,698,229,732,255,667
+Transportation and material moving occupations,Stockers and order fillers,"1,084",706,729,730,355,667
+Transportation and material moving occupations,Pumping station operators,18,–,17,–,1,–
+Transportation and material moving occupations,Refuse and recyclable material collectors,74,762,69,789,5,–
+Transportation and material moving occupations,Other material moving workers,50,889,38,–,11,–
