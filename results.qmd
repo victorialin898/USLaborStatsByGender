@@ -1,10 +1,354 @@
 # Results
 
+
+Outline:
+
+1. say something like the most important thing is the occupation difference 
+  - start with the Total Earnings by Gender and Occupation Group plot? (hard plot 1)
+  - is the box plot relevant or am i just trying to get another plot 
+  - i like the clevland dot plot / bar chart under it showing the men and women differences (hard plot 2)
+  - show some combo of the most popular jobs by imbalance / most popular jobs by gender
+     - this might be something we just show the table for, feel interesting for the reader
+     - we can also skip completely
+  - end with the scatter plot that shows jobs with the 45 degree line in the middle (hard plot 3)
+2. another large finding is child and marital status
+  - show the overall marital one first (hard plot 4)
+  - Women's Median Weekly Earnings as Percentage of Men's Earnings by Children Status next
+     - need to be careful about this one, its not so clear cut (hard plot 5)
+  - then the one that shows the percent of day breakdown (hard plot 6)
+3. comment on data we have over time
+  - time series with race, education status? (make those breaks in the series for recessions also)
+  - maybe map plot if we dont do the one below?
+
+still need to add an interactive component  -- maybe something like this showing wages over time?
+i still havent really looked much how d3 works, so may need to do something else
+https://nwlc.org/resource/wage-gap-state-by-state/
+
+hard plot = we should def include these
+
+
+
+```{r}
+# Add libraries and read in data
+library(readr)
+library(dplyr)
+library(naniar)   # For missing data visualization and summaries
+library(visdat)
+library(ggplot2)
+library(tidyr)
+library(ggmosaic)
+
+
+atusAllGroups2023 <- read_csv("data/atusAllGroups2023.csv", show_col_types = FALSE)
+
+MedianWeeklyEarningByPresenceOfChildren <- read_csv("data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv", show_col_types = FALSE)
+MedianWeeklyEarningByRace <- read_csv("data/MedianWeeklyEarningByRaceTable18.csv", show_col_types = FALSE)
+MedianWeeklyEarningsByGenderEducation <- read_csv("data/MedianWeeklyEarningsByGenderEducationTable24.csv", show_col_types = FALSE)
+MedianHourlyEarningsHispanicByAge <- read_csv("data/MedianHourlyEarningsHispanicByAgeTable25.csv", show_col_types = FALSE)
+MedianHoursWorkedByRaceGender <- read_csv("data/MedianHoursWorkedByRaceGenderTable26.csv", show_col_types = FALSE)
+
+MedianWeeklyEarningsByOccupation <- read_csv("data/MedianWeeklyEarningsByOccupation.csv", show_col_types = FALSE)
+MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarningsByOccupationAggregate.csv", show_col_types = FALSE)
+
+MedianWeeklyEarningsByMaritalStatus <- read_csv("data/MedianWeeklyEarningsByMaritalStatus.csv", show_col_types = FALSE)
+
+
+```
+
+
+
+```{r}
+
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Assuming data is loaded into MedianWeeklyEarningsByOccupation
+data <- MedianWeeklyEarningsByOccupation
+
+# Clean data by removing NA values for men's and women's earnings
+data_clean <- data %>%
+  filter(!is.na(men_median_weekly_earnings) & !is.na(women_median_weekly_earnings)) %>%
+  mutate(
+    wage_gap = (women_median_weekly_earnings / men_median_weekly_earnings) * 100
+  )
+
+# Top 15 Occupations by Number of Women Workers (sorted by number of workers)
+top_15_women <- data_clean %>%
+  arrange(desc(women_number_of_workers)) %>%
+  head(15) %>%
+  mutate(occupation = factor(occupation, levels = rev(occupation))) %>%
+  select(occupation, women_number_of_workers, wage_gap)
+
+# Top 15 Occupations by Number of Men Workers (sorted by number of workers)
+top_15_men <- data_clean %>%
+  arrange(desc(men_number_of_workers)) %>%
+  head(15) %>%
+  mutate(occupation = factor(occupation, levels = rev(occupation))) %>%
+  select(occupation, men_number_of_workers, wage_gap)
+
+# Plot for Top 15 Occupations by Women Workers (sorted by number of workers)
+p1 <- ggplot(top_15_women, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(round(wage_gap, 1), "%")), 
+            vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
+  coord_flip() + # Flip the axes for readability
+  labs(
+    title = "Wage Gap for Top 15 Occupations by Number of Women Workers",
+    x = "Occupation",
+    y = "Wage Gap (%)"
+  ) +
+  scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+# Plot for Top 15 Occupations by Men Workers (sorted by number of workers)
+p2 <- ggplot(top_15_men, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(round(wage_gap, 1), "%")), 
+            vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
+  coord_flip() + # Flip the axes for readability
+  labs(
+    title = "Wage Gap for Top 15 Occupations by Number of Men Workers",
+    x = "Occupation",
+    y = "Wage Gap (%)"
+  ) +
+  scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+# Print both plots
+p1
+p2
+
+
+
+```
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Assuming data is loaded into MedianWeeklyEarningsByOccupation
+data <- MedianWeeklyEarningsByOccupation
+
+# Clean data by removing NA values for men's and women's earnings
+data_clean <- data %>%
+  filter(!is.na(men_median_weekly_earnings) & !is.na(women_median_weekly_earnings)) %>%
+  mutate(
+    wage_gap = (women_median_weekly_earnings / men_median_weekly_earnings) * 100,
+    women_men_ratio = women_number_of_workers / men_number_of_workers,  # Women-to-Men Ratio
+    men_women_ratio = men_number_of_workers / women_number_of_workers   # Men-to-Women Ratio
+  )
+
+# Top 15 Occupations with the Highest Women-to-Men Workers Ratio (sorted by ratio)
+top_15_women_imbalance <- data_clean %>%
+  arrange(desc(women_men_ratio)) %>%
+  head(15) %>%
+  mutate(occupation = factor(occupation, levels = rev(occupation))) %>%
+  select(occupation, women_men_ratio, wage_gap)
+
+# Top 15 Occupations with the Highest Men-to-Women Workers Ratio (sorted by ratio)
+top_15_men_imbalance <- data_clean %>%
+  arrange(desc(men_women_ratio)) %>%
+  head(15) %>%
+  mutate(occupation = factor(occupation, levels = rev(occupation))) %>%
+  select(occupation, men_women_ratio, wage_gap)
+
+# Plot for Top 15 Occupations with the Highest Women-to-Men Workers Ratio (sorted by ratio)
+p1 <- ggplot(top_15_women_imbalance, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(round(wage_gap, 1), "%")), 
+            vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
+  coord_flip() + # Flip the axes for readability
+  labs(
+    title = "Wage Gap for Top 15 Occupations with the Highest Women-to-Men Workers Ratio",
+    x = "Occupation",
+    y = "Wage Gap (%)"
+  ) +
+  scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+# Plot for Top 15 Occupations with the Highest Men-to-Women Workers Ratio (sorted by ratio)
+p2 <- ggplot(top_15_men_imbalance, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(round(wage_gap, 1), "%")), 
+            vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
+  coord_flip() + # Flip the axes for readability
+  labs(
+    title = "Wage Gap for Top 15 Occupations with the Highest Men-to-Women Workers Ratio",
+    x = "Occupation",
+    y = "Wage Gap (%)"
+  ) +
+  scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+
+# Print both plots
+p1
+p2
+
+
+
+
+```
+
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Assuming you have a dataset like MedianWeeklyEarningsByOccupation
+data <- MedianWeeklyEarningsByOccupation
+
+# Clean data by removing rows with NA values for median earnings
+data_clean <- data %>%
+  filter(!is.na(men_median_weekly_earnings) & !is.na(women_median_weekly_earnings))
+
+# Convert data to long format for ggplot (necessary for making boxplots)
+data_long <- data_clean %>%
+  select(occupation_group_major, occupation, men_median_weekly_earnings, women_median_weekly_earnings) %>%
+  pivot_longer(cols = c(men_median_weekly_earnings, women_median_weekly_earnings),
+               names_to = "gender", 
+               values_to = "median_weekly_earnings") %>%
+  mutate(gender = ifelse(gender == "men_median_weekly_earnings", "Men", "Women"))
+
+# Identify outliers (values outside the whiskers)
+calculate_outliers <- function(x) {
+  # Calculate Q1, Q3, and IQR
+  Q1 <- quantile(x, 0.25, na.rm = TRUE)
+  Q3 <- quantile(x, 0.75, na.rm = TRUE)
+  IQR <- Q3 - Q1
+  
+  # Define lower and upper bounds for outliers
+  lower_bound <- Q1 - 1.5 * IQR
+  upper_bound <- Q3 + 1.5 * IQR
+  
+  # Identify outliers
+  outliers <- x[x < lower_bound | x > upper_bound]
+  return(outliers)
+}
+
+# Create a new column to mark outliers for labeling
+outlier_data <- data_long %>%
+  group_by(gender) %>%
+  mutate(is_outlier = median_weekly_earnings %in% calculate_outliers(median_weekly_earnings))
+
+# Create boxplot of median weekly earnings for Men and Women with outlier labels (by occupation)
+ggplot(data_long, aes(x = gender, y = median_weekly_earnings, fill = gender)) +
+  geom_boxplot() +
+  geom_text(data = outlier_data %>% filter(is_outlier), 
+            aes(label = occupation),
+            position = position_jitter(width = 0.1),  # Slightly jitter outlier labels to avoid overlap
+            color = "black", fontface = "bold", size = 3) +
+  labs(
+    title = "Distribution of Median Weekly Earnings by Gender with Outliers Labeled (by Occupation)",
+    x = "Gender",
+    y = "Median Weekly Earnings (USD)"
+  ) +
+  scale_fill_manual(values = c("blue", "pink")) +  # Customize boxplot colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 12),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14))
+
+```
+
+
+
+
+```{r}
+library(plotly)
+library(dplyr)
+
+# Clean the data
+data_clean <- MedianWeeklyEarningsByOccupation |>
+  filter(total_number_of_workers >= 15, 
+         !is.na(men_median_weekly_earnings) & !is.na(women_median_weekly_earnings))
+
+# Create the scatter plot using plot_ly
+plot_ly(data = data_clean, 
+        x = ~men_median_weekly_earnings, 
+        y = ~women_median_weekly_earnings, 
+        type = 'scatter', 
+        mode = 'markers', 
+        text = ~occupation,  # Hover text with occupation names
+        hoverinfo = 'text',  # Show only occupation on hover
+        color = ~occupation_group_major,  # Color by occupation group
+        colors = c("red", "blue", "green", "orange"),  # Specify colors for groups
+        marker = list(size = 10, opacity = 0.7)) %>%
+  layout(
+    title = "Men vs. Women Median Weekly Earnings by Occupation",
+    xaxis = list(title = "Men's Median Weekly Earnings ($)"),
+    yaxis = list(title = "Women's Median Weekly Earnings ($)"),
+    shapes = list(
+      # Add 45-degree line (y = x) as a reference
+      list(
+        type = "line", 
+        x0 = 500, x1 = max(data_clean$men_median_weekly_earnings, na.rm = TRUE), 
+        y0 = 500, y1 = max(data_clean$women_median_weekly_earnings, na.rm = TRUE), 
+        line = list(color = "black", width = 2, dash = "dot")
+      )
+    ),
+    annotations = list(
+      # Add annotation outside the chart
+      list(
+        x = 1.1,  # Position outside the plot area (right side)
+        y = .05,     # Position vertically at the top of the chart
+        xref = "paper",  # Use 'paper' to position relative to plot area
+        yref = "paper",  # Use 'paper' to position relative to plot area
+        text = "---- Men Median Pay = Women Median Pay", 
+        showarrow = TRUE,
+        arrowhead = 2, 
+        ax = 20, 
+        ay = 0,   # Adjust arrow direction to point to the line
+        font = list(size = 12, color = "black")
+      )
+    )
+  )
+
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+data_long <- MedianWeeklyEarningsByOccupationAggregate |>
+  dplyr::select(occupation, men_median_weekly_earnings, women_median_weekly_earnings) |>
+  pivot_longer(cols = c(men_median_weekly_earnings, women_median_weekly_earnings), 
+               names_to = "gender", values_to = "median_weekly_earnings") |>
+  mutate(gender = factor(gender, levels = c("men_median_weekly_earnings", "women_median_weekly_earnings"), 
+                        labels = c("Men", "Women")))
+
+
+# Create the Cleveland dot plot with occupation descriptions on the y-axis and earnings on the x-axis
+ggplot(data_long, aes(x = median_weekly_earnings, y = occupation, color = gender)) +
+  geom_point(size = 2) +  # Use points to create the dot plot
+  scale_color_manual(values = c("blue", "pink")) +  # Assign colors for men and women
+  labs(title = "Median Weekly Earnings by Occupation (Men vs. Women)",
+       x = "Median Weekly Earnings ($)",
+       y = "Occupation",
+       color = "Gender") +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 8),  # Adjust y-axis labels for readability
+        axis.title.x = element_text(size = 10),  # Optional: adjust the x-axis title size
+        axis.title.y = element_text(size = 10),  # Optional: adjust the y-axis title size
+        legend.position = "top")  # Position legend at the top
+
+```
+
+
+
 ```{r}
 
 # Reshape the data to long format
 data_long <- MedianWeeklyEarningsByOccupationAggregate %>%
-  select(occupation, men_median_weekly_earnings, women_median_weekly_earnings) %>%
+  dplyr::select(occupation, men_median_weekly_earnings, women_median_weekly_earnings) %>%
   gather(key = "gender", value = "median_weekly_earnings", men_median_weekly_earnings, women_median_weekly_earnings) %>%
   mutate(gender = factor(gender, levels = c("men_median_weekly_earnings", "women_median_weekly_earnings"), 
                         labels = c("Men", "Women")))
@@ -22,45 +366,40 @@ ggplot(data_long, aes(x = occupation, y = median_weekly_earnings, fill = gender)
         legend.position = "top") +
   coord_flip()
 ```
-
-
-
 ```{r}
-# weighted to see which industries contribute to the disparity the most
+library(ggplot2)
+library(dplyr)
+library(tidyr)
 
-# Compute the weighted median earnings for men and women
-# Weighted median earnings for men
-data$weighted_men_earnings <- (data$men_median_weekly_earnings * data$men_number_of_workers)
+# Prepare the data
+data_clean <- MedianWeeklyEarningsByOccupation |>
+  filter(total_number_of_workers >= 15, 
+         !is.na(men_median_weekly_earnings) & !is.na(women_median_weekly_earnings))
 
-# Weighted median earnings for women
-data$weighted_women_earnings <- (data$women_median_weekly_earnings * data$women_number_of_workers)
+# Calculate total earnings by multiplying median weekly earnings by the number of workers
+data_clean <- data_clean %>%
+  mutate(men_total_earnings = men_median_weekly_earnings * men_number_of_workers,
+         women_total_earnings = women_median_weekly_earnings * women_number_of_workers)
 
-# Calculate total number of workers for each occupation (for normalization)
-data$total_workers <- data$men_number_of_workers + data$women_number_of_workers
+# Reshape the data to long format for stacking
+data_long <- data_clean %>%
+  dplyr::select(occupation, occupation_group_major, men_total_earnings, women_total_earnings) %>%
+  pivot_longer(cols = c(men_total_earnings, women_total_earnings),
+               names_to = "gender",
+               values_to = "total_earnings") %>%
+  mutate(gender = recode(gender, 
+                        "men_total_earnings" = "Men", 
+                        "women_total_earnings" = "Women"))
 
-# Compute the weighted average earnings for men and women
-data$weighted_avg_men_earnings <- data$weighted_men_earnings / data$men_number_of_workers
-data$weighted_avg_women_earnings <- data$weighted_women_earnings / data$women_number_of_workers
-
-# Reshape the data to long format
-data_long <- data %>%
-  select(occupation, weighted_avg_men_earnings, weighted_avg_women_earnings) %>%
-  gather(key = "gender", value = "weighted_avg_earnings", weighted_avg_men_earnings, weighted_avg_women_earnings) %>%
-  mutate(gender = factor(gender, levels = c("weighted_avg_men_earnings", "weighted_avg_women_earnings"), 
-                        labels = c("Men", "Women")))
-
-# Create the weighted bar plot
-ggplot(data_long, aes(x = occupation, y = weighted_avg_earnings, fill = gender)) +
-  geom_bar(stat = "identity", position = position_dodge(width = 0.8), width = 0.7) +
-  scale_fill_manual(values = c("blue", "pink")) +  # Assign colors for men and women
-  labs(title = "Weighted Median Weekly Earnings by Occupation (Men vs. Women)",
-       x = "Occupation",
-       y = "Weighted Median Weekly Earnings ($)",
-       fill = "Gender") +
+# Create stacked bar chart with color by major occupation group
+ggplot(data_long, aes(x = gender, y = total_earnings, fill = occupation_group_major)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Total Earnings by Gender and Occupation Group",
+       x = "Gender",
+       y = "Total Earnings ($)") +
+  scale_fill_brewer(palette = "Set3") +  # Use a color palette for different occupation groups
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels for readability
-        legend.position = "top") +
-  coord_flip()  # Flip coordinates for better readability of occupation names
+  theme(legend.position = "right")  # Place the legend to the right
 
 ```
 
@@ -75,7 +414,7 @@ library(dplyr)
 # Assuming 'MedianWeeklyEarningsByOccupation' is your data frame, first filter for legal occupations
 legal_data <- MedianWeeklyEarningsByOccupation %>%
   filter(occupation_group == "Legal occupations") %>%
-  select(occupation, 
+  dplyr::select(occupation, 
          total_number_of_workers, 
          total_median_weekly_earnings, 
          men_number_of_workers, 
@@ -108,6 +447,65 @@ ggplot(legal_data, aes(x = occupation, y = pay_gap_ratio, fill = "Pay Gap Ratio"
         legend.position = "none") +
   coord_flip()  # Flip coordinates for better readability of occupation names
 
+
+```
+
+```{r}
+
+library(ggplot2)
+library(dplyr)
+library(stringr)
+
+
+# Reshape the data to long format
+data_long <- MedianWeeklyEarningsByOccupationAggregate %>%
+  dplyr::select(occupation, men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings) %>%
+  pivot_longer(cols = c(men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings), 
+               names_to = "variable", values_to = "value") %>%
+  mutate(gender = case_when(
+    str_detect(variable, "women") ~ "Women",
+    str_detect(variable, "men") ~ "Men"
+  ),
+  variable = case_when(
+    str_detect(variable, "number_of_workers") ~ "Number of Workers",
+    str_detect(variable, "median_weekly_earnings") ~ "Median Weekly Earnings"
+  ))
+
+# Plot with both number of workers and median weekly earnings
+ggplot(data_long, aes(x = value, y = occupation, color = gender)) +
+  geom_point(size = 4) +
+  facet_wrap(~ variable, scales = "free_x") +  # Separate by the variable (Workers vs Earnings)
+  scale_color_manual(values = c("blue", "pink")) +
+  labs(title = "Number of Workers and Median Weekly Earnings by Occupation (Men vs Women)",
+       x = "Value", 
+       y = "Occupation",
+       color = "Gender") +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 8))  # Adjust y-axis labels for readability
+
+```
+
+
+```{r}
+
+# Pivot data into long format
+data_long <- MedianWeeklyEarningsByOccupationAggregate %>%
+  dplyr::select(occupation, men_number_of_workers, women_number_of_workers) %>%
+  pivot_longer(cols = c(men_number_of_workers, women_number_of_workers),
+               names_to = "gender", values_to = "number_of_workers") %>%
+  mutate(gender = factor(gender, levels = c("men_number_of_workers", "women_number_of_workers"), 
+                        labels = c("Men", "Women")))
+
+
+ggplot(data_long) +
+  geom_mosaic(aes(x = product(occupation), fill = gender, weight = number_of_workers)) +
+  scale_fill_manual(values = c("blue", "hotpink")) +
+  labs(title = "Distribution of Workers by Occupation and Gender",
+       x = "Occupation",
+       y = "Proportion of Workers",
+       fill = "Gender") +
+  theme_minimal() +
+  coord_flip()
 
 ```
 
@@ -197,3 +595,102 @@ ggplot(atus_long, aes(x = Time, y = interaction(Gender, Group), fill = Major_Act
             position = position_stack(vjust = 0.5), color = "black", size = 3)
 
 ```
+
+```{r}
+
+
+# Reshape data for plotting
+data_long <- MedianWeeklyEarningByPresenceOfChildren %>%
+  mutate(Marital_Status = factor(Marital_Status),
+         Characteristic = factor(Characteristic, levels = c("Total", "With children under 18 years old", "With children 6 to 17 none younger", "With children under 6 years old", "With no children under 18 years old"))) %>%
+  pivot_longer(cols = c(Median_weekly_earnings), names_to = "earnings", values_to = "value")
+
+# Plot using ggplot
+ggplot(data_long, aes(x = Characteristic, y = value, fill = Gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  facet_wrap(~ Marital_Status) +
+  labs(title = "Median Weekly Earnings by Gender, Marital Status, and Presence of Children",
+       x = "Characteristic (Children Status)",
+       y = "Median Weekly Earnings ($)",
+       fill = "Gender") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Assuming the data is loaded into `MedianWeeklyEarningsByPresenceOfChildren`
+data <- MedianWeeklyEarningByPresenceOfChildren
+
+women_data <- data %>%
+  filter(Gender == "Women") %>%
+  select(Marital_Status, Characteristic, women_median_weekly_earnings = Median_weekly_earnings)
+
+men_data <- data %>%
+  filter(Gender == "Men") %>%
+  select(Marital_Status, Characteristic, men_median_weekly_earnings = Median_weekly_earnings)
+
+# Join women and men data by Marital_Status and Characteristic
+merged_data <- left_join(women_data, men_data, by = c("Marital_Status", "Characteristic"))
+
+# Calculate women's earnings as a percentage of men's earnings
+merged_data <- merged_data %>%
+  mutate(women_as_percent_of_men = (women_median_weekly_earnings / men_median_weekly_earnings) * 100)
+
+# Remove rows with missing data (if any)
+merged_data <- merged_data %>%
+  filter(!is.na(women_as_percent_of_men))
+
+# Plot: Women's Earnings as a Percentage of Men's Earnings by Children Status, without legend and with simplified x-axis
+ggplot(merged_data, aes(x = Characteristic, y = women_as_percent_of_men, fill = Characteristic)) +
+  geom_bar(stat = "identity", position = "dodge", show.legend = FALSE) +  # Remove legend
+  geom_text(aes(label = paste0(round(women_as_percent_of_men, 1), "%")), 
+            vjust = 1.5, color = "white", fontface = "bold", size=3) +  # Add percentage labels
+  labs(
+    title = "Women's Median Weekly Earnings as Percentage of Men's Earnings by Children Status",
+    x = "Children Status",
+    y = "Women's Earnings as % of Men's Earnings"
+  ) +
+  scale_x_discrete(labels = function(x) gsub(":", "\n", x)) +  # Add line breaks in x-axis labels
+  theme_minimal() +  # Clean theme
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels for better visibility
+        axis.ticks.x = element_blank(),  # Hide x-axis ticks
+        axis.title.x = element_text(size = 12),  # Set title size for x-axis
+        axis.title.y = element_text(size = 12),  # Set title size for y-axis
+        legend.position = "none") +  # Ensure no legend is shown
+  facet_wrap(~ Marital_Status, scales = "free_y")
+
+
+```
+
+```{r}
+
+data <- MedianWeeklyEarningsByMaritalStatus
+  
+# Calculate women's earnings as a percentage of men's earnings
+data$women_as_percent_of_men = (data$women_median_weekly_earnings / data$men_median_weekly_earnings) * 100
+
+# Plot: Women's Earnings as a Percentage of Men's Earnings with Labels
+ggplot(data, aes(x = MaritalStatus, y = women_as_percent_of_men, fill = MaritalStatus)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  geom_text(aes(label = paste0(round(women_as_percent_of_men, 1), "%")), 
+            vjust = 1.5, color = "white", fontface = "bold") +  # Add '%' and adjust label position
+  labs(
+    title = "Women's Median Weekly Earnings as Percentage of Men's Earnings by Marital Status",
+    x = "Marital Status",
+    y = "Women's Earnings as % of Men's Earnings"
+  ) +
+  theme_grey() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+
+
+
+

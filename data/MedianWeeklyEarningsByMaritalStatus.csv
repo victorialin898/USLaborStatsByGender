@@ -1,0 +1,6 @@
+MaritalStatus,women_number_of_workers,women_median_weekly_earnings,women_stderr,men_number_of_workers,men_median_weekly_earnings,men_stderr,
+"Never married",17541,876,5,22116,945,6,92.7
+"Married, spouse present",26956,1143,4,36963,1421,6,80.4
+Widowed,1229,895,19,533,1082,45,82.7
+Divorced,6451,1041,11,4935,1201,13,86.7
+Separated,2030,832,14,2153,1046,20,79.5

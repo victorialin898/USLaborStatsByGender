@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -68,6 +102,15 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 </head>
@@ -169,6 +212,881 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Outline:</p>
+<ol type="1">
+<li>say something like the most important thing is the occupation difference</li>
+</ol>
+<ul>
+<li>start with the Total Earnings by Gender and Occupation Group plot? (hard plot 1)</li>
+<li>is the box plot relevant or am i just trying to get another plot</li>
+<li>i like the clevland dot plot / bar chart under it showing the men and women differences (hard plot 2)</li>
+<li>show some combo of the most popular jobs by imbalance / most popular jobs by gender
+<ul>
+<li>this might be something we just show the table for, feel interesting for the reader</li>
+<li>we can also skip completely</li>
+</ul></li>
+<li>end with the scatter plot that shows jobs with the 45 degree line in the middle (hard plot 3)</li>
+</ul>
+<ol start="2" type="1">
+<li>another large finding is child and marital status</li>
+</ol>
+<ul>
+<li>show the overall marital one first (hard plot 4)</li>
+<li>Women’s Median Weekly Earnings as Percentage of Men’s Earnings by Children Status next
+<ul>
+<li>need to be careful about this one, its not so clear cut (hard plot 5)</li>
+</ul></li>
+<li>then the one that shows the percent of day breakdown (hard plot 6)</li>
+</ul>
+<ol start="3" type="1">
+<li>comment on data we have over time</li>
+</ol>
+<ul>
+<li>time series with race, education status? (make those breaks in the series for recessions also)</li>
+<li>maybe map plot if we dont do the one below?</li>
+</ul>
+<p>still need to add an interactive component – maybe something like this showing wages over time? i still havent really looked much how d3 works, so may need to do something else https://nwlc.org/resource/wage-gap-state-by-state/</p>
+<p>hard plot = we should def include these</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add libraries and read in data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)   <span class="co"># For missing data visualization and summaries</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visdat)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmosaic)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>atusAllGroups2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/atusAllGroups2023.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>MedianWeeklyEarningByPresenceOfChildren <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>MedianWeeklyEarningByRace <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MedianWeeklyEarningByRaceTable18.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>MedianWeeklyEarningsByGenderEducation <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MedianWeeklyEarningsByGenderEducationTable24.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>MedianHourlyEarningsHispanicByAge <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MedianHourlyEarningsHispanicByAgeTable25.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>MedianHoursWorkedByRaceGender <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MedianHoursWorkedByRaceGenderTable26.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>MedianWeeklyEarningsByOccupation <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MedianWeeklyEarningsByOccupation.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>MedianWeeklyEarningsByOccupationAggregate <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MedianWeeklyEarningsByOccupationAggregate.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>MedianWeeklyEarningsByMaritalStatus <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/MedianWeeklyEarningsByMaritalStatus.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...8`</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming data is loaded into MedianWeeklyEarningsByOccupation</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupation</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data by removing NA values for men's and women's earnings</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(men_median_weekly_earnings) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(women_median_weekly_earnings)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">wage_gap =</span> (women_median_weekly_earnings <span class="sc">/</span> men_median_weekly_earnings) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 15 Occupations by Number of Women Workers (sorted by number of workers)</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>top_15_women <span class="ot">&lt;-</span> data_clean <span class="sc">%&gt;%</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(women_number_of_workers)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">occupation =</span> <span class="fu">factor</span>(occupation, <span class="at">levels =</span> <span class="fu">rev</span>(occupation))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(occupation, women_number_of_workers, wage_gap)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 15 Occupations by Number of Men Workers (sorted by number of workers)</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>top_15_men <span class="ot">&lt;-</span> data_clean <span class="sc">%&gt;%</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(men_number_of_workers)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">occupation =</span> <span class="fu">factor</span>(occupation, <span class="at">levels =</span> <span class="fu">rev</span>(occupation))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(occupation, men_number_of_workers, wage_gap)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Top 15 Occupations by Women Workers (sorted by number of workers)</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_15_women, <span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> wage_gap, <span class="at">fill =</span> wage_gap)) <span class="sc">+</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(wage_gap, <span class="dv">1</span>), <span class="st">"%"</span>)), </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span>  <span class="co"># Add labels inside bars</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co"># Flip the axes for readability</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Wage Gap for Top 15 Occupations by Number of Women Workers"</span>,</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Wage Gap (%)"</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"red"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span>  <span class="co"># Red for lower wage gap, Green for higher wage gap</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))  <span class="co"># Rotate x-axis labels for better readability</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Top 15 Occupations by Men Workers (sorted by number of workers)</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_15_men, <span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> wage_gap, <span class="at">fill =</span> wage_gap)) <span class="sc">+</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(wage_gap, <span class="dv">1</span>), <span class="st">"%"</span>)), </span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span>  <span class="co"># Add labels inside bars</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co"># Flip the axes for readability</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Wage Gap for Top 15 Occupations by Number of Men Workers"</span>,</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Wage Gap (%)"</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"red"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span>  <span class="co"># Red for lower wage gap, Green for higher wage gap</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))  <span class="co"># Rotate x-axis labels for better readability</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Print both plots</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming data is loaded into MedianWeeklyEarningsByOccupation</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupation</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data by removing NA values for men's and women's earnings</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(men_median_weekly_earnings) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(women_median_weekly_earnings)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">wage_gap =</span> (women_median_weekly_earnings <span class="sc">/</span> men_median_weekly_earnings) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">women_men_ratio =</span> women_number_of_workers <span class="sc">/</span> men_number_of_workers,  <span class="co"># Women-to-Men Ratio</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">men_women_ratio =</span> men_number_of_workers <span class="sc">/</span> women_number_of_workers   <span class="co"># Men-to-Women Ratio</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 15 Occupations with the Highest Women-to-Men Workers Ratio (sorted by ratio)</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>top_15_women_imbalance <span class="ot">&lt;-</span> data_clean <span class="sc">%&gt;%</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(women_men_ratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">occupation =</span> <span class="fu">factor</span>(occupation, <span class="at">levels =</span> <span class="fu">rev</span>(occupation))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(occupation, women_men_ratio, wage_gap)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 15 Occupations with the Highest Men-to-Women Workers Ratio (sorted by ratio)</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>top_15_men_imbalance <span class="ot">&lt;-</span> data_clean <span class="sc">%&gt;%</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(men_women_ratio)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">15</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">occupation =</span> <span class="fu">factor</span>(occupation, <span class="at">levels =</span> <span class="fu">rev</span>(occupation))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(occupation, men_women_ratio, wage_gap)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Top 15 Occupations with the Highest Women-to-Men Workers Ratio (sorted by ratio)</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_15_women_imbalance, <span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> wage_gap, <span class="at">fill =</span> wage_gap)) <span class="sc">+</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(wage_gap, <span class="dv">1</span>), <span class="st">"%"</span>)), </span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span>  <span class="co"># Add labels inside bars</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co"># Flip the axes for readability</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Wage Gap for Top 15 Occupations with the Highest Women-to-Men Workers Ratio"</span>,</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Wage Gap (%)"</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"red"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span>  <span class="co"># Red for lower wage gap, Green for higher wage gap</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))  <span class="co"># Rotate x-axis labels for better readability</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot for Top 15 Occupations with the Highest Men-to-Women Workers Ratio (sorted by ratio)</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_15_men_imbalance, <span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> wage_gap, <span class="at">fill =</span> wage_gap)) <span class="sc">+</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(wage_gap, <span class="dv">1</span>), <span class="st">"%"</span>)), </span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span>  <span class="co"># Add labels inside bars</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co"># Flip the axes for readability</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Wage Gap for Top 15 Occupations with the Highest Men-to-Women Workers Ratio"</span>,</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Wage Gap (%)"</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"red"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span>  <span class="co"># Red for lower wage gap, Green for higher wage gap</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))  <span class="co"># Rotate x-axis labels for better readability</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Print both plots</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>p1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming you have a dataset like MedianWeeklyEarningsByOccupation</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupation</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data by removing rows with NA values for median earnings</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(men_median_weekly_earnings) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(women_median_weekly_earnings))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert data to long format for ggplot (necessary for making boxplots)</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_clean <span class="sc">%&gt;%</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(occupation_group_major, occupation, men_median_weekly_earnings, women_median_weekly_earnings) <span class="sc">%&gt;%</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(men_median_weekly_earnings, women_median_weekly_earnings),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"gender"</span>, </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"median_weekly_earnings"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">ifelse</span>(gender <span class="sc">==</span> <span class="st">"men_median_weekly_earnings"</span>, <span class="st">"Men"</span>, <span class="st">"Women"</span>))</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify outliers (values outside the whiskers)</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>calculate_outliers <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate Q1, Q3, and IQR</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  Q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  Q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  IQR <span class="ot">&lt;-</span> Q3 <span class="sc">-</span> Q1</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define lower and upper bounds for outliers</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  lower_bound <span class="ot">&lt;-</span> Q1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> IQR</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  upper_bound <span class="ot">&lt;-</span> Q3 <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> IQR</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Identify outliers</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  outliers <span class="ot">&lt;-</span> x[x <span class="sc">&lt;</span> lower_bound <span class="sc">|</span> x <span class="sc">&gt;</span> upper_bound]</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(outliers)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column to mark outliers for labeling</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>outlier_data <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_outlier =</span> median_weekly_earnings <span class="sc">%in%</span> <span class="fu">calculate_outliers</span>(median_weekly_earnings))</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplot of median weekly earnings for Men and Women with outlier labels (by occupation)</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_long, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> median_weekly_earnings, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> outlier_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(is_outlier), </span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> occupation),</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>),  <span class="co"># Slightly jitter outlier labels to avoid overlap</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Median Weekly Earnings by Gender with Outliers Labeled (by Occupation)"</span>,</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Median Weekly Earnings (USD)"</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"pink"</span>)) <span class="sc">+</span>  <span class="co"># Customize boxplot colors</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'plotly'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    last_plot</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    filter</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:graphics':
+
+    layout</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean the data</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupation <span class="sc">|&gt;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(total_number_of_workers <span class="sc">&gt;=</span> <span class="dv">15</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(men_median_weekly_earnings) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(women_median_weekly_earnings))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatter plot using plot_ly</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(<span class="at">data =</span> data_clean, </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="sc">~</span>men_median_weekly_earnings, </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="sc">~</span>women_median_weekly_earnings, </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">'scatter'</span>, </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">mode =</span> <span class="st">'markers'</span>, </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="sc">~</span>occupation,  <span class="co"># Hover text with occupation names</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">hoverinfo =</span> <span class="st">'text'</span>,  <span class="co"># Show only occupation on hover</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="sc">~</span>occupation_group_major,  <span class="co"># Color by occupation group</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"orange"</span>),  <span class="co"># Specify colors for groups</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">opacity =</span> <span class="fl">0.7</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Men vs. Women Median Weekly Earnings by Occupation"</span>,</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Men's Median Weekly Earnings ($)"</span>),</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Women's Median Weekly Earnings ($)"</span>),</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">shapes =</span> <span class="fu">list</span>(</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Add 45-degree line (y = x) as a reference</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"line"</span>, </span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">x0 =</span> <span class="dv">500</span>, <span class="at">x1 =</span> <span class="fu">max</span>(data_clean<span class="sc">$</span>men_median_weekly_earnings, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">y0 =</span> <span class="dv">500</span>, <span class="at">y1 =</span> <span class="fu">max</span>(data_clean<span class="sc">$</span>women_median_weekly_earnings, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">dash =</span> <span class="st">"dot"</span>)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotations =</span> <span class="fu">list</span>(</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Add annotation outside the chart</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fl">1.1</span>,  <span class="co"># Position outside the plot area (right side)</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> .<span class="dv">05</span>,     <span class="co"># Position vertically at the top of the chart</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">xref =</span> <span class="st">"paper"</span>,  <span class="co"># Use 'paper' to position relative to plot area</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">yref =</span> <span class="st">"paper"</span>,  <span class="co"># Use 'paper' to position relative to plot area</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">text =</span> <span class="st">"---- Men Median Pay = Women Median Pay"</span>, </span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">showarrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">arrowhead =</span> <span class="dv">2</span>, </span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">ax =</span> <span class="dv">20</span>, </span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">ay =</span> <span class="dv">0</span>,   <span class="co"># Adjust arrow direction to point to the line</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">font =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-809fab4bdf196113320f" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-809fab4bdf196113320f">{"x":{"visdat":{"fbff53fd012":["function () ","plotlyVisDat"]},"cur_data":"fbff53fd012","attrs":{"fbff53fd012":{"x":{},"y":{},"mode":"markers","text":{},"hoverinfo":"text","marker":{"size":10,"opacity":0.69999999999999996},"color":{},"colors":["red","blue","green","orange"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Men vs. Women Median Weekly Earnings by Occupation","xaxis":{"domain":[0,1],"automargin":true,"title":"Men's Median Weekly Earnings ($)"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Women's Median Weekly Earnings ($)"},"shapes":[{"type":"line","x0":500,"x1":2983,"y0":500,"y1":2907,"line":{"color":"black","width":2,"dash":"dot"}}],"annotations":[{"x":1.1000000000000001,"y":0.050000000000000003,"xref":"paper","yref":"paper","text":"---- Men Median Pay = Women Median Pay","showarrow":true,"arrowhead":2,"ax":20,"ay":0,"font":{"size":12,"color":"black"}}],"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1294,1495,1312],"y":[1221,1408,1609],"mode":"markers","text":["Graphic designers","Other designers","Producers and directors"],"hoverinfo":["text","text","text"],"marker":{"color":"rgba(255,0,0,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(255,0,0,1)"}},"type":"scatter","name":"Arts, design, entertainment, sports, and media occupations","textfont":{"color":"rgba(255,0,0,1)"},"error_y":{"color":"rgba(255,0,0,1)"},"error_x":{"color":"rgba(255,0,0,1)"},"line":{"color":"rgba(255,0,0,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1852,1370,1347,1242,772],"y":[1565,1220,1213,1124,685],"mode":"markers","text":["Postsecondary teachers","Elementary and middle school teachers","Secondary school teachers","Other teachers and instructors","Teaching assistants"],"hoverinfo":["text","text","text","text","text"],"marker":{"color":"rgba(218,0,108,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(218,0,108,1)"}},"type":"scatter","name":"Education related occupations","textfont":{"color":"rgba(218,0,108,1)"},"error_y":{"color":"rgba(218,0,108,1)"},"error_x":{"color":"rgba(218,0,108,1)"},"line":{"color":"rgba(218,0,108,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1682,2238,2920,1715,1657,1172,1483,992,1018,709,751,765,904,919],"y":[1341,2180,2907,1526,1409,1089,1321,886,984,625,668,695,738,790],"mode":"markers","text":["Healthcare practitioners and technical occupations","Pharmacists","Other physicians","Physical therapists","Registered nurses","Clinical laboratory technologists and technicians","Radiologic technologists and technicians","Pharmacy technicians","Licensed practical and licensed vocational nurses","Home health aides","Personal care aides","Nursing assistants","Medical assistants","Other healthcare support workers"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"marker":{"color":"rgba(154,0,195,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(154,0,195,1)"}},"type":"scatter","name":"Healthcare occupations","textfont":{"color":"rgba(154,0,195,1)"},"error_y":{"color":"rgba(154,0,195,1)"},"error_x":{"color":"rgba(154,0,195,1)"},"line":{"color":"rgba(154,0,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[2983,1689,1911,2297,2313,2100,1891,1879,1318,1747,1870,1121,1914,1521,1501,1887,1270,1514,1468,1597,1367,1648,1207,1919,1993,1771,1737,1644,1760,2082,1457,2386,1736,1894,1906,2296,1478,1631,2208,1668,1893,1839,1766,1953,1287,2290,1742,1430,1157,1227,1248,1253,967,2505,1425],"y":[2520,1347,1746,1688,2192,1497,1706,1585,1219,1431,1469,924,1540,1143,1341,1536,1029,1216,1306,1377,1259,1222,994,1661,1817,1552,1224,1504,1643,1552,1294,1233,1278,1487,1760,2020,1348,1430,1665,1474,1691,1465,1682,1904,982,1537,1649,1275,1144,1158,1011,1228,962,2330,1125],"mode":"markers","text":["Chief executives","General and operations managers","Marketing managers","Sales managers","Computer and information systems managers","Financial managers","Human resources managers","Purchasing managers","Transportation, storage, and distribution managers","Construction managers","Education and childcare administrators","Food service managers","Medical and health services managers","Property, real estate, and community association managers","Social and community service managers","Managers, all other","Wholesale and retail buyers, except farm products","Purchasing agents, except wholesale, retail, and farm products","Claims adjusters, appraisers, examiners, and investigators","Compliance officers","Human resources workers","Training and development specialists","Logisticians","Project management specialists","Management analysts","Market research analysts and marketing specialists","Business operations specialists, all other","Accountants and auditors","Financial and investment analysts","Personal financial advisors","Credit counselors and loan officers","Other financial specialists","Professional and related occupations","Computer systems analysts","Computer programmers","Software developers","Computer support specialists","Computer occupations, all other","Operations research analysts","Other mathematical science occupations","Architects, except landscape and naval","Civil engineers","Industrial engineers, including health and safety","Engineers, all other","Other engineering technologists and technicians, except drafters","Medical scientists","Physical scientists, all other","Other life, physical, and social science technicians","Community and social service occupations","Educational, guidance, and career counselors and advisors","Counselors, all other","Social workers, all other","Social and human service assistants","Lawyers","Paralegals and legal assistants"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"marker":{"color":"rgba(83,58,233,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(83,58,233,1)"}},"type":"scatter","name":"Management, business, and financial operations occupations","textfont":{"color":"rgba(83,58,233,1)"},"error_y":{"color":"rgba(83,58,233,1)"},"error_x":{"color":"rgba(83,58,233,1)"},"line":{"color":"rgba(83,58,233,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[745,686,704,870],"y":[626,611,598,711],"mode":"markers","text":["Janitors and building cleaners","Maids and housekeeping cleaners","Miscellaneous agricultural workers","Construction laborers"],"hoverinfo":["text","text","text","text"],"marker":{"color":"rgba(125,147,166,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(125,147,166,1)"}},"type":"scatter","name":"Natural resources, construction, and maintenance occupations.","textfont":{"color":"rgba(125,147,166,1)"},"error_y":{"color":"rgba(125,147,166,1)"},"error_x":{"color":"rgba(125,147,166,1)"},"line":{"color":"rgba(125,147,166,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1133,1363,811,854,819,682,645,768,639,684,607,801],"y":[914,1034,717,690,677,608,600,745,595,617,588,716],"mode":"markers","text":["Correctional officers and jailers","Police officers","Security guards and gambling surveillance officers","Chefs and head cooks","First-line supervisors of food preparation and serving workers","Cooks","Food preparation workers","Bartenders","Fast food and counter workers","Waiters and waitresses","Dining room and cafeteria attendants and bartender helpers","Recreation workers"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text"],"marker":{"color":"rgba(87,228,79,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(87,228,79,1)"}},"type":"scatter","name":"Personal care and service occupations","textfont":{"color":"rgba(87,228,79,1)"},"error_y":{"color":"rgba(87,228,79,1)"},"error_x":{"color":"rgba(87,228,79,1)"},"line":{"color":"rgba(87,228,79,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1263,887,852,726,818,906,1010,752,893],"y":[914,782,758,656,696,684,809,698,771],"mode":"markers","text":["First-line supervisors of production and operating workers","Electrical, electronics, and electromechanical assemblers","Other assemblers and fabricators","Bakers","Butchers and other meat, poultry, and fish processing workers","Other metal workers and plastic workers","Inspectors, testers, sorters, samplers, and weighers","Packaging and filling machine operators and tenders","Other production workers"],"hoverinfo":["text","text","text","text","text","text","text","text","text"],"marker":{"color":"rgba(135,236,0,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(135,236,0,1)"}},"type":"scatter","name":"Production occupations","textfont":{"color":"rgba(135,236,0,1)"},"error_y":{"color":"rgba(135,236,0,1)"},"error_x":{"color":"rgba(135,236,0,1)"},"line":{"color":"rgba(135,236,0,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1094,1464,616,988,1728,1310,2412,1451,1535,1444,1019,1209,1100,1335,918,770,885,1128,1194,1335,827,1101,819,1062,867,1038],"y":[904,1151,602,710,1398,927,1654,1137,1215,1215,807,1075,922,1009,799,749,711,852,1015,1333,789,882,809,896,824,988],"mode":"markers","text":["First-line supervisors of retail sales workers","First-line supervisors of non-retail sales workers","Cashiers","Retail salespersons","Advertising sales agents","Insurance sales agents","Securities, commodities, and financial services sales agents","Sales representatives of services, except advertising, insurance, financial services, and travel","Sales representatives, wholesale and manufacturing","Real estate brokers and sales agents","Sales and related workers, all other","First-line supervisors of office and administrative support workers","Bookkeeping, accounting, and auditing clerks","Financial clerks, all other","Customer service representatives","Receptionists and information clerks","Couriers and messengers","Dispatchers, except police, fire, and ambulance","Postal service mail carriers","Production, planning, and expediting clerks","Shipping, receiving, and inventory clerks","Secretaries and administrative assistants, except legal, medical, and executive","Data entry keyers","Insurance claims and policy processing clerks","Office clerks, general","Office and administrative support workers, all other"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"marker":{"color":"rgba(206,204,0,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(206,204,0,1)"}},"type":"scatter","name":"Sales and office occupations","textfont":{"color":"rgba(206,204,0,1)"},"error_y":{"color":"rgba(206,204,0,1)"},"error_x":{"color":"rgba(206,204,0,1)"},"line":{"color":"rgba(206,204,0,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1127,979,1016,812,704,801,732,730],"y":[791,811,734,786,605,685,667,667],"mode":"markers","text":["Supervisors of transportation and material moving workers","Bus drivers, transit and intercity","Driver/sales workers and truck drivers","Industrial truck and tractor operators","Cleaners of vehicles and equipment","Laborers and freight, stock, and material movers, hand","Packers and packagers, hand","Stockers and order fillers"],"hoverinfo":["text","text","text","text","text","text","text","text"],"marker":{"color":"rgba(255,165,0,1)","size":10,"opacity":0.69999999999999996,"line":{"color":"rgba(255,165,0,1)"}},"type":"scatter","name":"Transportation and material moving occupations","textfont":{"color":"rgba(255,165,0,1)"},"error_y":{"color":"rgba(255,165,0,1)"},"error_x":{"color":"rgba(255,165,0,1)"},"line":{"color":"rgba(255,165,0,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupationAggregate <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(occupation, men_median_weekly_earnings, women_median_weekly_earnings) <span class="sc">|&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(men_median_weekly_earnings, women_median_weekly_earnings), </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"gender"</span>, <span class="at">values_to =</span> <span class="st">"median_weekly_earnings"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"men_median_weekly_earnings"</span>, <span class="st">"women_median_weekly_earnings"</span>), </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>)))</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Cleveland dot plot with occupation descriptions on the y-axis and earnings on the x-axis</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_long, <span class="fu">aes</span>(<span class="at">x =</span> median_weekly_earnings, <span class="at">y =</span> occupation, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span>  <span class="co"># Use points to create the dot plot</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"pink"</span>)) <span class="sc">+</span>  <span class="co"># Assign colors for men and women</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Weekly Earnings by Occupation (Men vs. Women)"</span>,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Median Weekly Earnings ($)"</span>,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Gender"</span>) <span class="sc">+</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),  <span class="co"># Adjust y-axis labels for readability</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),  <span class="co"># Optional: adjust the x-axis title size</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),  <span class="co"># Optional: adjust the y-axis title size</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>)  <span class="co"># Position legend at the top</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape the data to long format</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupationAggregate <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(occupation, men_median_weekly_earnings, women_median_weekly_earnings) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">"gender"</span>, <span class="at">value =</span> <span class="st">"median_weekly_earnings"</span>, men_median_weekly_earnings, women_median_weekly_earnings) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"men_median_weekly_earnings"</span>, <span class="st">"women_median_weekly_earnings"</span>), </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>)))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the bar plot</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_long, <span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> median_weekly_earnings, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.8</span>), <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"pink"</span>)) <span class="sc">+</span>  <span class="co"># Assign colors for men and women</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Weekly Earnings by Occupation (Men vs. Women)"</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Weekly Earnings ($)"</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Gender"</span>) <span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>),  <span class="co"># Rotate x-axis labels for readability</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupation <span class="sc">|&gt;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(total_number_of_workers <span class="sc">&gt;=</span> <span class="dv">15</span>, </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(men_median_weekly_earnings) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(women_median_weekly_earnings))</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total earnings by multiplying median weekly earnings by the number of workers</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>data_clean <span class="ot">&lt;-</span> data_clean <span class="sc">%&gt;%</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">men_total_earnings =</span> men_median_weekly_earnings <span class="sc">*</span> men_number_of_workers,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">women_total_earnings =</span> women_median_weekly_earnings <span class="sc">*</span> women_number_of_workers)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape the data to long format for stacking</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_clean <span class="sc">%&gt;%</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(occupation, occupation_group_major, men_total_earnings, women_total_earnings) <span class="sc">%&gt;%</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(men_total_earnings, women_total_earnings),</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"gender"</span>,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"total_earnings"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">recode</span>(gender, </span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"men_total_earnings"</span> <span class="ot">=</span> <span class="st">"Men"</span>, </span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"women_total_earnings"</span> <span class="ot">=</span> <span class="st">"Women"</span>))</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Create stacked bar chart with color by major occupation group</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_long, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> total_earnings, <span class="at">fill =</span> occupation_group_major)) <span class="sc">+</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Earnings by Gender and Occupation Group"</span>,</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Earnings ($)"</span>) <span class="sc">+</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set3"</span>) <span class="sc">+</span>  <span class="co"># Use a color palette for different occupation groups</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)  <span class="co"># Place the legend to the right</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'MedianWeeklyEarningsByOccupation' is your data frame, first filter for legal occupations</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>legal_data <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupation <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(occupation_group <span class="sc">==</span> <span class="st">"Legal occupations"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(occupation, </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>         total_number_of_workers, </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>         total_median_weekly_earnings, </span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>         men_number_of_workers, </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>         men_median_weekly_earnings, </span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>         women_number_of_workers, </span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>         women_median_weekly_earnings)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean the data (remove commas and convert to numeric where needed)</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>legal_data <span class="ot">&lt;-</span> legal_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">men_median_weekly_earnings =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>, men_median_weekly_earnings)),</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">women_median_weekly_earnings =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>, women_median_weekly_earnings)),</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">men_number_of_workers =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>, men_number_of_workers)),</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">women_number_of_workers =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">","</span>, <span class="st">""</span>, women_number_of_workers))</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the pay gap ratio (women's earnings divided by men's earnings)</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>legal_data<span class="sc">$</span>pay_gap_ratio <span class="ot">&lt;-</span> legal_data<span class="sc">$</span>women_median_weekly_earnings <span class="sc">/</span> legal_data<span class="sc">$</span>men_median_weekly_earnings</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a plot comparing the pay gap ratio for all occupations, including legal ones</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(legal_data, <span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> pay_gap_ratio, <span class="at">fill =</span> <span class="st">"Pay Gap Ratio"</span>)) <span class="sc">+</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.77</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># 77% pay gap line</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Pay Gap Ratio by Occupation"</span>,</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Pay Gap Ratio (Women to Men)"</span>,</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Pay Gap Ratio"</span>) <span class="sc">+</span></span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>),  <span class="co"># Rotate x-axis labels for readability</span></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()  <span class="co"># Flip coordinates for better readability of occupation names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 4 rows containing missing values or values outside the scale range
+(`geom_bar()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape the data to long format</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupationAggregate <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(occupation, men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings) <span class="sc">%&gt;%</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings), </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(variable, <span class="st">"women"</span>) <span class="sc">~</span> <span class="st">"Women"</span>,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(variable, <span class="st">"men"</span>) <span class="sc">~</span> <span class="st">"Men"</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(variable, <span class="st">"number_of_workers"</span>) <span class="sc">~</span> <span class="st">"Number of Workers"</span>,</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">str_detect</span>(variable, <span class="st">"median_weekly_earnings"</span>) <span class="sc">~</span> <span class="st">"Median Weekly Earnings"</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with both number of workers and median weekly earnings</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_long, <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> occupation, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> variable, <span class="at">scales =</span> <span class="st">"free_x"</span>) <span class="sc">+</span>  <span class="co"># Separate by the variable (Workers vs Earnings)</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"pink"</span>)) <span class="sc">+</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Number of Workers and Median Weekly Earnings by Occupation (Men vs Women)"</span>,</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Value"</span>, </span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"Gender"</span>) <span class="sc">+</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))  <span class="co"># Adjust y-axis labels for readability</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot data into long format</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupationAggregate <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(occupation, men_number_of_workers, women_number_of_workers) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(men_number_of_workers, women_number_of_workers),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"gender"</span>, <span class="at">values_to =</span> <span class="st">"number_of_workers"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"men_number_of_workers"</span>, <span class="st">"women_number_of_workers"</span>), </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>)))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_long) <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_mosaic</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">product</span>(occupation), <span class="at">fill =</span> gender, <span class="at">weight =</span> number_of_workers)) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"hotpink"</span>)) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Workers by Occupation and Gender"</span>,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Proportion of Workers"</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Gender"</span>) <span class="sc">+</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `scale_name` argument of `continuous_scale()` is deprecated as of ggplot2
+3.5.0.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The `trans` argument of `continuous_scale()` is deprecated as of ggplot2 3.5.0.
+ℹ Please use the `transform` argument instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `unite_()` was deprecated in tidyr 1.2.0.
+ℹ Please use `unite()` instead.
+ℹ The deprecated feature was likely used in the ggmosaic package.
+  Please report the issue at &lt;https://github.com/haleyjeppson/ggmosaic&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> MedianWeeklyEarningsByOccupationAggregate</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the pay gap ratio (women's earnings divided by men's earnings)</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>pay_gap_ratio <span class="ot">&lt;-</span> data<span class="sc">$</span>women_median_weekly_earnings <span class="sc">/</span> data<span class="sc">$</span>men_median_weekly_earnings</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a plot comparing the pay gap ratio for all occupations, including legal ones</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> pay_gap_ratio, <span class="at">fill =</span> <span class="st">"Pay Gap Ratio"</span>)) <span class="sc">+</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">width =</span> <span class="fl">0.7</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.77</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># 77% pay gap line</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Pay Gap Ratio by Occupation"</span>,</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Occupation"</span>,</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Pay Gap Ratio (Women to Men)"</span>,</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Pay Gap Ratio"</span>) <span class="sc">+</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>),  <span class="co"># Rotate x-axis labels for readability</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()  <span class="co"># Flip coordinates for better readability of occupation names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape the data into a long format</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>atus_long <span class="ot">&lt;-</span> atusAllGroups2023 <span class="sc">%&gt;%</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"AnyChildren"</span>) <span class="sc">|</span> <span class="fu">starts_with</span>(<span class="st">"NoChildren"</span>), </span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Group_Gender"</span>, <span class="at">values_to =</span> <span class="st">"Time"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Group_Gender, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"Group"</span>, <span class="st">"Gender"</span>), <span class="at">sep =</span> <span class="st">"_"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Group =</span> <span class="fu">factor</span>(Group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"AnyChildrenUnder18"</span>, <span class="st">"NoChildren"</span>)),</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">Gender =</span> <span class="fu">factor</span>(Gender, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Men"</span>, <span class="st">"Women"</span>)),</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">Major_Activity_Group =</span> <span class="fu">factor</span>(Major_Activity_Group, <span class="at">levels =</span> <span class="fu">unique</span>(Major_Activity_Group)),</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">Activity =</span> <span class="fu">factor</span>(Activity, <span class="at">levels =</span> <span class="fu">unique</span>(Activity))) <span class="sc">%&gt;%</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sum the time by Major_Activity_Group for each Group and Gender</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Major_Activity_Group, Group, Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Time =</span> <span class="fu">sum</span>(Time, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Normalize the total time to 24 hours</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Group, Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Time =</span> Total_Time <span class="sc">/</span> <span class="fu">sum</span>(Total_Time) <span class="sc">*</span> <span class="dv">24</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Major_Activity_Group', 'Group'. You can
+override using the `.groups` argument.</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>atus_long <span class="ot">&lt;-</span> atus_long <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Group_Gender =</span> <span class="fu">factor</span>(<span class="fu">interaction</span>(Group, Gender), </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NoChildren_Men"</span>, <span class="st">"NoChildren_Women"</span>, <span class="st">"AnyChildrenUnder18_Men"</span>, <span class="st">"AnyChildrenUnder18_Women"</span>)))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate percentages for each stacked segment</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>atus_long <span class="ot">&lt;-</span> atus_long <span class="sc">%&gt;%</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Group_Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Percentage =</span> Time <span class="sc">/</span> <span class="fu">sum</span>(Time) <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a horizontal stacked bar chart with ggplot2</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(atus_long, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> <span class="fu">interaction</span>(Gender, Group), <span class="at">fill =</span> Major_Activity_Group)) <span class="sc">+</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set3"</span>) <span class="sc">+</span>  <span class="co"># Color palette for the activities</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Time (hours)"</span>, <span class="at">y =</span> <span class="st">"Group &amp; Gender"</span>, <span class="at">title =</span> <span class="st">"Time Spent by Activity (24-Hour Breakdown)"</span>) <span class="sc">+</span></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>),  <span class="co"># Keep y-axis labels horizontal</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Men, Children Under 18"</span>, <span class="st">"Women, Children Under 18"</span>,</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Men, No Children"</span>, <span class="st">"Women, No Children"</span>)) <span class="sc">+</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"Activity"</span>)) <span class="sc">+</span></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Set the x-axis limit to 24 hours and ensure the last label is 24</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">24</span>, <span class="at">by =</span> <span class="dv">4</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">24.01</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add percentages to each segment</span></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(Percentage, <span class="dv">1</span>), <span class="st">"%"</span>)), </span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape data for plotting</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> MedianWeeklyEarningByPresenceOfChildren <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Marital_Status =</span> <span class="fu">factor</span>(Marital_Status),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Characteristic =</span> <span class="fu">factor</span>(Characteristic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Total"</span>, <span class="st">"With children under 18 years old"</span>, <span class="st">"With children 6 to 17 none younger"</span>, <span class="st">"With children under 6 years old"</span>, <span class="st">"With no children under 18 years old"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(Median_weekly_earnings), <span class="at">names_to =</span> <span class="st">"earnings"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot using ggplot</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_long, <span class="fu">aes</span>(<span class="at">x =</span> Characteristic, <span class="at">y =</span> value, <span class="at">fill =</span> Gender)) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Marital_Status) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Median Weekly Earnings by Gender, Marital Status, and Presence of Children"</span>,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Characteristic (Children Status)"</span>,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Median Weekly Earnings ($)"</span>,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Gender"</span>) <span class="sc">+</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming the data is loaded into `MedianWeeklyEarningsByPresenceOfChildren`</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> MedianWeeklyEarningByPresenceOfChildren</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>women_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">"Women"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Marital_Status, Characteristic, <span class="at">women_median_weekly_earnings =</span> Median_weekly_earnings)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>men_data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">"Men"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Marital_Status, Characteristic, <span class="at">men_median_weekly_earnings =</span> Median_weekly_earnings)</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Join women and men data by Marital_Status and Characteristic</span></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(women_data, men_data, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Marital_Status"</span>, <span class="st">"Characteristic"</span>))</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate women's earnings as a percentage of men's earnings</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">women_as_percent_of_men =</span> (women_median_weekly_earnings <span class="sc">/</span> men_median_weekly_earnings) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove rows with missing data (if any)</span></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(women_as_percent_of_men))</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot: Women's Earnings as a Percentage of Men's Earnings by Children Status, without legend and with simplified x-axis</span></span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(merged_data, <span class="fu">aes</span>(<span class="at">x =</span> Characteristic, <span class="at">y =</span> women_as_percent_of_men, <span class="at">fill =</span> Characteristic)) <span class="sc">+</span></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># Remove legend</span></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(women_as_percent_of_men, <span class="dv">1</span>), <span class="st">"%"</span>)), </span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Add percentage labels</span></span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Women's Median Weekly Earnings as Percentage of Men's Earnings by Children Status"</span>,</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Children Status"</span>,</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Women's Earnings as % of Men's Earnings"</span></span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="cf">function</span>(x) <span class="fu">gsub</span>(<span class="st">":"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, x)) <span class="sc">+</span>  <span class="co"># Add line breaks in x-axis labels</span></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>  <span class="co"># Clean theme</span></span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),  <span class="co"># Rotate x-axis labels for better visibility</span></span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),  <span class="co"># Hide x-axis ticks</span></span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Set title size for x-axis</span></span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),  <span class="co"># Set title size for y-axis</span></span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span>  <span class="co"># Ensure no legend is shown</span></span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Marital_Status, <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> MedianWeeklyEarningsByMaritalStatus</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate women's earnings as a percentage of men's earnings</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>women_as_percent_of_men <span class="ot">=</span> (data<span class="sc">$</span>women_median_weekly_earnings <span class="sc">/</span> data<span class="sc">$</span>men_median_weekly_earnings) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot: Women's Earnings as a Percentage of Men's Earnings with Labels</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> MaritalStatus, <span class="at">y =</span> women_as_percent_of_men, <span class="at">fill =</span> MaritalStatus)) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(women_as_percent_of_men, <span class="dv">1</span>), <span class="st">"%"</span>)), </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span>  <span class="co"># Add '%' and adjust label position</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Women's Median Weekly Earnings as Percentage of Men's Earnings by Marital Status"</span>,</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Marital Status"</span>,</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Women's Earnings as % of Men's Earnings"</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_grey</span>() <span class="sc">+</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="results_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 
