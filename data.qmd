@@ -27,7 +27,9 @@ library(visdat)
 library(ggplot2)
 
 
-ATUS2023 <- read_csv("data/ATUS2023.csv", show_col_types = FALSE)
+atusAllGroups2023 <- read_csv("data/atusAllGroups2023.csv", show_col_types = FALSE)
+atusChildrenActivities2023 <- read_csv("data/atusChildrenActivities2023.csv", show_col_types = FALSE)
+
 MedianWeeklyEarningByPresenceOfChildren <- read_csv("data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv", show_col_types = FALSE)
 MedianWeeklyEarningByRace <- read_csv("data/MedianWeeklyEarningByRaceTable18.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByGenderEducation <- read_csv("data/MedianWeeklyEarningsByGenderEducationTable24.csv", show_col_types = FALSE)
@@ -38,6 +40,7 @@ MedianWeeklyEarningsByOccupation <- read_csv("data/MedianWeeklyEarningsByOccupat
 MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarningsByOccupationAggregate.csv", show_col_types = FALSE)
 
 ```
+
 
 
 ```{r}
