@@ -2,13 +2,8 @@
 
 ```{r}
 
-
-# Reshape the data to long format for ggplot
-data <- MedianWeeklyEarningsByOccupationAggregate
-
-
 # Reshape the data to long format
-data_long <- data %>%
+data_long <- MedianWeeklyEarningsByOccupationAggregate %>%
   select(occupation, men_median_weekly_earnings, women_median_weekly_earnings) %>%
   gather(key = "gender", value = "median_weekly_earnings", men_median_weekly_earnings, women_median_weekly_earnings) %>%
   mutate(gender = factor(gender, levels = c("men_median_weekly_earnings", "women_median_weekly_earnings"), 
@@ -27,6 +22,8 @@ ggplot(data_long, aes(x = occupation, y = median_weekly_earnings, fill = gender)
         legend.position = "top") +
   coord_flip()
 ```
+
+
 
 ```{r}
 # weighted to see which industries contribute to the disparity the most
@@ -64,5 +61,139 @@ ggplot(data_long, aes(x = occupation, y = weighted_avg_earnings, fill = gender))
   theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels for readability
         legend.position = "top") +
   coord_flip()  # Flip coordinates for better readability of occupation names
+
+```
+
+
+
+```{r}
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Assuming 'MedianWeeklyEarningsByOccupation' is your data frame, first filter for legal occupations
+legal_data <- MedianWeeklyEarningsByOccupation %>%
+  filter(occupation_group == "Legal occupations") %>%
+  select(occupation, 
+         total_number_of_workers, 
+         total_median_weekly_earnings, 
+         men_number_of_workers, 
+         men_median_weekly_earnings, 
+         women_number_of_workers, 
+         women_median_weekly_earnings)
+
+# Clean the data (remove commas and convert to numeric where needed)
+legal_data <- legal_data %>%
+  mutate(
+    men_median_weekly_earnings = as.numeric(gsub(",", "", men_median_weekly_earnings)),
+    women_median_weekly_earnings = as.numeric(gsub(",", "", women_median_weekly_earnings)),
+    men_number_of_workers = as.numeric(gsub(",", "", men_number_of_workers)),
+    women_number_of_workers = as.numeric(gsub(",", "", women_number_of_workers))
+  )
+
+# Calculate the pay gap ratio (women's earnings divided by men's earnings)
+legal_data$pay_gap_ratio <- legal_data$women_median_weekly_earnings / legal_data$men_median_weekly_earnings
+
+# Create a plot comparing the pay gap ratio for all occupations, including legal ones
+ggplot(legal_data, aes(x = occupation, y = pay_gap_ratio, fill = "Pay Gap Ratio")) +
+  geom_bar(stat = "identity", width = 0.7, fill = "purple") +
+  geom_hline(yintercept = 0.77, linetype = "dashed", color = "red", size = 1) +  # 77% pay gap line
+  labs(title = "Pay Gap Ratio by Occupation",
+       x = "Occupation",
+       y = "Pay Gap Ratio (Women to Men)",
+       fill = "Pay Gap Ratio") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels for readability
+        legend.position = "none") +
+  coord_flip()  # Flip coordinates for better readability of occupation names
+
+
+```
+
+
+```{r}
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+data <- MedianWeeklyEarningsByOccupationAggregate
+
+# Calculate the pay gap ratio (women's earnings divided by men's earnings)
+data$pay_gap_ratio <- data$women_median_weekly_earnings / data$men_median_weekly_earnings
+
+# Create a plot comparing the pay gap ratio for all occupations, including legal ones
+ggplot(data, aes(x = occupation, y = pay_gap_ratio, fill = "Pay Gap Ratio")) +
+  geom_bar(stat = "identity", width = 0.7, fill = "purple") +
+  geom_hline(yintercept = 0.77, linetype = "dashed", color = "red", size = 1) +  # 77% pay gap line
+  labs(title = "Pay Gap Ratio by Occupation",
+       x = "Occupation",
+       y = "Pay Gap Ratio (Women to Men)",
+       fill = "Pay Gap Ratio") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),  # Rotate x-axis labels for readability
+        legend.position = "none") +
+  coord_flip()  # Flip coordinates for better readability of occupation names
+
+
+```
+
+
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(RColorBrewer)
+library(grid)
+
+
+# Reshape the data into a long format
+atus_long <- atusAllGroups2023 %>%
+  pivot_longer(cols = starts_with("AnyChildren") | starts_with("NoChildren"), 
+               names_to = "Group_Gender", values_to = "Time") %>%
+  separate(Group_Gender, into = c("Group", "Gender"), sep = "_") %>%
+  filter(Gender %in% c("Men", "Women")) %>%
+  mutate(Group = factor(Group, levels = c("AnyChildrenUnder18", "NoChildren")),
+         Gender = factor(Gender, levels = c("Men", "Women")),
+         Major_Activity_Group = factor(Major_Activity_Group, levels = unique(Major_Activity_Group)),
+         Activity = factor(Activity, levels = unique(Activity))) %>%
+  # Sum the time by Major_Activity_Group for each Group and Gender
+  group_by(Major_Activity_Group, Group, Gender) %>%
+  summarise(Total_Time = sum(Time, na.rm = TRUE)) %>%
+  ungroup() %>%
+  # Normalize the total time to 24 hours
+  group_by(Group, Gender) %>%
+  mutate(Time = Total_Time / sum(Total_Time) * 24) %>%
+  ungroup()
+
+atus_long <- atus_long %>%
+  mutate(Group_Gender = factor(interaction(Group, Gender), 
+                               levels = c("NoChildren_Men", "NoChildren_Women", "AnyChildrenUnder18_Men", "AnyChildrenUnder18_Women")))
+
+# Calculate percentages for each stacked segment
+atus_long <- atus_long %>%
+  group_by(Group_Gender) %>%
+  mutate(Percentage = Time / sum(Time) * 100) %>%
+  ungroup()
+
+
+# Create a horizontal stacked bar chart with ggplot2
+ggplot(atus_long, aes(x = Time, y = interaction(Gender, Group), fill = Major_Activity_Group)) +
+  geom_bar(stat = "identity") +
+  scale_fill_brewer(palette = "Set3") +  # Color palette for the activities
+  labs(x = "Time (hours)", y = "Group & Gender", title = "Time Spent by Activity (24-Hour Breakdown)") +
+  theme_minimal() +
+  theme(axis.text.y = element_text(angle = 0),  # Keep y-axis labels horizontal
+        legend.position = "bottom") +
+  scale_y_discrete(labels = c("Men, Children Under 18", "Women, Children Under 18",
+                              "Men, No Children", "Women, No Children")) +
+  guides(fill = guide_legend(title = "Activity")) +
+  # Set the x-axis limit to 24 hours and ensure the last label is 24
+  scale_x_continuous(breaks = seq(0, 24, by = 4), limits = c(0, 24.01), expand = c(0, 0)) +
+  # Add percentages to each segment
+  geom_text(aes(label = paste0(round(Percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5), color = "black", size = 3)
 
 ```
