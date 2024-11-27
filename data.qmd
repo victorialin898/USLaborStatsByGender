@@ -28,7 +28,6 @@ library(ggplot2)
 
 
 atusAllGroups2023 <- read_csv("data/atusAllGroups2023.csv", show_col_types = FALSE)
-atusChildrenActivities2023 <- read_csv("data/atusChildrenActivities2023.csv", show_col_types = FALSE)
 
 MedianWeeklyEarningByPresenceOfChildren <- read_csv("data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv", show_col_types = FALSE)
 MedianWeeklyEarningByRace <- read_csv("data/MedianWeeklyEarningByRaceTable18.csv", show_col_types = FALSE)
@@ -39,6 +38,9 @@ MedianHoursWorkedByRaceGender <- read_csv("data/MedianHoursWorkedByRaceGenderTab
 MedianWeeklyEarningsByOccupation <- read_csv("data/MedianWeeklyEarningsByOccupation.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarningsByOccupationAggregate.csv", show_col_types = FALSE)
 
+MedianWeeklyEarningsByMaritalStatus <- read_csv("data/MedianWeeklyEarningsByMaritalStatus.csv", show_col_types = FALSE)
+
+
 ```
 
 
@@ -46,7 +48,7 @@ MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarnings
 ```{r}
 library(patchwork)
 
-ATUS2023Missing <- gg_miss_var(ATUS2023) + ggtitle("ATUS2023") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+ATUS2023Missing <- gg_miss_var(atusAllGroups2023) + ggtitle("ATUS2023") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
 MedianWeeklyEarningByPresenceOfChildrenMissing <- gg_miss_var(MedianWeeklyEarningByPresenceOfChildren) + ggtitle("MedianWeeklyEarningByPresenceOfChildrenMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
