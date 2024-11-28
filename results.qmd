@@ -690,7 +690,64 @@ ggplot(data, aes(x = MaritalStatus, y = women_as_percent_of_men, fill = MaritalS
 ```
 
 
+Hours Worked and Earnings by Gender and Race
+
+Notes: Hours worked is kinda messy, looks like white families have the lowest %; Median earnings looks like Black and Hispanic have noticeably higher %s compared to White/Asian, however once you plot the dollar values of earnings (of men) we see that Black and Hispanic groups have consistently made much less than asian/white over time.
 
 
+```{r}
+
+# Filter for Year>=2000 due to Asian data not being collected until then
+tabRaceGenderHoursWorked <- filter(MedianHoursWorkedByRaceGender, Year>=2000)
+tabRaceGenderEarnings <- filter(MedianWeeklyEarningByRace, (Year>=2000) & (Year<2023))
+
+# Some data manipulation to get it ready for plotting
+tabRGHours_t <- tabRaceGenderHoursWorked |> select(-Total16Plus) |>
+  pivot_longer( 
+    cols=c("White","Black_or_African_American","Asian","Hispanic_or_Latino_ethnicity"),
+    names_to = "Race", values_to = "HoursWorked")
+tabRGHours_t <- pivot_wider(tabRGHours_t, names_from=Gender, values_from=HoursWorked)
+tabRGHours_t$women_as_percent_of_men = (tabRGHours_t$Women / tabRGHours_t$Men) * 100
+
+tabRGEarnings_t <- tabRaceGenderEarnings |> select(-Total) |>
+  pivot_longer(
+    cols=c("White","Black_or_African_American","Asian","Hispanic_or_Latino_ethnicity"),
+    names_to = "Race", values_to = "Earnings")
+tabRGEarnings_t <- pivot_wider(tabRGEarnings_t, names_from=Gender, values_from=Earnings)
+tabRGEarnings_t$women_as_percent_of_men = (tabRGEarnings_t$Women / tabRGEarnings_t$Men) * 100
+
+# Plot hours worked data
+ggplot(data=tabRGHours_t, aes(x=Year, y=women_as_percent_of_men, group=Race)) +
+  geom_line(aes(color = Race)) +
+  geom_point(aes(color = Race)) +
+  labs(
+    title = "Women's Median Hours Worked as Percentage of Men's by Race",
+    x = "Year",
+    y = "Women's Hours Worked as % of Men's"
+  ) +
+  theme_light()
+
+# Plot earnings data
+ggplot(data=tabRGEarnings_t, aes(x=Year, y=women_as_percent_of_men, group=Race)) +
+  geom_line(aes(color = Race)) +
+  geom_point(aes(color = Race)) +
+  labs(
+    title = "Women's Median Earnings as Percentage of Men's by Race",
+    x = "Year",
+    y = "Women's Earnings as % of Men's"
+  ) +
+  theme_light()
+
+# Plot earnings data
+ggplot(data=tabRGEarnings_t, aes(x=Year, y=Men, group=Race)) +
+  geom_line(aes(color = Race)) +
+  geom_point(aes(color = Race)) +
+  labs(
+    title = "Men's Median Earnings by Race",
+    x = "Year",
+    y = "Median Earnings"
+  ) +
+  theme_light()
+```
 
 
