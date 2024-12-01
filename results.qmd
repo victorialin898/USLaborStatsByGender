@@ -10,22 +10,20 @@ library(ggplot2)
 library(tidyr)
 library(ggmosaic)
 library(stringr)
-
+library(patchwork)
 
 atusAllGroups2023 <- read_csv("data/atusAllGroups2023.csv", show_col_types = FALSE)
 
 MedianWeeklyEarningByPresenceOfChildren <- read_csv("data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv", show_col_types = FALSE)
 MedianWeeklyEarningByRace <- read_csv("data/MedianWeeklyEarningByRaceTable18.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByGenderEducation <- read_csv("data/MedianWeeklyEarningsByGenderEducationTable24.csv", show_col_types = FALSE)
-MedianHourlyEarningsHispanicByAge <- read_csv("data/MedianHourlyEarningsHispanicByAgeTable25.csv", show_col_types = FALSE)
+MedianHourlyEarningsByAge <- read_csv("data/MedianHourlyEarningsHispanicByAgeTable25.csv", show_col_types = FALSE)
 MedianHoursWorkedByRaceGender <- read_csv("data/MedianHoursWorkedByRaceGenderTable26.csv", show_col_types = FALSE)
 
 MedianWeeklyEarningsByOccupation <- read_csv("data/MedianWeeklyEarningsByOccupation.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarningsByOccupationAggregate.csv", show_col_types = FALSE)
 
 MedianWeeklyEarningsByMaritalStatus <- read_csv("data/MedianWeeklyEarningsByMaritalStatus.csv", show_col_types = FALSE)
-
-
 ```
 
 # Occupation: The Primary Driver of the Gender Wage Gap
@@ -110,12 +108,12 @@ ggplot(data_long, aes(x = value, y = occupation, color = gender)) +
   geom_point(size = 4) +
   facet_wrap(~ variable, scales = "free_x") +  # Separate by the variable (Workers vs Earnings)
   scale_color_manual(values = c("blue", "pink")) +
-  labs(title = "Number of Workers and Median Weekly Earnings by Occupation (Men vs Women)",
+  labs(title = "Number of Workers and Median Weekly Earnings \nby Occupation (Men vs Women)",
        x = "Value", 
        y = "Occupation",
        color = "Gender") +
   theme_minimal() +
-  theme(axis.text.y = element_text(size = 8))  # Adjust y-axis labels for readability
+  theme(axis.text.y = element_text(size = 8), plot.title = element_text(size = 10))  # Adjust y-axis labels for readability
 
 ```
 
@@ -174,13 +172,13 @@ p2 <- ggplot(top_15_men, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
             vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
   coord_flip() + # Flip the axes for readability
   labs(
-    title = "Wage Gap for Top 15 Occupations by Number of Men Workers",
+    title = "Wage Gap for Top 15 Occupations \n by Number of Men Workers",
     x = "Occupation",
     y = "Wage Gap (%)"
   ) +
   scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
 
 # Print both plots
 p1
@@ -258,7 +256,7 @@ Let’s now look at the impact of marital status on women’s wages. This bar ch
 
 The data reveals that never-married women earn significantly more than their married counterparts. This may be because they do not face traditional household and caregiving demands. Divorced and widowed women also tend to earn more than married women, possibly because they have taken on greater financial independence and responsibility after major life transitions, driving them to pursue higher-paying opportunities.
 
-Married women tend to experience a larger wage gap and seperated women experience the largest. One possibility for this may be family responsibilities limitting their career opportunities. This highlights how family structure continues to impact women’s wages, with unmarried women facing fewer barriers to higher pay.
+Married women tend to experience a larger wage gap and seperated women experience the largest. One possibility for this may be family responsibilities limiting their career opportunities. This highlights how family structure continues to impact women’s wages, with unmarried women facing fewer barriers to higher pay.
 
 
 ```{r}
@@ -282,14 +280,18 @@ ggplot(data, aes(x = MaritalStatus, y = women_as_percent_of_men, fill = MaritalS
     y = "Women's Earnings as % of Men's Earnings"
   ) +
   theme_grey() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 12))
 ```
+
+
 
 
 ## The Impact of Children: Women’s Earnings by Parental Status
 Next, we focus on parental status and its effect on women’s wages. This bar chart compares women’s earnings as a percentage of men’s across different categories of parental status, including women with no children, women with children under 6, and women with children 6-17 years old.
 
-The data shows a clear trend: women with children under the age of 6 experience the greatest wage disparity, earning far less than men in similar occupations. This likely reflects the additional caregiving responsibilities that come with raising young children. Women with older children still face a wage gap, but it is somewhat smaller, suggesting that the impact of children on women’s wages is most pronounced during the early years of child-rearing.
+We can see that the impact of children on women's earnings varies across demographics when the "married spouse is present" (left plot) vs "other marital statuses" (right plot). For married couples (left plot) the trend is not too clear, with the women with children under 6 years old seeing the highest earnings parity, followed by women with no children under 18 years old and children 6 to 17. This is somewhat contrary to our initial hypothesis, which was that women with children would experience the greatest wage disparity, and women with no children under 18 years old experience the greatest to gender pay equity. This unexpected outcome may be due to confounding variables, such as age (explored further below) and maternity leave policies.
+
+Our hypothesis is however reflected in the "other marital statuses" (right) plot, where we see that women with no children under 18 years old make 95% of the earnings of men (the highest) and women with children 6 to 17 make 77.9% (the lowest). This suggest that the impact of children on women’s wages is most pronounced during the middle to later years of child-rearing, where children have additional extracurricular and academic activities which need to be catered to.
 
 
 ```{r}
@@ -338,10 +340,12 @@ ggplot(merged_data, aes(x = Characteristic, y = women_as_percent_of_men, fill = 
         axis.ticks.x = element_blank(),  # Hide x-axis ticks
         axis.title.x = element_text(size = 12),  # Set title size for x-axis
         axis.title.y = element_text(size = 12),  # Set title size for y-axis
-        legend.position = "none") +  # Ensure no legend is shown
+        legend.position = "none",  # Ensure no legend is shown
+        plot.title = element_text(size = 10)) + 
   facet_wrap(~ Marital_Status, scales = "free_y")
 
 ```
+
 
 ## Unpaid Labor and Time Allocation: Insights from the American Time Use Survey
 
@@ -410,16 +414,43 @@ ggplot(atus_long, aes(x = Time, y = interaction(Gender, Group), fill = Major_Act
 
 ```
 
+# Age: Ageism vs. the gender pay gap
 
-# Hours Worked and Earnings by Gender and Race
+Ageism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women's median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around \$1-\$1.50. Then the wage gap starkly increases for ages 35 to 64, to around \$3. This big shift shows that ageism has a larger impact on women aged 35 and older, with women in this age bracket seeing a harsher discrepancy in wages. 
 
-Notes: Hours worked is kinda messy, looks like white families have the lowest %; Median earnings looks like Black and Hispanic have noticeably higher %s compared to White/Asian, however once you plot the dollar values of earnings (of men) we see that Black and Hispanic groups have consistently made much less than asian/white over time.
 
+```{r}
+EA_plotdata <- MedianHourlyEarningsByAge |> 
+  filter(Year==2023) |> 
+  select(-Total16Plus, -Total25Plus) |>
+  pivot_longer( 
+    cols=c("Ages16to19","Ages20to24","Ages25to34","Ages35to44","Ages45to54","Ages55to64","Ages65Plus"),
+    names_to = "Age", values_to = "HourlyEarnings")
+
+ggplot(EA_plotdata, aes(x = HourlyEarnings, y = Age, color = Gender)) +
+  geom_point(size = 4) +
+  scale_color_manual(values = c("blue", "pink")) +
+  labs(title = "Median Hourly Earnings by Age Group (Men vs Women)",
+       x = "Hourly Earnings ($)", 
+       y = "Age Group",
+       color = "Gender") +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 8), plot.title = element_text(size = 10))  # Adjust y-axis labels for readability
+
+```
+
+# Race: Earnings across Racial Demographics
+
+Next, we explore the impact of race on the earnings discrepancy between women and men. In the faceted plots below, on the left plot we can see that there is a pretty major impact, with White and Asian demographic groups experiencing the most gender discrepancy in earnings (with women earning around 75-80% compared to men), and Black and Hispanic/Latino demographics seeing what appears to be a more equitable discrepancy (with women earning around 85-95% compared to men). We also can see that there is a general upwards trend towards gender earnings equity for White and Black demographics, with the Asian curve showing a generally flat trend, and the Hispanic curve decreasing in recent years.
+
+However, that's not the full story. When we pull in median weekly Hours Worked data from the BLS and compare across racial demographics, the data shows that White Women work lower median hours compared to men, across demographics. This checks out with the lower earnings percentages in the earnings plot -- all else the same, fewer hours worked means less pay. This number has also been growing, with the purple White Women's Median Hours Worked as a % of Men line rising from around 83% in 2000 to around 87 in recent years. This matches the increasing earnings of this demographic over time. On the other hand, Asian Women had lower % earnings vs Asian Men, yet when looking at Hours Worked, Asian Women's Hours Worked as a % of Men's is generally fairly high, compared to the other races. This seems to suggest that while Asian Women are working similar hours to Asian Men, they are earning less, and this the gendered earnings discrepancy is larger for Asians.  
+
+Shaded areas represent recessions, as determined by the National Bureau of Economic Research.
 
 ```{r}
 
 # Filter for Year>=2000 due to Asian data not being collected until then
-tabRaceGenderHoursWorked <- filter(MedianHoursWorkedByRaceGender, Year>=2000)
+tabRaceGenderHoursWorked <- filter(MedianHoursWorkedByRaceGender, (Year>=2000) & (Year<2023))
 tabRaceGenderEarnings <- filter(MedianWeeklyEarningByRace, (Year>=2000) & (Year<2023))
 
 # Some data manipulation to get it ready for plotting
@@ -429,6 +460,7 @@ tabRGHours_t <- tabRaceGenderHoursWorked |> select(-Total16Plus) |>
     names_to = "Race", values_to = "HoursWorked")
 tabRGHours_t <- pivot_wider(tabRGHours_t, names_from=Gender, values_from=HoursWorked)
 tabRGHours_t$women_as_percent_of_men = (tabRGHours_t$Women / tabRGHours_t$Men) * 100
+tabRGHours_t$metric <- "2) HoursWorked"
 
 tabRGEarnings_t <- tabRaceGenderEarnings |> select(-Total) |>
   pivot_longer(
@@ -436,40 +468,63 @@ tabRGEarnings_t <- tabRaceGenderEarnings |> select(-Total) |>
     names_to = "Race", values_to = "Earnings")
 tabRGEarnings_t <- pivot_wider(tabRGEarnings_t, names_from=Gender, values_from=Earnings)
 tabRGEarnings_t$women_as_percent_of_men = (tabRGEarnings_t$Women / tabRGEarnings_t$Men) * 100
+tabRGEarnings_t$metric <- "1) WomensEarningsAsPctOfMen"
+
+RGE_plotdata <- rbind(tabRGHours_t, tabRGEarnings_t)
 
 # Plot hours worked data
-ggplot(data=tabRGHours_t, aes(x=Year, y=women_as_percent_of_men, group=Race)) +
+ggplot(data=RGE_plotdata, aes(x=Year, y=women_as_percent_of_men, group=Race)) +
+  geom_rect(xmin=2007.9, xmax=2009.5, ymin=0, ymax=Inf, fill="grey90", alpha=0.3, col="grey90") +
+  geom_rect(xmin=2020.2, xmax=2020.4, ymin=0, ymax=Inf, fill="grey90", alpha=0.3, col="grey90") +
   geom_line(aes(color = Race)) +
   geom_point(aes(color = Race)) +
-  labs(
-    title = "Women's Median Hours Worked as Percentage of Men's by Race",
-    x = "Year",
-    y = "Women's Hours Worked as % of Men's"
-  ) +
-  theme_light()
+  facet_wrap(~metric, scales="free") +
+  labs(title = "Women Earnings & Hours Worked as Percentage of Men by Race", x = "Year", y = "Women as % of Men") +
+  theme_light() +
+  theme(legend.position="bottom")
 
-# Plot earnings data
-ggplot(data=tabRGEarnings_t, aes(x=Year, y=women_as_percent_of_men, group=Race)) +
-  geom_line(aes(color = Race)) +
-  geom_point(aes(color = Race)) +
-  labs(
-    title = "Women's Median Earnings as Percentage of Men's by Race",
-    x = "Year",
-    y = "Women's Earnings as % of Men's"
-  ) +
-  theme_light()
-
-# Plot earnings data
-ggplot(data=tabRGEarnings_t, aes(x=Year, y=Men, group=Race)) +
-  geom_line(aes(color = Race)) +
-  geom_point(aes(color = Race)) +
-  labs(
-    title = "Men's Median Earnings by Race",
-    x = "Year",
-    y = "Median Earnings"
-  ) +
-  theme_light()
 ```
+
+From the above plots, we can form some conclusions about how gender earnings gaps vary across race, but how do these fit into the greater context of how race impacts earnings overall? To answer this question, we change the facet from Hours Worked to Median Men's Earnings in dollars, which also gives us an idea of the dollar value of these earnings gaps. As we can see below, even though Black and Hispanic/Latino groups have higher gender earnings equity, they are also consistently earning less in dollar value compared to White and Asian groups. On the other hand, Asian Women are making some of the lowest %'s compared to men, yet Asian Men are the highest earning demographic. 
+
+When we compare Men's and Women's Median Earnings on a dollar value basis, we can see that Asian Men have the highest earnings overall, followed by White Men and then Asian Women. Asian Men's and Women's earnings follow a very similar upwards growth trend, with similar slopes, which explains why the ratio of Asian Women's to Men's earnings is generally flat over time -- while absolute earnings have grown over time, the earnings ratio has remained around the same level. On the other hand, Hispanic Men's and Womens earnings follow an increasing trend, however Hispanic Men's earnings are growing at a faster rate compared to Hispanic Womens. This steeper slope translates into that decreasing gender earnings ratio curve that we noted above. Finally, Black and White Men's median earnings are largely flat over time, while Black and White Women's median earnings show a slightly positive slope, which reflects the observations above that Black and White demographics are experiencing the most improvement in gender earnings equity over time.
+
+
+```{r}
+# Plot earnings data
+RGE_abs_ratio <- select(tabRGEarnings_t, c(Year, Race, women_as_percent_of_men)) |> rename(value=women_as_percent_of_men)
+RGE_abs_mens <- select(tabRGEarnings_t, c(Year, Race, Men)) |> rename(value=Men)
+RGE_abs_womens <- select(tabRGEarnings_t, c(Year, Race, Women)) |> rename(value=Women)
+RGE_abs_ratio$metric = "1) WomensEarningsAsPctOfMen"
+RGE_abs_mens$metric = "2) MensEarningsInDollars"
+RGE_abs_womens$metric = "3) WomensEarningsInDollars"
+RGE_abs_plotdata1 <- rbind(RGE_abs_ratio, RGE_abs_mens) 
+RGE_abs_plotdata2 <- rbind(RGE_abs_mens, RGE_abs_womens) 
+
+ggplot(data=RGE_abs_plotdata1, aes(x=Year, y=value, group=Race)) +
+  geom_rect(xmin=2007.9, xmax=2009.5, ymin=0, ymax=Inf, fill="grey90", alpha=0.3, col="grey90") +
+  geom_rect(xmin=2020.2, xmax=2020.4, ymin=0, ymax=Inf, fill="grey90", alpha=0.3, col="grey90") +
+  geom_line(aes(color = Race)) +
+  geom_point(aes(color = Race)) +
+  facet_wrap(~metric, scales="free") +
+  labs(title = "Womens Median Earnings as % of Mens vs Men's Median Earnings ($) by Race", x = "Year", y = "Median Earnings") +
+  theme_light() +
+  theme(legend.position="bottom")
+
+
+ggplot(data=RGE_abs_plotdata2, aes(x=Year, y=value, group=Race)) +
+  geom_rect(xmin=2007.9, xmax=2009.5, ymin=0, ymax=Inf, fill="grey90", alpha=0.3, col="grey90") +
+  geom_rect(xmin=2020.2, xmax=2020.4, ymin=0, ymax=Inf, fill="grey90", alpha=0.3, col="grey90") +
+  geom_line(aes(color = Race)) +
+  geom_point(aes(color = Race)) +
+  facet_wrap(~metric) +
+  labs(title = "Median Women & Men's Median Earnings ($) by Race", x = "Year", y = "Median Earnings") +
+  theme_light() +
+  theme(legend.position="bottom")
+
+```
+
+# Education: Impacts of Schooling, Race, and Gender
 
 
 
