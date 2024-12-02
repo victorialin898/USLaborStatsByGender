@@ -24,6 +24,9 @@ MedianWeeklyEarningsByOccupation <- read_csv("data/MedianWeeklyEarningsByOccupat
 MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarningsByOccupationAggregate.csv", show_col_types = FALSE)
 
 MedianWeeklyEarningsByMaritalStatus <- read_csv("data/MedianWeeklyEarningsByMaritalStatus.csv", show_col_types = FALSE)
+
+MedianWeeklyEarningsByRaceGenderEducation2023 <- read_csv("data/MedianEarningsByRaceGenderEducation_2023.csv", show_col_types = FALSE)
+MedianWeeklyEarningsByRaceGenderEducation <- read_csv("data/MedianEarningsByRaceGenderEducation_AllYears.csv", show_col_types = FALSE)
 ```
 
 # Occupation: The Primary Driver of the Gender Wage Gap
@@ -526,6 +529,44 @@ ggplot(data=RGE_abs_plotdata2, aes(x=Year, y=value, group=Race)) +
 
 # Education: Impacts of Schooling, Race, and Gender
 
+Finally, we delve into the question of how educational attainment and race impact earnings by gender. Using the latest data from the BLS, we can see that as educational attainment increases, there is not a consistent trend for how gender pay disparity changes. For Hispanic/Latino and Black/African American women, there appears to be an overall increasing effect, where as women attain higher levels of education, gender pay equity increases. For White women, the trend appears reversed, with "Less than a high school diploma" having the highest gender pay equity level, followed by "High school graduates, no college", and with "Advanced degree" seeing the lowest % earning vs men. For Asian women, there does not seem to be a noticeable trend, with "Some college or associate degree" having the highest % earning vs men, and "Bachelor's degree only" seeing the lowest %.
 
 
+```{r}
+# BLS uses Series Id's to label series, so manually added data on each series
+# collated from the BLS website pages to the 2023 data; now left join onto the yearly data
+RGEseriesIdMap <- select(MedianWeeklyEarningsByRaceGenderEducation2023, 
+                            c("SeriesId", "Race", "Gender", "EducationLevel"))
+RGEyearly_labeled <- merge(x=RGEseriesIdMap,
+                            y=MedianWeeklyEarningsByRaceGenderEducation, 
+                            by="SeriesId", all.x=TRUE)
 
+t_RGE2023 <- select(MedianWeeklyEarningsByRaceGenderEducation2023, c(Year, Race,Gender,EducationLevel,Value))
+t_RGE2023$EducationLevel <- factor(t_RGE2023$EducationLevel, levels = c("Less than a high school diploma", "High school graduates, no college", "Some college or associate degree", "Bachelor's degree only", "Bachelor's degree or higher", "Advanced degree"))
+
+t_RGE2023_plot <- pivot_wider(t_RGE2023, names_from=Gender, values_from=Value)
+t_RGE2023_plot$women_as_percent_of_men <- (t_RGE2023_plot$Women / t_RGE2023_plot$Men) * 100
+
+ggplot(t_RGE2023_plot, aes(EducationLevel, women_as_percent_of_men)) +
+  geom_bar(stat = "identity", aes(fill = EducationLevel)) +
+  coord_flip() +
+  facet_wrap(~Race) +
+  labs(title = "Median Women's Weekly Hourly Earnings as Percentage of Men \nby Race and Education (2023)", x = "Education Attainment", y = "Women's Earnings as a % of Men's") +
+  theme_light() +
+  theme(legend.position="None", plot.title = element_text(size = 10))
+```
+
+
+But of course the story isn't complete without looking at absolute earnings levels, which as we can see differ drastically across education levels and racial demographics. In the faceted plots below, we see there is a very clear trend of increasing earnings with education level.
+
+```{r, fig.width=10, height=12}
+
+ggplot(t_RGE2023, aes(EducationLevel, Value)) +
+  geom_bar(stat = "identity", aes(fill = EducationLevel)) +
+  coord_flip() +
+  facet_wrap(vars(Race, Gender), ncol=2) +
+  labs(title = "Median Women's Weekly Hourly Earnings as Percentage of Men \nby Race and Education (2023)", x = "Education Attainment", y = "Women's Earnings as a % of Men's") +
+  theme_light() +
+  theme(legend.position="None", axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 10))
+
+```
