@@ -5,9 +5,9 @@
 
 For this project, we will draw on several key datasets from the U.S. Bureau of Labor Statistics (BLS). BLS is a federal agency that collects and disseminates various data about the U.S. economy and labor market.
 
-The main dataset we will use comes out of the **Current Population Survey (CPS)**. The CPS is a monthly survey conducted by the U.S. Census Bureau on behalf of the BLS, collecting data from approximately 60,000 eligible households across the United States. It provides detailed information on employment, earnings, demographic characteristics, and other labor market factors. Data is gathered through household interviews using a rotating panel design to ensure both consistency and coverage of the U.S. civilian noninstitutional population aged 16 and older. The CPS data includes a rich set of variables, such as employment status, wages, hours worked, and demographic factors like gender, ethnicity, and family structure [(https://www.bls.gov/cps/earnings-faqs.htm#blscensus)](https://www.bls.gov/cps/earnings-faqs.htm#blscensus). The data we are looking at is aggregated yearly.
+The main dataset we will use comes out of the **Current Population Survey (CPS)**. The CPS is a monthly survey conducted by the U.S. Census Bureau on behalf of the BLS, collecting data from approximately 60,000 eligible households across the United States. It provides detailed information on employment, earnings, demographic characteristics, and other labor market factors. Data is gathered through household interviews using a rotating panel design to ensure both consistency and coverage of the U.S. civilian non-institutional population aged 16 and older. The CPS data includes a rich set of variables, such as employment status, wages, hours worked, and demographic factors like gender, ethnicity, age, education level, and family structure [(https://www.bls.gov/cps/earnings-faqs.htm#blscensus)](https://www.bls.gov/cps/earnings-faqs.htm#blscensus). The data we are looking at is aggregated yearly.
 
-We will also use data from the the **American Time Use Survey (ATUS)**. ATUS is a national survey conducted by BLS that collects data on how people aged 15 and older allocate their time across various activities, such as work, leisure, and household chores, through a 24-hour time diary recall to better understand patterns of time use across different demographic groups. This is also aggregated yearly at [(https://www.bls.gov/tus/documents.htm)](https://www.bls.gov/tus/documents.htm)
+We will also use data from the the **American Time Use Survey (ATUS)**. ATUS is a national survey conducted by BLS that collects data on how people aged 15 and older allocate their time across various activities, such as work, leisure, and household chores, through a 24-hour time diary recall to better understand patterns of time use across different demographic groups -- in our case, we will focus on the difference between genders. This is also aggregated yearly at [(https://www.bls.gov/tus/documents.htm)](https://www.bls.gov/tus/documents.htm)
 
 Both datasets several limitations, including nonresponse bias, misclassification of employment status, and recall bias due to reliance on self-reporting. Additionally, CPS struggles with accurately capturing nontraditional employment, has limited detail on job quality, and may be affected by changes in methodology and question design over time, which complicates long-term comparisons.
 
@@ -32,7 +32,7 @@ atusAllGroups2023 <- read_csv("data/atusAllGroups2023.csv", show_col_types = FAL
 MedianWeeklyEarningByPresenceOfChildren <- read_csv("data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv", show_col_types = FALSE)
 MedianWeeklyEarningByRace <- read_csv("data/MedianWeeklyEarningByRaceTable18.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByGenderEducation <- read_csv("data/MedianWeeklyEarningsByGenderEducationTable24.csv", show_col_types = FALSE)
-MedianHourlyEarningsHispanicByAge <- read_csv("data/MedianHourlyEarningsHispanicByAgeTable25.csv", show_col_types = FALSE)
+MedianHourlyEarningsByAge <- read_csv("data/MedianHourlyEarningsHispanicByAgeTable25.csv", show_col_types = FALSE)
 MedianHoursWorkedByRaceGender <- read_csv("data/MedianHoursWorkedByRaceGenderTable26.csv", show_col_types = FALSE)
 
 MedianWeeklyEarningsByOccupation <- read_csv("data/MedianWeeklyEarningsByOccupation.csv", show_col_types = FALSE)
@@ -40,36 +40,43 @@ MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarnings
 
 MedianWeeklyEarningsByMaritalStatus <- read_csv("data/MedianWeeklyEarningsByMaritalStatus.csv", show_col_types = FALSE)
 
+MedianWeeklyEarningsByRaceGenderEducation2023 <- read_csv("data/MedianEarningsByRaceGenderEducation_2023.csv", show_col_types = FALSE)
+MedianWeeklyEarningsByRaceGenderEducation <- read_csv("data/MedianEarningsByRaceGenderEducation_AllYears.csv", show_col_types = FALSE)
 
 ```
 
 
 
-```{r}
+```{r, fig.width=14, fig.height=15}
 library(patchwork)
 
 ATUS2023Missing <- gg_miss_var(atusAllGroups2023) + ggtitle("ATUS2023") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
-MedianWeeklyEarningByPresenceOfChildrenMissing <- gg_miss_var(MedianWeeklyEarningByPresenceOfChildren) + ggtitle("MedianWeeklyEarningByPresenceOfChildrenMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+MedianWeeklyEarningByPresenceOfChildrenMissing <- gg_miss_var(MedianWeeklyEarningByPresenceOfChildren) + ggtitle("MedianWeeklyEarningBy\nPresenceOfChildrenMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
 MedianWeeklyEarningByRaceMissing <- gg_miss_var(MedianWeeklyEarningByRace) + ggtitle("MedianWeeklyEarningByRace") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
-MedianWeeklyEarningsByGenderEducationMissing <- gg_miss_var(MedianWeeklyEarningsByGenderEducation) + ggtitle("MedianWeeklyEarningsByGenderEducationMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+MedianWeeklyEarningsByGenderEducationMissing <- gg_miss_var(MedianWeeklyEarningsByGenderEducation) + ggtitle("MedianWeeklyEarningsBy\nGenderEducationMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
-MedianHourlyEarningsHispanicByAgeMissing <- gg_miss_var(MedianHourlyEarningsHispanicByAge) + ggtitle("MedianHourlyEarningsHispanicByAgeMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+MedianHourlyEarningsByAgeMissing <- gg_miss_var(MedianHourlyEarningsByAge) + ggtitle("MedianHourlyEarningsBy\nAgeMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
-MedianHoursWorkedByRaceGenderMissing <- gg_miss_var(MedianHoursWorkedByRaceGender) + ggtitle("MedianHoursWorkedByRaceGender") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+MedianHoursWorkedByRaceGenderMissing <- gg_miss_var(MedianHoursWorkedByRaceGender) + ggtitle("MedianHoursWorkedBy\nRaceGenderMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
-firstThird <- (ATUS2023Missing | MedianWeeklyEarningByPresenceOfChildrenMissing)
-secondThird <- (MedianWeeklyEarningByRaceMissing | MedianWeeklyEarningsByGenderEducationMissing)
-thirdThird <- (MedianHourlyEarningsHispanicByAgeMissing | MedianHoursWorkedByRaceGenderMissing)
 
-( firstThird/ secondThird/ thirdThird) + plot_annotation(title="Missing Value Frequencies Across Datasets in Use")
+MedianWeeklyEarningsByRaceGenderEducation2023Missing <- gg_miss_var(MedianWeeklyEarningsByRaceGenderEducation2023) + ggtitle("MedianWeeklyEarningsBy\nRaceGenderEducation(2023)Missing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+
+MedianWeeklyEarningsByRaceGenderEducationMissing <- gg_miss_var(MedianWeeklyEarningsByRaceGenderEducation) + ggtitle("MedianWeeklyEarningsBy\nRaceGenderEducationMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+
+firstRow <- (ATUS2023Missing | MedianWeeklyEarningByPresenceOfChildrenMissing)
+secondRow <- (MedianWeeklyEarningByRaceMissing | MedianWeeklyEarningsByGenderEducationMissing)
+thirdRow <- (MedianHourlyEarningsByAgeMissing | MedianHoursWorkedByRaceGenderMissing)
+fourthRow <- (MedianWeeklyEarningsByRaceGenderEducation2023Missing | MedianWeeklyEarningsByRaceGenderEducationMissing)
+
+( firstRow/ secondRow/ thirdRow / fourthRow) + plot_annotation(title="Missing Value Frequencies Across Datasets in Use")
 ```
 
 `gg_miss_var`can help us visualize the frequency of missing data.
-For most datasets we see no missing data. The exception is for the MedianWeeklyEarningByRace and MedianHoursWorkedByRaceGender sets.
-Below, we plot this out and see BLS only started including the Asian group in the Current Population Survey in 2000, vs started with the rest in 1979.
+For most datasets we see no missing data. The exception is for the ATUS2023, MedianWeeklyEarningByRace, and MedianHoursWorkedByRaceGender sets. The null values in the ATUS2023 are minimal and likely due to reporting issues. Below, we plot out MedianWeeklyEarningByRace and MedianHoursWorkedByRaceGender, and see BLS only started including the Asian group in the Current Population Survey in 2000, vs started with the rest in 1979. Since our analysis will generally focus on the most recent year (2023), or range from 2000-present, these missing data points will not have any impact on our analysis.
 
 
 ```{r}
