@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>US Labor Stats By Gender - 4&nbsp; Interactive graph</title>
+<title>US Labor Stats By Gender - 4&nbsp; Interactive Graph</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./d3graph.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./d3graph.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive Graph</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./d3graph.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive Graph</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -152,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive Graph</span></h1>
 </div>
 
 
@@ -173,11 +173,34 @@ ul.task-list li input[type="checkbox"] {
   * {
     font-family: sans-serif;
   }
+  .bar-men {
+    fill: blue;
+  }
+  .bar-women {
+    fill: pink;
+  }
+  .bar:hover {
+    opacity: 0.8;
+  }
+  #year-slider {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  .axis-label {
+    font-size: 14px;
+  }
+  .job-label {
+    font-size: 12px;
+    font-weight: bold;
+    fill: black;
+    text-anchor: middle;
+  }
 </style>
 <div id="plot">
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<p><label for="year-slider">Select Year:</label> <input type="range" id="year-slider" min="2013" max="2023" step="1" value="2023"> <span id="selected-year">2023</span></p>
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="scripts/myscript.js"></script>
 
 
