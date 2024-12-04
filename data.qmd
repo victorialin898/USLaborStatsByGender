@@ -40,8 +40,104 @@ MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarnings
 
 MedianWeeklyEarningsByMaritalStatus <- read_csv("data/MedianWeeklyEarningsByMaritalStatus.csv", show_col_types = FALSE)
 
+```
+```{r}
+occupationsByYear <- read_csv("data/occupationsByYear.csv", show_col_types = FALSE)
+
+library(dplyr)
+
+# Clean leading dots in occupation names
+data <- occupationsByYear %>%
+  mutate(Occupation = gsub("^\\.+", "", Occupation))
+
+# Top 15 most common jobs for women
+top_women_jobs <- data %>%
+  group_by(Year) %>%
+  arrange(desc(Women_Number)) %>%
+  slice_head(n = 15) %>%
+  mutate(Gender = "Women")
+
+# Top 15 most common jobs for men
+top_men_jobs <- data %>%
+  group_by(Year) %>%
+  arrange(desc(Men_Number)) %>%
+  slice_head(n = 15) %>%
+  mutate(Gender = "Men")
+
+total_jobs <- data %>%
+  group_by(Year) %>%
+  arrange(desc(Total_Number)) %>%
+  slice_head(n = 10)
+
+total_jobs
+write.csv(total_jobs, "top_jobs_by_gender.csv", row.names = FALSE)
+
+
+# Combine the two datasets
+combined_jobs <- bind_rows(top_women_jobs, top_men_jobs)
+
+# Print the combined dataframe
+print(combined_jobs)
+combined_jobs <- combined_jobs %>% mutate(across(where(is.numeric) & !starts_with("Year"), 
+                ~ ifelse(Year %in% c(2020, 2023), . * 1000, .)))
+
+
+# Save the combined dataframe to a CSV file
+write.csv(combined_jobs, "top_jobs_by_gender.csv", row.names = FALSE)
+
 
 ```
+
+```{r}
+library(dplyr)
+
+# Read the CSV file
+df <- read.csv("top_jobs_by_gender.csv")
+
+# Clean up the data (remove commas and convert to numeric)
+df_cleaned <- df %>%
+  mutate(
+    Total_Number = as.numeric(gsub(",", "", Total_Number)),
+    Men_Number = as.numeric(gsub(",", "", Men_Number)),
+    Women_Number = as.numeric(gsub(",", "", Women_Number)),
+    Total_MedianEarnings = as.numeric(gsub(",", "", Total_MedianEarnings)),
+    Men_MedianEarnings = as.numeric(gsub(",", "", Men_MedianEarnings)),
+    Women_MedianEarnings = as.numeric(gsub(",", "", Women_MedianEarnings))
+  )
+
+# Group by Year and Occupation, and calculate the total number of people for each job
+df_grouped <- df_cleaned %>%
+  group_by(Year, Occupation) %>%
+  summarise(
+    men=sum(Men_Number, na.rm = TRUE),
+    women=sum(Women_Number, na.rm = TRUE),
+    median_income = mean(Total_MedianEarnings, na.rm = TRUE), # Calculate median income
+    .groups = "drop"
+  )
+
+
+```
+
+
+```{r}
+library(dplyr)
+library(jsonlite)
+
+
+total_jobs
+
+df_grouped <- total_jobs %>%
+  mutate(
+    men = Men_Number,     # Assuming 'Total_Men' is the column for the number of men
+    women = Women_Number,  # Assuming 'Total_Women' is the column for the number of women
+    median_income = Total_MedianEarnings  # Assuming 'Total_MedianEarnings' is the column for median income
+  )
+
+# Save the data as JSON file
+write_json(df_grouped, "output_data.json")
+
+```
+
 
 
 

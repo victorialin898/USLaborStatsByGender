@@ -1,13 +1,41 @@
-# Interactive graph
+---
+title: "Interactive Graph"
+output: html_document
+---
 
 <style>
   * {
     font-family: sans-serif;
   }
+  .bar-men {
+    fill: blue;
+  }
+  .bar-women {
+    fill: pink;
+  }
+  .bar:hover {
+    opacity: 0.8;
+  }
+  #year-slider {
+    width: 300px;
+    margin-bottom: 20px;
+  }
+  .axis-label {
+    font-size: 14px;
+  }
+  .job-label {
+    font-size: 12px;
+    font-weight: bold;
+    fill: black;
+    text-anchor: middle;
+  }
 </style> 
 
-<div id="plot">
-</div>
+<div id="plot"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<label for="year-slider">Select Year:</label>
+<input type="range" id="year-slider" min="2013" max="2023" step="1" value="2023">
+<span id="selected-year">2023</span>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="scripts/myscript.js"></script>
