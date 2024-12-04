@@ -31,16 +31,16 @@ MedianWeeklyEarningsByRaceGenderEducation <- read_csv("data/MedianEarningsByRace
 
 ## Occupation: The Primary Driver of the Gender Wage Gap
 
-One of the most significant factors driving the gender wage gap is occupation. Men and women tend to be concentrated in different types of jobs, and these occupations vary greatly in terms of pay. Occupations that are predominantly female, such as nursing, teaching, and caregiving, tend to be lower-paying compared to male-dominated fields like technology, finance, and management.
+One of the most significant factors driving the gender wage gap is occupation. Men and women tend to be concentrated in different types of jobs, and these occupations vary greatly in terms of pay. Occupations that are predominantly female, such as nursing, teaching, and caregiving, tend to be devalued and are generally lower-paying compared to male-dominated fields like technology, finance, and management. Then, within an occupation, there may be additional wage gaps between genders. In 2017, the Institute for Women's Policy Research published a fact sheet on the [(Gender Wage Gap by Occupation in 2017)](https://iwpr.org/wp-content/uploads/2020/08/C467_2018-Occupational-Wage-Gap.pdf), discusses this phenomenon, and does has additional insights on these trends within races.
 
-In this section, we will discuss the occupations men and women chose and the earnings imbalance within those occupations. This will help provide a clear picture of how much the gender wage gap varies depending on the field.
+In this section, we will explore the occupations men and women chose and the earnings imbalance between and within those occupations, using the latest data from the BLS. This will help provide a clear picture of how much the gender wage gap varies depending on the field.
+
 
 ### Total Earnings by Gender and Occupation Group
 
-In this plot, we see total earnings across women and men (created by multiplying male/female median earnings for each occupation by the number of male/female workers in that occupation). This gives us a sense of what total women earnings and total male earnings come from.
+To prepare the data for plotting, we first pick major occupations by filtering on the number of workers. We then estimate the aggregate dollar earnings for each gender and occupation type by multiplying men's and women's median earnings by the number of men and women in each occupation. This representation allows us to abstract certain details, and on a high level understand what the total earnings per gender look like.
 
-We see more of the share of management, business, and financial wages go to men, and a hgiher share of the education, healthcare, and office occupations go to men. 
-
+In the stacked bar chart below, we can see at a glance that on an aggregate level, women's earnings are lower than men's. It is also evident that a larger portion of the share of management, business, and financial wages go to men, and a higher share of the education, healthcare, and office occupations go to women. 
 
 ```{r}
 
@@ -89,7 +89,9 @@ ggplot(data_long, aes(x = gender, y = total_earnings, fill = occupation_group_ma
 ### Comparing Earnings and Representation: Cleveland Dot Plot
 To dig a little deeper, we can also examine the number of workers in each occupation alongside median weekly earnings for men and women. The following Cleveland dot plot helps visualize both the earnings disparity and the gender representation within each occupation. It shows the median earnings for both men and women, and how the size of the workforce differs between genders.
 
-This comparison reveals that while some high-paying occupations, like management and engineering, have larger numbers of men than women, women are often clustered in lower-paying, high-population fields, such as office support and education roles. The imbalance in gender representation, combined with the pay differences, exacerbates the overall wage gap.
+This comparison reveals that many high-paying occupations like "Management", "Computer and mathematical", and "Architecture and engineering" have larger numbers of men that women, while women are often clustered in lower-paying, high-population fields, such as "Office and administrative support", "Healthcare practitioners and technical", "Education, training, and library", and "Business and financial operations" occupations. Furthermore, within every single major occupation, men's median earnings exceed women's... *even occupations dominated by women*!
+
+The imbalance in gender representation across occupations, combined with the pay differences within occupations, exacerbates the overall wage gap.
 
 ```{r}
 # Reshape the data to long format
@@ -120,8 +122,12 @@ ggplot(data_long, aes(x = value, y = occupation, color = gender)) +
 
 ```
 
+Further, let's look at the top occupations for men and women, and what the gender imbalance looks like in each. We first order the occupations by number of workers, and take a closer look at the top 15.
 
-Further, let's look at the top occupations for men and women, and what the gender imbalance looks like in each.
+Some interesting trends arise: for top women's occupations, we see that the generally higher paying roles like "Financial managers" and "Professional and related" occupations have the worst pay gaps, at 73% and 71% respectively. On the other hand, the lower paying roles like "Community and social service" and "Cashiers" occupations are the most equitable, at 98% and 97% respectively. Given the wide range of compensation across occupations, some of the pay gaps here are more significant than others - in high paying roles, each 1% of pay gap translates to more dollars! The first plot shows us that women are being way more shortchanged in some of the occupations that matter "the most".
+
+In the second plot, the story is a bit more complex. The worst pay gaps are in "Retail salespersons", "Drivers/sales workers and truck drivers", and "Professional and related occupations", at 71%, 72%, and 73%. This is a mixed bag; while retail jobs tend to be lower paying, professional occupations may have a wider range, and the pay gap of truck drivers may be an artifact of the minimal female representation within that population. The most equitable roles within top men's occupations are "Cooks" and "Software developers", at 89% and 88%. While cooks can have a wide range of salaries, software developers generally tend to have higher pay.
+
 
 ```{r}
 
@@ -160,13 +166,13 @@ p1 <- ggplot(top_15_women, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
             vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
   coord_flip() + # Flip the axes for readability
   labs(
-    title = "Wage Gap for Top 15 Occupations by Number of Women Workers",
+    title = "Wage Gap for Top 15 Occupations \n by Number of Women Workers",
     x = "Occupation",
     y = "Wage Gap (%)"
   ) +
   scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.text.y = element_text(size=5), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
 
 # Plot for Top 15 Occupations by Men Workers (sorted by number of workers)
 p2 <- ggplot(top_15_men, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
@@ -181,7 +187,7 @@ p2 <- ggplot(top_15_men, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
   ) +
   scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.text.y = element_text(size=5), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
 
 # Print both plots
 p1
@@ -259,7 +265,7 @@ Let’s now look at the impact of marital status on women’s wages. This bar ch
 
 The data reveals that never-married women earn significantly more than their married counterparts. This may be because they do not face traditional household and caregiving demands. Divorced and widowed women also tend to earn more than married women, possibly because they have taken on greater financial independence and responsibility after major life transitions, driving them to pursue higher-paying opportunities.
 
-Married women tend to experience a larger wage gap and seperated women experience the largest. One possibility for this may be family responsibilities limiting their career opportunities. This highlights how family structure continues to impact women’s wages, with unmarried women facing fewer barriers to higher pay.
+Married women tend to experience a larger wage gap and separated women experience the largest. One possibility for this may be family responsibilities limiting their career opportunities. This highlights how family structure (and the potential imbalanced domestic responsibilities) continues to impact women’s wages, with unmarried women often facing fewer barriers to higher pay.
 
 
 ```{r}
@@ -282,7 +288,7 @@ ggplot(data, aes(x = MaritalStatus, y = women_as_percent_of_men, fill = MaritalS
     x = "Marital Status",
     y = "Women's Earnings as % of Men's Earnings"
   ) +
-  theme_grey() +
+  theme_light() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 12))
 ```
 
@@ -292,9 +298,9 @@ ggplot(data, aes(x = MaritalStatus, y = women_as_percent_of_men, fill = MaritalS
 ### The Impact of Children: Women’s Earnings by Parental Status
 Next, we focus on parental status and its effect on women’s wages. This bar chart compares women’s earnings as a percentage of men’s across different categories of parental status, including women with no children, women with children under 6, and women with children 6-17 years old.
 
-We can see that the impact of children on women's earnings varies across demographics when the "married spouse is present" (left plot) vs "other marital statuses" (right plot). For married couples (left plot) the trend is not too clear, with the women with children under 6 years old seeing the highest earnings parity, followed by women with no children under 18 years old and children 6 to 17. This is somewhat contrary to our initial hypothesis, which was that women with children would experience the greatest wage disparity, and women with no children under 18 years old experience the greatest to gender pay equity. This unexpected outcome may be due to confounding variables, such as age (explored further below) and maternity leave policies.
+We can see that the impact of children on women's earnings varies across demographics when the "married spouse is present" (left plot) vs "other marital statuses" (right plot). For married couples (left plot) the trend is not too clear, with the women with children under 6 years old seeing the highest earnings parity, followed by women with no children under 18 years old and children 6 to 17. This is somewhat contrary to our initial hypothesis, which was that women with children would experience the greatest wage disparity, and women with no children under 18 years old experience the greatest to gender pay equity. This unexpected outcome may be due to confounding variables, such as age (explored further below, where we find younger women generally face a fairer wage gap) and maternity leave policies.
 
-Our hypothesis is however reflected in the "other marital statuses" (right) plot, where we see that women with no children under 18 years old make 95% of the earnings of men (the highest) and women with children 6 to 17 make 77.9% (the lowest). This suggest that the impact of children on women’s wages is most pronounced during the middle to later years of child-rearing, where children have additional extracurricular and academic activities which need to be catered to.
+Our hypothesis is however reflected in the "other marital statuses" (right) plot, where we see that women with no children under 18 years old make 93% of the earnings of men (the highest) and women with children 6 to 17 make 77.9% (the lowest). This suggest that the impact of children on women’s wages is most pronounced during the middle to later years of child-rearing, where children have additional extracurricular and academic activities which need to be catered to.
 
 
 ```{r}
@@ -341,8 +347,8 @@ ggplot(merged_data, aes(x = Characteristic, y = women_as_percent_of_men, fill = 
   theme_minimal() +  # Clean theme
   theme(axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels for better visibility
         axis.ticks.x = element_blank(),  # Hide x-axis ticks
-        axis.title.x = element_text(size = 12),  # Set title size for x-axis
-        axis.title.y = element_text(size = 12),  # Set title size for y-axis
+        axis.title.x = element_text(size = 10),  # Set title size for x-axis
+        axis.title.y = element_text(size = 10),  # Set title size for y-axis
         legend.position = "none",  # Ensure no legend is shown
         plot.title = element_text(size = 10)) + 
   facet_wrap(~ Marital_Status, scales = "free_y")
@@ -404,8 +410,9 @@ ggplot(atus_long, aes(x = Time, y = interaction(Gender, Group), fill = Major_Act
   scale_fill_brewer(palette = "Set3") +  # Color palette for the activities
   labs(x = "Time (hours)", y = "Group & Gender", title = "Time Spent by Activity (24-Hour Breakdown)") +
   theme_minimal() +
-  theme(axis.text.y = element_text(angle = 0),  # Keep y-axis labels horizontal
-        legend.position = "bottom") +
+  theme(axis.text.y = element_text(angle = 0, size = 6),  # Keep y-axis labels horizontal
+        legend.position = "bottom",
+        legend.text=element_text(size=6)) +
   scale_y_discrete(labels = c("Men, Children Under 18", "Women, Children Under 18",
                               "Men, No Children", "Women, No Children")) +
   guides(fill = guide_legend(title = "Activity")) +
@@ -417,9 +424,9 @@ ggplot(atus_long, aes(x = Time, y = interaction(Gender, Group), fill = Major_Act
 
 ```
 
-## Age: Ageism vs. the gender pay gap
+## Age vs. the gender pay gap
 
-Ageism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women's median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around \$1-\$1.50. Then the wage gap starkly increases for ages 35 to 64, to around \$3. This big shift shows that ageism has a larger impact on women aged 35 and older, with women in this age bracket seeing a harsher discrepancy in wages. 
+Ageism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women's median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around \$1-\$1.50. Then the wage gap starkly increases for ages 35 to 64, to around \$3. This big shift shows that perhaps ageism has a larger impact on women, with women in the 35-64 age bracket seeing a harsher discrepancy in wages versus men in the same age bracket. However, there are likely other correlated factors beyond ageism, such as children (older women may have more and/or older children and bear more responsibility in the family as a caretaker) or limitations in career promotions (versus men in the same bracket, due an unfair playing field).
 
 
 ```{r}
@@ -446,7 +453,7 @@ ggplot(EA_plotdata, aes(x = HourlyEarnings, y = Age, color = Gender)) +
 
 Next, we explore the impact of race on the earnings discrepancy between women and men. In the faceted plots below, on the left plot we can see that there is a pretty major impact, with White and Asian demographic groups experiencing the most gender discrepancy in earnings (with women earning around 75-80% compared to men), and Black and Hispanic/Latino demographics seeing what appears to be a more equitable discrepancy (with women earning around 85-95% compared to men). We also can see that there is a general upwards trend towards gender earnings equity for White and Black demographics, with the Asian curve showing a generally flat trend, and the Hispanic curve decreasing in recent years.
 
-However, that's not the full story. When we pull in median weekly Hours Worked data from the BLS and compare across racial demographics, the data shows that White Women work lower median hours compared to men, across demographics. This checks out with the lower earnings percentages in the earnings plot -- all else the same, fewer hours worked means less pay. This number has also been growing, with the purple White Women's Median Hours Worked as a % of Men line rising from around 83% in 2000 to around 87 in recent years. This matches the increasing earnings of this demographic over time. On the other hand, Asian Women had lower % earnings vs Asian Men, yet when looking at Hours Worked, Asian Women's Hours Worked as a % of Men's is generally fairly high, compared to the other races. This seems to suggest that while Asian Women are working similar hours to Asian Men, they are earning less, and this the gendered earnings discrepancy is larger for Asians.  
+However, that's not the full story. When we pull in median weekly Hours Worked data from the BLS and compare across racial demographics, the data shows that White women work lower median hours compared to White men, with the lowest % compared to other demographics (with the exception of 2015-2018 where Hispanic/Latino and briefly Black women's % hours worked dipped). This checks out with the lower earnings percentages in the earnings plot on the left -- all else the same, fewer hours worked means less pay. This number has also been growing, with the purple White Women's Median Hours Worked as a % of Men line rising from around 83% in 2000 to around 87% in recent years. This matches the increasing earnings of this demographic over time. On the other hand, Asian Women had lower % earnings vs Asian Men, yet when looking at Hours Worked, Asian Women's Hours Worked as a % of men's is generally fairly high, compared to the other races. This seems to suggest that while Asian women are working similar hours to Asian men, they are earning less, and thus the gendered earnings discrepancy is larger for Asians.  
 
 Shaded areas represent recessions, as determined by the National Bureau of Economic Research.
 
@@ -488,9 +495,9 @@ ggplot(data=RGE_plotdata, aes(x=Year, y=women_as_percent_of_men, group=Race)) +
 
 ```
 
-From the above plots, we can form some conclusions about how gender earnings gaps vary across race, but how do these fit into the greater context of how race impacts earnings overall? To answer this question, we change the facet from Hours Worked to Median Men's Earnings in dollars, which also gives us an idea of the dollar value of these earnings gaps. As we can see below, even though Black and Hispanic/Latino groups have higher gender earnings equity, they are also consistently earning less in dollar value compared to White and Asian groups. On the other hand, Asian Women are making some of the lowest %'s compared to men, yet Asian Men are the highest earning demographic. 
+From the above plots, we can form some conclusions about how gender earnings gaps vary across race, but how do these fit into the greater context of how race impacts earnings overall? To answer this question, we change the facet from Hours Worked to Median Men's Earnings in dollars, which also gives us an idea of the dollar value of these earnings gaps. As we can see below, even though Black and Hispanic/Latino groups have higher gender earnings equity, they are also consistently earning less in dollar value compared to White and Asian groups. On the other hand, Asian women are making some of the lowest % earnings compared to men, yet Asian men are the highest earning demographic. 
 
-When we compare Men's and Women's Median Earnings on a dollar value basis, we can see that Asian Men have the highest earnings overall, followed by White Men and then Asian Women. Asian Men's and Women's earnings follow a very similar upwards growth trend, with similar slopes, which explains why the ratio of Asian Women's to Men's earnings is generally flat over time -- while absolute earnings have grown over time, the earnings ratio has remained around the same level. On the other hand, Hispanic Men's and Womens earnings follow an increasing trend, however Hispanic Men's earnings are growing at a faster rate compared to Hispanic Womens. This steeper slope translates into that decreasing gender earnings ratio curve that we noted above. Finally, Black and White Men's median earnings are largely flat over time, while Black and White Women's median earnings show a slightly positive slope, which reflects the observations above that Black and White demographics are experiencing the most improvement in gender earnings equity over time.
+When we compare men's and women's Median Earnings on a dollar value basis, we can see that Asian men have the highest earnings overall, followed by White men and then Asian women. Asian men and women's earnings follow a very similar upwards growth trend, with similar slopes, which explains why the ratio of Asian women's to men's earnings is generally flat over time: while absolute earnings have grown over time, the earnings ratio has remained around the same level. On the other hand, Hispanic men's and women's earnings follow an increasing trend, however Hispanic men's earnings are growing at a faster rate compared to Hispanic womens. This steeper slope translates into that decreasing gender earnings ratio curve that we noted above. Finally, Black and White men's median earnings are largely flat over time, while Black and White women's median earnings show a slightly positive slope, which reflects the observations above that Black and White demographics are experiencing the most improvement in gender earnings equity over time.
 
 
 ```{r}
