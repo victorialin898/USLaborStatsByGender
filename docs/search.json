@@ -60,11 +60,11 @@
     ]
   },
   {
-    "objectID": "results.html#age-ageism-vs.-the-gender-pay-gap",
-    "href": "results.html#age-ageism-vs.-the-gender-pay-gap",
+    "objectID": "results.html#age-vs.-the-gender-pay-gap",
+    "href": "results.html#age-vs.-the-gender-pay-gap",
     "title": "3  Results",
-    "section": "3.3 Age: Ageism vs. the gender pay gap",
-    "text": "3.3 Age: Ageism vs. the gender pay gap\nAgeism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women’s median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around $1-$1.50. Then the wage gap starkly increases for ages 35 to 64, to around $3. This big shift shows that ageism has a larger impact on women aged 35 and older, with women in this age bracket seeing a harsher discrepancy in wages.\n\n\nCode\nEA_plotdata &lt;- MedianHourlyEarningsByAge |&gt; \n  filter(Year==2023) |&gt; \n  select(-Total16Plus, -Total25Plus) |&gt;\n  pivot_longer( \n    cols=c(\"Ages16to19\",\"Ages20to24\",\"Ages25to34\",\"Ages35to44\",\"Ages45to54\",\"Ages55to64\",\"Ages65Plus\"),\n    names_to = \"Age\", values_to = \"HourlyEarnings\")\n\nggplot(EA_plotdata, aes(x = HourlyEarnings, y = Age, color = Gender)) +\n  geom_point(size = 4) +\n  scale_color_manual(values = c(\"blue\", \"pink\")) +\n  labs(title = \"Median Hourly Earnings by Age Group (Men vs Women)\",\n       x = \"Hourly Earnings ($)\", \n       y = \"Age Group\",\n       color = \"Gender\") +\n  theme_minimal() +\n  theme(axis.text.y = element_text(size = 8), plot.title = element_text(size = 10))  # Adjust y-axis labels for readability",
+    "section": "3.3 Age vs. the gender pay gap",
+    "text": "3.3 Age vs. the gender pay gap\nAgeism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women’s median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around $1-$1.50. Then the wage gap starkly increases for ages 35 to 64, to around $3. This big shift shows that perhaps ageism has a larger impact on women, with women in the 35-64 age bracket seeing a harsher discrepancy in wages versus men in the same age bracket. However, there are likely other correlated factors beyond ageism, such as children (older women may have more and/or older children and bear more responsibility in the family as a caretaker) or limitations in career promotions (versus men in the same bracket, due an unfair playing field).\n\n\nCode\nEA_plotdata &lt;- MedianHourlyEarningsByAge |&gt; \n  filter(Year==2023) |&gt; \n  select(-Total16Plus, -Total25Plus) |&gt;\n  pivot_longer( \n    cols=c(\"Ages16to19\",\"Ages20to24\",\"Ages25to34\",\"Ages35to44\",\"Ages45to54\",\"Ages55to64\",\"Ages65Plus\"),\n    names_to = \"Age\", values_to = \"HourlyEarnings\")\n\nggplot(EA_plotdata, aes(x = HourlyEarnings, y = Age, color = Gender)) +\n  geom_point(size = 4) +\n  scale_color_manual(values = c(\"blue\", \"pink\")) +\n  labs(title = \"Median Hourly Earnings by Age Group (Men vs Women)\",\n       x = \"Hourly Earnings ($)\", \n       y = \"Age Group\",\n       color = \"Gender\") +\n  theme_minimal() +\n  theme(axis.text.y = element_text(size = 8), plot.title = element_text(size = 10))  # Adjust y-axis labels for readability",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Results</span>"
     ]
@@ -97,16 +97,6 @@
     "text": "Select Year:  2023",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Interactive Graph</span>"
-    ]
-  },
-  {
-    "objectID": "results.html#age-vs.-the-gender-pay-gap",
-    "href": "results.html#age-vs.-the-gender-pay-gap",
-    "title": "3  Results",
-    "section": "3.3 Age vs. the gender pay gap",
-    "text": "3.3 Age vs. the gender pay gap\nAgeism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women’s median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around $1-$1.50. Then the wage gap starkly increases for ages 35 to 64, to around $3. This big shift shows that perhaps ageism has a larger impact on women, with women in the 35-64 age bracket seeing a harsher discrepancy in wages versus men in the same age bracket. However, there are likely other correlated factors beyond ageism, such as children (older women may have more and/or older children and bear more responsibility in the family as a caretaker) or limitations in career promotions (versus men in the same bracket, due an unfair playing field).\n\n\nCode\nEA_plotdata &lt;- MedianHourlyEarningsByAge |&gt; \n  filter(Year==2023) |&gt; \n  select(-Total16Plus, -Total25Plus) |&gt;\n  pivot_longer( \n    cols=c(\"Ages16to19\",\"Ages20to24\",\"Ages25to34\",\"Ages35to44\",\"Ages45to54\",\"Ages55to64\",\"Ages65Plus\"),\n    names_to = \"Age\", values_to = \"HourlyEarnings\")\n\nggplot(EA_plotdata, aes(x = HourlyEarnings, y = Age, color = Gender)) +\n  geom_point(size = 4) +\n  scale_color_manual(values = c(\"blue\", \"pink\")) +\n  labs(title = \"Median Hourly Earnings by Age Group (Men vs Women)\",\n       x = \"Hourly Earnings ($)\", \n       y = \"Age Group\",\n       color = \"Gender\") +\n  theme_minimal() +\n  theme(axis.text.y = element_text(size = 8), plot.title = element_text(size = 10))  # Adjust y-axis labels for readability",
-    "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Results</span>"
     ]
   }
 ]
