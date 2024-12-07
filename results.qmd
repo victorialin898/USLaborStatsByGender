@@ -1,6 +1,6 @@
 # Results
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Add libraries and read in data
 library(readr)
 library(dplyr)
@@ -42,7 +42,7 @@ To prepare the data for plotting, we first pick major occupations by filtering o
 
 In the stacked bar chart below, we can see at a glance that on an aggregate level, women's earnings are lower than men's. It is also evident that a larger portion of the share of management, business, and financial wages go to men, and a higher share of the education, healthcare, and office occupations go to women. 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 library(ggplot2)
 library(dplyr)
@@ -93,7 +93,7 @@ This comparison reveals that many high-paying occupations like "Management", "Co
 
 The imbalance in gender representation across occupations, combined with the pay differences within occupations, exacerbates the overall wage gap.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Reshape the data to long format
 data_long <- MedianWeeklyEarningsByOccupationAggregate |>
   dplyr::select(occupation, men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings) |>
@@ -129,7 +129,7 @@ Some interesting trends arise: for top women's occupations, we see that the gene
 In the second plot, the story is a bit more complex. The worst pay gaps are in "Retail salespersons", "Drivers/sales workers and truck drivers", and "Professional and related occupations", at 71%, 72%, and 73%. This is a mixed bag; while retail jobs tend to be lower paying, professional occupations may have a wider range, and the pay gap of truck drivers may be an artifact of the minimal female representation within that population. The most equitable roles within top men's occupations are "Cooks" and "Software developers", at 89% and 88%. While cooks can have a wide range of salaries, software developers generally tend to have higher pay.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 # Load necessary libraries
 library(dplyr)
@@ -163,7 +163,7 @@ top_15_men <- data_clean |>
 p1 <- ggplot(top_15_women, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = paste0(round(wage_gap, 1), "%")), 
-            vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
+            hjust = 1.2, vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
   coord_flip() + # Flip the axes for readability
   labs(
     title = "Wage Gap for Top 15 Occupations \n by Number of Women Workers",
@@ -172,13 +172,13 @@ p1 <- ggplot(top_15_women, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
   ) +
   scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.text.y = element_text(size=5), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 45, hjust = 0.5), axis.text.y = element_text(size=5), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
 
 # Plot for Top 15 Occupations by Men Workers (sorted by number of workers)
 p2 <- ggplot(top_15_men, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = paste0(round(wage_gap, 1), "%")), 
-            vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
+            hjust = 1.2, vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
   coord_flip() + # Flip the axes for readability
   labs(
     title = "Wage Gap for Top 15 Occupations \n by Number of Men Workers",
@@ -202,7 +202,7 @@ When we compare men’s and women’s weekly earnings directly, we can see how t
 From this chart, it’s clear that the majority of occupations fall below the equality line, showing that men earn more than women in most job categories. However, there are a few occupations that have closer parity, especially in fields like arts and healthcare where the gender balance is somewhat more equitable. Still, overall, the data reflects the persistent gap between male and female earnings across most sectors.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(plotly)
 library(dplyr)
 
@@ -268,7 +268,7 @@ The data reveals that never-married women earn significantly more than their mar
 Married women tend to experience a larger wage gap and separated women experience the largest. One possibility for this may be family responsibilities limiting their career opportunities. This highlights how family structure (and the potential imbalanced domestic responsibilities) continues to impact women’s wages, with unmarried women often facing fewer barriers to higher pay.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Assuming the data is loaded into `MedianWeeklyEarningsByMaritalStatus`
 data <- MedianWeeklyEarningsByMaritalStatus
 
@@ -303,7 +303,7 @@ We can see that the impact of children on women's earnings varies across demogra
 Our hypothesis is however reflected in the "other marital statuses" (right) plot, where we see that women with no children under 18 years old make 93% of the earnings of men (the highest) and women with children 6 to 17 make 77.9% (the lowest). This suggest that the impact of children on women’s wages is most pronounced during the middle to later years of child-rearing, where children have additional extracurricular and academic activities which need to be catered to.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 data <- MedianWeeklyEarningByPresenceOfChildren |>
   filter(Characteristic != "With children under 18 years old")
 
@@ -366,7 +366,7 @@ This unequal time allocation has serious implications for the wage gap. Women’
 
 By highlighting the everyday time trade-offs that women make, this chart underscores the structural challenges that prevent women from fully participating in the workforce, ultimately affecting their long-term earning potential.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -429,7 +429,7 @@ ggplot(atus_long, aes(x = Time, y = interaction(Gender, Group), fill = Major_Act
 Ageism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women's median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around \$1-\$1.50. Then the wage gap starkly increases for ages 35 to 64, to around \$3. This big shift shows that perhaps ageism has a larger impact on women, with women in the 35-64 age bracket seeing a harsher discrepancy in wages versus men in the same age bracket. However, there are likely other correlated factors beyond ageism, such as children (older women may have more and/or older children and bear more responsibility in the family as a caretaker) or limitations in career promotions (versus men in the same bracket, due an unfair playing field).
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 EA_plotdata <- MedianHourlyEarningsByAge |> 
   filter(Year==2023) |> 
   select(-Total16Plus, -Total25Plus) |>
@@ -457,7 +457,7 @@ However, that's not the full story. When we pull in median weekly Hours Worked d
 
 Shaded areas represent recessions, as determined by the National Bureau of Economic Research.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 
 # Filter for Year>=2000 due to Asian data not being collected until then
 tabRaceGenderHoursWorked <- filter(MedianHoursWorkedByRaceGender, (Year>=2000) & (Year<2023))
@@ -500,7 +500,7 @@ From the above plots, we can form some conclusions about how gender earnings gap
 When we compare men's and women's Median Earnings on a dollar value basis, we can see that Asian men have the highest earnings overall, followed by White men and then Asian women. Asian men and women's earnings follow a very similar upwards growth trend, with similar slopes, which explains why the ratio of Asian women's to men's earnings is generally flat over time: while absolute earnings have grown over time, the earnings ratio has remained around the same level. On the other hand, Hispanic men's and women's earnings follow an increasing trend, however Hispanic men's earnings are growing at a faster rate compared to Hispanic womens. This steeper slope translates into that decreasing gender earnings ratio curve that we noted above. Finally, Black and White men's median earnings are largely flat over time, while Black and White women's median earnings show a slightly positive slope, which reflects the observations above that Black and White demographics are experiencing the most improvement in gender earnings equity over time.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Plot earnings data
 RGE_abs_ratio <- select(tabRGEarnings_t, c(Year, Race, women_as_percent_of_men)) |> rename(value=women_as_percent_of_men)
 RGE_abs_mens <- select(tabRGEarnings_t, c(Year, Race, Men)) |> rename(value=Men)
@@ -539,7 +539,7 @@ ggplot(data=RGE_abs_plotdata2, aes(x=Year, y=value, group=Race)) +
 Finally, we delve into the question of how educational attainment and race impact earnings by gender. Using the latest data from the BLS, we can see that as educational attainment increases, there is not a consistent trend for how gender pay disparity changes. For Hispanic/Latino and Black/African American women, there appears to be an overall increasing effect, where as women attain higher levels of education, gender pay equity increases. For White women, the trend appears reversed, with "Less than a high school diploma" having the highest gender pay equity level, followed by "High school graduates, no college", and with "Advanced degree" seeing the lowest % earning vs men. For Asian women, there does not seem to be a noticeable trend, with "Some college or associate degree" having the highest % earning vs men, and "Bachelor's degree only" seeing the lowest %.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # BLS uses Series Id's to label series, so manually added data on each series
 # collated from the BLS website pages to the 2023 data; now left join onto the yearly data
 RGEseriesIdMap <- select(MedianWeeklyEarningsByRaceGenderEducation2023, 

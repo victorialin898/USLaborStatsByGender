@@ -45,9 +45,7 @@ MedianWeeklyEarningsByRaceGenderEducation <- read_csv("data/MedianEarningsByRace
 
 ```
 
-
-
-```{r, fig.width=14, fig.height=15}
+```{r, fig.width=14, fig.height=15, message=FALSE, warning=FALSE}
 library(patchwork)
 
 ATUS2023Missing <- gg_miss_var(atusAllGroups2023) + ggtitle("ATUS2023") + theme(plot.title = element_text(size = 7, hjust = 0.5))
@@ -79,7 +77,7 @@ fourthRow <- (MedianWeeklyEarningsByRaceGenderEducation2023Missing | MedianWeekl
 For most datasets we see no missing data. The exception is for the ATUS2023, MedianWeeklyEarningByRace, and MedianHoursWorkedByRaceGender sets. The null values in the ATUS2023 are minimal and likely due to reporting issues. Below, we plot out MedianWeeklyEarningByRace and MedianHoursWorkedByRaceGender, and see BLS only started including the Asian group in the Current Population Survey in 2000, vs started with the rest in 1979. Since our analysis will generally focus on the most recent year (2023), or range from 2000-present, these missing data points will not have any impact on our analysis.
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Plot "Asian" variable by "Year"
 ggplot(MedianWeeklyEarningByRace, aes(x = Year, y = Asian)) +
   geom_line(color = "blue", size = 1) +  # Line plot, blue color
@@ -98,5 +96,4 @@ ggplot(MedianHoursWorkedByRaceGender, aes(x = Year, y = Asian)) +
        y = "Median Hours Worked (Asian)") +
   theme_minimal()
 ```
-
 

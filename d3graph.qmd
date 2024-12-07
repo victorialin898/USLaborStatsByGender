@@ -29,9 +29,28 @@ output: html_document
     fill: black;
     text-anchor: middle;
   }
+  /* Tooltip Styling */
+  .tooltip {
+    background-color: #f4f4f4;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0.9;
+    position: absolute;
+    z-index: 10;
+  }
+
+.wage-gap-box {
+  fill: blue;
+  opacity: 0.6;
+}
+
 </style> 
 
-<div id="plot"></div>
+
+<div id="plot" style="padding:30px 5px;"><div id="tooltip" style="position: absolute; visibility: hidden; background: #fff; border: 1px solid #ccc; padding: 10px; border-radius: 5px; font-size: 12px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);"></div>
+</div>
 
 <label for="year-slider">Select Year:</label>
 <input type="range" id="year-slider" min="2013" max="2023" step="1" value="2023">
