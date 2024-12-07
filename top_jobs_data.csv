@@ -1,161 +1,91 @@
 Year,Occupation_Group,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_MedianEarnings,Women_MedianEarnings
-2013,Sales and office occupations,Sales and Related Occupations,9763412,5776608,3986804,"41,300",50259,31747
-2013,Production occupations,Production Occupations,6900369,5123473,1776896,"35,478",39170,26544
-2013,Healthcare occupations,Healthcare Practitioners and Technical Occupations,5784959,1647689,4137270,"61,014",80723,56710
-2013,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,5677671,2607609,3070062,"60,692",70670,52958
-2013,Education related occupations,"Educational Instruction, and Library Occupations",5123204,1512120,3611084,"47,331",55349,44667
-2013,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,4960836,4841705,119131,"40,003",40078,33236
-2013,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",3860624,3721190,139434,"43,450",43781,40347
-2013,Transportation and material moving occupations,Transportation Occupations,3637658,3296719,340939,"40,594",41222,30304
-2013,Personal care and service occupations,Food Preparation and Serving Related Occupations,3428600,1846291,1582309,"21,343",22483,20049
-2013,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3334604,2253763,1080841,"25,267",27873,20844
-2013,"Management, business, and financial operations occupations",Computer and mathematical occupations,3326898,2491163,835735,"76,739",80509,69795
-2013,"Management, business, and financial operations occupations","Managers, all other",3034121,2056582,977539,"75,912",81462,63917
-2013,Sales and office occupations,First-line supervisors of retail sales workers,2563806,1465356,1098450,"38,265",44856,31897
-2013,Personal care and service occupations,Personal Care and Service Occupations,2530732,667947,1862785,"24,051",30217,22294
-2013,Personal care and service occupations,Protective Service Occupations,2494739,1998665,496074,"49,316",51159,40760
-2014,Sales and office occupations,Sales and Related Occupations,9834140,5788675,4045465,"41,747",50567,32122
-2014,Production occupations,Production Occupations,7047746,5254651,1793095,"35,891",40113,26561
-2014,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6183734,1732770,4450964,"60,631",77993,56151
-2014,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,5809077,2672417,3136660,"60,934",70728,54018
-2014,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5306587,5174910,131677,"40,042",40133,32481
-2014,Education related occupations,"Educational Instruction, and Library Occupations",5211831,1513551,3698280,"48,026",55730,45162
-2014,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",3856472,3713565,142907,"44,262",44462,41195
-2014,Transportation and material moving occupations,Transportation Occupations,3777077,3408321,368756,"40,763",41394,31001
-2014,"Management, business, and financial operations occupations","Managers, all other",3571939,2379728,1192211,"75,766",81484,63700
-2014,Personal care and service occupations,Food Preparation and Serving Related Occupations,3563188,1931113,1632075,"21,513",22709,20202
-2014,"Management, business, and financial operations occupations",Computer and mathematical occupations,3556981,2670024,886957,"77,975",81043,70786
-2014,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3385523,2270153,1115370,"25,507",28153,20931
-2014,Personal care and service occupations,Protective Service Occupations,2582882,2092393,490489,"49,555",51369,40422
-2014,Transportation and material moving occupations,Driver/sales workers and truck drivers,2569929,2455007,114922,"40,913",41201,30173
-2014,Sales and office occupations,First-line supervisors of retail sales workers,2548184,1454977,1093207,"38,807",44447,32093
-2015,Sales and office occupations,Sales and Related Occupations,9992545,5884240,4108305,"42,101",50928,32588
-2015,Production occupations,Production Occupations,7218719,5366548,1852171,"36,278",40435,27256
-2015,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6285534,1728301,4557233,"60,928",80084,56629
-2015,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,5914658,2699566,3215092,"61,547",71816,55043
-2015,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5559833,5418960,140873,"40,235",40300,35673
-2015,Education related occupations,"Educational Instruction, and Library Occupations",5240692,1530438,3710254,"48,649",55772,45789
-2015,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",4029724,3897252,132472,"45,414",45515,41070
-2015,Transportation and material moving occupations,Transportation Occupations,3927349,3535497,391852,"41,549",42204,31533
-2015,Personal care and service occupations,Food Preparation and Serving Related Occupations,3693996,1983782,1710214,"21,938",23729,20620
-2015,"Management, business, and financial operations occupations","Managers, all other",3681343,2443030,1238313,"76,680",82139,66153
-2015,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,3679444,2766278,913166,"80,339",82130,71378
-2015,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3357793,2209972,1147821,"25,797",28980,21421
-2015,Transportation and material moving occupations,Driver/sales workers and truck drivers,2644153,2526258,117895,"41,834",42127,30962
-2015,Personal care and service occupations,Personal Care and Service Occupations,2635195,665033,1970162,"24,280",29220,22718
-2015,Sales and office occupations,First-line supervisors of retail sales workers,2584676,1475041,1109635,"39,844",45509,32506
-2016,Sales and office occupations,Sales and Related Occupations,10085935,5907517,4178418,"43,647",51791,34226
-2016,Production occupations,Production Occupations,7084690,5206127,1878563,"36,773",40898,28241
-2016,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6558946,1806655,4752291,"61,813",81023,58404
-2016,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,6123442,2814981,3308461,"63,511",74011,56897
-2016,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5684325,5535847,148478,"40,852",40926,35859
-2016,Education related occupations,"Educational Instruction, and Library Occupations",5348821,1547041,3801780,"49,619",56876,46403
-2016,Transportation and material moving occupations,Transportation Occupations,4017489,3621746,395743,"41,788",42389,31991
-2016,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",4007794,3873396,134398,"45,939",46092,40827
-2016,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,3884352,2925768,958584,"81,760",85427,72472
-2016,Personal care and service occupations,Food Preparation and Serving Related Occupations,3769365,2027036,1742329,"22,544",24935,21224
-2016,"Management, business, and financial operations occupations","Managers, all other",3758629,2472383,1286246,"78,843",84600,67769
-2016,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3516387,2331552,1184835,"26,420",30043,21933
-2016,Personal care and service occupations,Personal Care and Service Occupations,2738373,681749,2056624,"25,119",30831,23318
-2016,Transportation and material moving occupations,Driver/sales workers and truck drivers,2695081,2570385,124696,"42,200",42435,32237
-2016,Sales and office occupations,First-line supervisors of retail sales workers,2677578,1537529,1140049,"40,573",46343,33778
-2017,Sales and office occupations,Sales and Related Occupations,10133059,5927866,4205193,"45,567",52335,35512
-2017,Production occupations,Production Occupations,7197169,5306230,1890939,"37,542",41565,29317
-2017,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6787795,1846250,4941545,"62,232",80092,60334
-2017,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,6327592,2884605,3442987,"65,590",75902,59584
-2017,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,6025290,5857738,167552,"41,334",41422,35760
-2017,Education related occupations,"Educational Instruction, and Library Occupations",5528587,1585239,3943348,"50,307",57802,47033
-2017,Transportation and material moving occupations,Transportation Occupations,4118728,3667169,451559,"42,227",44173,31941
-2017,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,4091529,3091982,999547,"83,469",87012,75555
-2017,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",3985231,3839984,145247,"46,973",47168,41113
-2017,"Management, business, and financial operations occupations","Managers, all other",3899979,2536832,1363147,"80,402",86960,68744
-2017,Personal care and service occupations,Food Preparation and Serving Related Occupations,3837283,2044072,1793211,"23,747",26046,21710
-2017,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3585052,2393665,1191387,"27,562",31124,22449
-2017,Personal care and service occupations,Personal Care and Service Occupations,2755337,701545,2053792,"26,054",31141,24682
-2017,Transportation and material moving occupations,Driver/sales workers and truck drivers,2728976,2585286,143690,"43,252",44476,31491
-2018,Sales and office occupations,Sales and Related Occupations,10130887,5893182,4237705,"46,617",54754,36519
-2018,Production occupations,Production Occupations,7221510,5310063,1911447,"39,918",42766,30617
-2018,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,7088377,3332992,3755385,"69,520",79998,61601
-2018,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6988175,1885295,5102880,"64,326",81376,60940
-2018,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,6166725,5983193,183532,"41,943",42023,37272
-2018,Education related occupations,"Educational Instruction, and Library Occupations",5621630,1608658,4012972,"51,030",60158,48123
-2018,Transportation and material moving occupations,Transportation Occupations,4376399,3894093,482306,"44,469",46008,32858
-2018,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,4371077,3255410,1115667,"85,063",89396,75914
-2018,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",3999085,3856978,142107,"48,373",48691,42132
-2018,Personal care and service occupations,Food Preparation and Serving Related Occupations,3887682,2042084,1845598,"24,999",26893,22344
-2018,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3660938,2436867,1224071,"28,659",31697,23483
-2018,"Management, business, and financial operations occupations","Managers, all other",3479567,2312994,1166573,"80,600",86883,68803
-2018,Healthcare occupations,Healthcare Support Occupations,3007586,468885,2538701,"29,848",32025,29172
-2018,Transportation and material moving occupations,Driver/sales workers and truck drivers,2877771,2724636,153135,"45,520",46192,31561
-2019,Sales and office occupations,Sales and Related Occupations,9988596,5710358,4278238,"46,454",54461,36458
-2019,Production occupations,Production Occupations,7324192,5351516,1972676,"40,136",43346,30856
-2019,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7181268,1970812,5210456,"66,614",85126,62299
-2019,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,7130983,3317732,3813251,"70,234",80061,62437
-2019,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,6272018,6090679,181339,"42,942",43525,35282
-2019,Education related occupations,"Educational Instruction, and Library Occupations",6042723,1705554,4337169,"51,382",60576,48833
-2019,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,4554097,3375006,1179091,"87,148",91377,77356
-2019,Transportation and material moving occupations,Transportation Occupations,4454627,3959754,494873,"45,487",46894,32462
-2019,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",4175469,4017924,157545,"50,152",50347,41472
-2019,Personal care and service occupations,Food Preparation and Serving Related Occupations,3965189,2074020,1891169,"25,694",27441,23440
-2019,"Management, business, and financial operations occupations","Managers, all other",3770040,2428328,1341712,"81,086",90343,68884
-2019,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3612735,2349404,1263331,"29,390",31831,24196
-2019,Healthcare occupations,Healthcare Support Occupations,3198658,490858,2707800,"30,473",32452,30163
-2019,"Management, business, and financial operations occupations",Architecture and Engineering Occupations,2889590,2449820,439770,"86,077",87639,76547
-2020,Sales and office occupations,Sales and Related Occupations,8958000,4991000,3967000,45760,54392,37180
-2020,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7504000,1921000,5584000,"63,804",78312,59956
-2020,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,7294000,3312000,3982000,"70,876",80600,62868
-2020,Education related occupations,"Educational Instruction, and Library Occupations",7012000,1870000,5142000,"56,992",69004,53352
-2020,Production occupations,Production Occupations,6820000,5055000,1765000,40300,43732,32760
-2020,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5826000,5635000,191000,47112,47320,41392
-2020,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,5083000,3838000,1246000,"84,916",90376,73996
-2020,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",4077000,3917000,160000,51168,51532,41652
-2020,Personal care and service occupations,Food Preparation and Serving Related Occupations,3353000,1700000,1653000,27560,29640,26312
-2020,Healthcare occupations,Healthcare Support Occupations,3210000,532000,2678000,31512,33280,31200
-2020,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3138000,2051000,1087000,31356,33852,26572
-2020,"Management, business, and financial operations occupations","Managers, all other",3120000,1821000,1299000,"81,328",90948,71708
-2020,"Management, business, and financial operations occupations",Architecture and engineering occupations,2933000,2466000,467000,"81,900",84552,71864
-2020,Healthcare occupations,Registered nurses,2701000,364000,2337000,"65,624",75608,64480
-2021,Sales and office occupations,Sales and Related Occupations,8996896,5252747,3744149,"51,457",61244,41002
-2021,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,7748685,3611239,4137446,"75,831",85910,67890
-2021,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7246380,2009340,5237040,"72,368",91134,68247
-2021,Production occupations,Production Occupations,6513044,4803799,1709245,"42,199",46794,34003
-2021,Education related occupations,"Educational Instruction, and Library Occupations",6261803,1809702,4452101,"55,329",63859,51984
-2021,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5491759,5327382,164377,"46,910",47149,39846
-2021,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,5029627,3776648,1252979,"94,409",99619,83834
-2021,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",3993828,3857273,136555,"52,167",52346,43061
-2021,Transportation and material moving occupations,Transportation Occupations,3924770,3496398,428372,"50,033",50848,36219
-2021,Transportation and material moving occupations,Material Moving Occupations,3792985,2840092,952893,"33,419",35459,30257
-2021,"Management, business, and financial operations occupations","Managers, all other",3776173,2382407,1393766,"88,771",97904,76803
-2021,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3093287,2092550,1000737,"31,615",35078,26624
-2021,"Management, business, and financial operations occupations",Architecture and Engineering Occupations,3056719,2569629,487090,"91,429",93381,81303
-2021,Healthcare occupations,Healthcare Support Occupations,2964496,476203,2488293,"32,415",35982,32091
-2021,Personal care and service occupations,Food Preparation and Serving Related Occupations,2787670,1401629,1386041,"26,981",29956,25231
-2022,Sales and office occupations,Sales and Related Occupations,9812069,5706063,4106006,"53,543",63240,42808
-2022,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,8274826,3873340,4401486,"79,502",90069,71856
-2022,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7555731,2062441,5493290,"76,047",95762,72119
-2022,Production occupations,Production Occupations,7019626,5178333,1841293,"45,073",49667,36546
-2022,Education related occupations,"Educational Instruction, and Library Occupations",6389431,1823649,4565782,"56,913",66043,53519
-2022,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5992219,5806646,185573,"50,311",50558,40164
-2022,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,5417891,4045406,1372485,"100,196",103298,87509
-2022,Transportation and material moving occupations,Transportation Occupations,4340588,3853734,486854,"51,768",53242,38252
-2022,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",4146880,4003705,143175,"54,671",54928,46973
-2022,Transportation and material moving occupations,Material Moving Occupations,3990615,2969427,1021188,"36,154",37573,32174
-2022,"Management, business, and financial operations occupations","Managers, all other",3971697,2455515,1516182,"93,144",102003,80164
-2022,Personal care and service occupations,Food Preparation and Serving Related Occupations,3352373,1759798,1592575,"30,448",32097,27393
-2022,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3258466,2164053,1094413,"34,080",37239,29141
-2022,"Management, business, and financial operations occupations",Architecture and Engineering Occupations,3249897,2733381,516516,"95,144",96938,85163
-2022,Healthcare occupations,Healthcare Support Occupations,3043706,509885,2533821,"35,335",39160,34691
-2023,Sales and office occupations,Sales and Related Occupations,9148000,5099000,4049000,"52,052",62192,43160
-2023,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,8227000,3694000,4533000,"78,884",87048,73112
-2023,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7795000,1963000,5832000,"73,008",87464,69732
-2023,Education related occupations,"Educational Instruction, and Library Occupations",7524000,2070000,5455000,"61,360",71552,58968
-2023,Production occupations,Production Occupations,7313000,5277000,2036000,46540,50232,38584
 2023,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,6517000,6277000,240000,51220,51532,41340
+2019,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,6272018,6090679,181339,"42,942",43525,35282
+2018,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,6166725,5983193,183532,"41,943",42023,37272
+2017,Sales and office occupations,Sales and Related Occupations,10133059,5927866,4205193,"45,567",52335,35512
+2016,Sales and office occupations,Sales and Related Occupations,10085935,5907517,4178418,"43,647",51791,34226
+2018,Sales and office occupations,Sales and Related Occupations,10130887,5893182,4237705,"46,617",54754,36519
+2015,Sales and office occupations,Sales and Related Occupations,9992545,5884240,4108305,"42,101",50928,32588
+2017,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,6025290,5857738,167552,"41,334",41422,35760
+2022,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5992219,5806646,185573,"50,311",50558,40164
+2014,Sales and office occupations,Sales and Related Occupations,9834140,5788675,4045465,"41,747",50567,32122
+2013,Sales and office occupations,Sales and Related Occupations,9763412,5776608,3986804,"41,300",50259,31747
+2019,Sales and office occupations,Sales and Related Occupations,9988596,5710358,4278238,"46,454",54461,36458
+2022,Sales and office occupations,Sales and Related Occupations,9812069,5706063,4106006,"53,543",63240,42808
+2020,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5826000,5635000,191000,47112,47320,41392
+2016,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5684325,5535847,148478,"40,852",40926,35859
+2015,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5559833,5418960,140873,"40,235",40300,35673
+2015,Production occupations,Production Occupations,7218719,5366548,1852171,"36,278",40435,27256
+2019,Production occupations,Production Occupations,7324192,5351516,1972676,"40,136",43346,30856
+2021,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5491759,5327382,164377,"46,910",47149,39846
+2018,Production occupations,Production Occupations,7221510,5310063,1911447,"39,918",42766,30617
+2017,Production occupations,Production Occupations,7197169,5306230,1890939,"37,542",41565,29317
+2023,Production occupations,Production Occupations,7313000,5277000,2036000,46540,50232,38584
+2014,Production occupations,Production Occupations,7047746,5254651,1793095,"35,891",40113,26561
+2021,Sales and office occupations,Sales and Related Occupations,8996896,5252747,3744149,"51,457",61244,41002
+2016,Production occupations,Production Occupations,7084690,5206127,1878563,"36,773",40898,28241
+2022,Production occupations,Production Occupations,7019626,5178333,1841293,"45,073",49667,36546
+2014,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,5306587,5174910,131677,"40,042",40133,32481
+2013,Production occupations,Production Occupations,6900369,5123473,1776896,"35,478",39170,26544
+2023,Sales and office occupations,Sales and Related Occupations,9148000,5099000,4049000,"52,052",62192,43160
+2020,Production occupations,Production Occupations,6820000,5055000,1765000,40300,43732,32760
+2020,Sales and office occupations,Sales and Related Occupations,8958000,4991000,3967000,45760,54392,37180
+2013,"Natural resources, construction, and maintenance occupations.",Construction and Extraction Occupations,4960836,4841705,119131,"40,003",40078,33236
+2021,Production occupations,Production Occupations,6513044,4803799,1709245,"42,199",46794,34003
 2023,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,6129000,4522000,1607000,"98,280",102752,84656
-2023,Personal care and service occupations,Food Preparation and Serving Related Occupations,4325000,2289000,2036000,34320,36400,32136
-2023,"Natural resources, construction, and maintenance occupations.","Installation, Maintenance, and Repair Occupations",4120000,3968000,152000,"56,784",57408,45500
-2023,"Management, business, and financial operations occupations","Managers, all other",3872000,2263000,1609000,"90,376",98124,79872
-2023,"Natural resources, construction, and maintenance occupations.",Building and Grounds Cleaning and Maintenance Occupations,3520000,2161000,1359000,35984,38948,32292
-2023,Healthcare occupations,Healthcare Support Occupations,3467000,578000,2890000,37076,41288,36608
-2023,"Management, business, and financial operations occupations",Architecture and Engineering Occupations,3374000,2821000,553000,"92,820",96928,85020
-2023,Healthcare occupations,Registered nurses,2817000,404000,2413000,"74,984",86164,73268
+2022,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,5417891,4045406,1372485,"100,196",103298,87509
+2019,Transportation and material moving occupations,Transportation Occupations,4454627,3959754,494873,"45,487",46894,32462
+2018,Transportation and material moving occupations,Transportation Occupations,4376399,3894093,482306,"44,469",46008,32858
+2022,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,8274826,3873340,4401486,"79,502",90069,71856
+2022,Transportation and material moving occupations,Transportation Occupations,4340588,3853734,486854,"51,768",53242,38252
+2020,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,5083000,3838000,1246000,"84,916",90376,73996
+2021,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,5029627,3776648,1252979,"94,409",99619,83834
+2023,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,8227000,3694000,4533000,"78,884",87048,73112
+2017,Transportation and material moving occupations,Transportation Occupations,4118728,3667169,451559,"42,227",44173,31941
+2016,Transportation and material moving occupations,Transportation Occupations,4017489,3621746,395743,"41,788",42389,31991
+2021,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,7748685,3611239,4137446,"75,831",85910,67890
+2015,Transportation and material moving occupations,Transportation Occupations,3927349,3535497,391852,"41,549",42204,31533
+2021,Transportation and material moving occupations,Transportation Occupations,3924770,3496398,428372,"50,033",50848,36219
+2014,Transportation and material moving occupations,Transportation Occupations,3777077,3408321,368756,"40,763",41394,31001
+2019,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,4554097,3375006,1179091,"87,148",91377,77356
+2018,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,7088377,3332992,3755385,"69,520",79998,61601
+2019,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,7130983,3317732,3813251,"70,234",80061,62437
+2020,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,7294000,3312000,3982000,"70,876",80600,62868
+2013,Transportation and material moving occupations,Transportation Occupations,3637658,3296719,340939,"40,594",41222,30304
+2018,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,4371077,3255410,1115667,"85,063",89396,75914
+2017,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,4091529,3091982,999547,"83,469",87012,75555
+2016,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,3884352,2925768,958584,"81,760",85427,72472
+2017,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,6327592,2884605,3442987,"65,590",75902,59584
+2016,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,6123442,2814981,3308461,"63,511",74011,56897
+2015,"Management, business, and financial operations occupations",Computer and Mathematical Occupations,3679444,2766278,913166,"80,339",82130,71378
+2015,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,5914658,2699566,3215092,"61,547",71816,55043
+2014,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,5809077,2672417,3136660,"60,934",70728,54018
+2014,"Management, business, and financial operations occupations",Computer and mathematical occupations,3556981,2670024,886957,"77,975",81043,70786
+2013,"Management, business, and financial operations occupations",Business and Financial Operations Occupations,5677671,2607609,3070062,"60,692",70670,52958
+2013,"Management, business, and financial operations occupations",Computer and mathematical occupations,3326898,2491163,835735,"76,739",80509,69795
+2023,Education related occupations,"Educational Instruction, and Library Occupations",7524000,2070000,5455000,"61,360",71552,58968
+2022,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7555731,2062441,5493290,"76,047",95762,72119
+2021,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7246380,2009340,5237040,"72,368",91134,68247
+2019,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7181268,1970812,5210456,"66,614",85126,62299
+2023,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7795000,1963000,5832000,"73,008",87464,69732
+2020,Healthcare occupations,Healthcare Practitioners and Technical Occupations,7504000,1921000,5584000,"63,804",78312,59956
+2018,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6988175,1885295,5102880,"64,326",81376,60940
+2020,Education related occupations,"Educational Instruction, and Library Occupations",7012000,1870000,5142000,"56,992",69004,53352
+2017,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6787795,1846250,4941545,"62,232",80092,60334
+2022,Education related occupations,"Educational Instruction, and Library Occupations",6389431,1823649,4565782,"56,913",66043,53519
+2021,Education related occupations,"Educational Instruction, and Library Occupations",6261803,1809702,4452101,"55,329",63859,51984
+2016,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6558946,1806655,4752291,"61,813",81023,58404
+2014,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6183734,1732770,4450964,"60,631",77993,56151
+2015,Healthcare occupations,Healthcare Practitioners and Technical Occupations,6285534,1728301,4557233,"60,928",80084,56629
+2019,Education related occupations,"Educational Instruction, and Library Occupations",6042723,1705554,4337169,"51,382",60576,48833
+2013,Healthcare occupations,Healthcare Practitioners and Technical Occupations,5784959,1647689,4137270,"61,014",80723,56710
+2018,Education related occupations,"Educational Instruction, and Library Occupations",5621630,1608658,4012972,"51,030",60158,48123
+2017,Education related occupations,"Educational Instruction, and Library Occupations",5528587,1585239,3943348,"50,307",57802,47033
+2016,Education related occupations,"Educational Instruction, and Library Occupations",5348821,1547041,3801780,"49,619",56876,46403
+2015,Education related occupations,"Educational Instruction, and Library Occupations",5240692,1530438,3710254,"48,649",55772,45789
+2014,Education related occupations,"Educational Instruction, and Library Occupations",5211831,1513551,3698280,"48,026",55730,45162
+2013,Education related occupations,"Educational Instruction, and Library Occupations",5123204,1512120,3611084,"47,331",55349,44667
+2017,Personal care and service occupations,Personal Care and Service Occupations,2755337,701545,2053792,"26,054",31141,24682
+2016,Personal care and service occupations,Personal Care and Service Occupations,2738373,681749,2056624,"25,119",30831,23318
+2013,Personal care and service occupations,Personal Care and Service Occupations,2530732,667947,1862785,"24,051",30217,22294
+2015,Personal care and service occupations,Personal Care and Service Occupations,2635195,665033,1970162,"24,280",29220,22718
