@@ -11,7 +11,7 @@ Year,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_Me
 2013,Computer and Mathematical Occupations,3326898,2491163,835735,76739,80509,69795
 2013,Office and Administrative Support Occupations,13261018,3706820,9554198,35120,38713,33637
 2014,Office and Administrative Support Occupations,13145902,3772191,9373711,35365,38667,34069
-2014,"Educational Instruction, and Library Occupations","5,211,831","1,513,551","3,698,280","48,026","55,730","45,162"
+2014,"Educational Instruction, and Library Occupations",5211831,1513551,3698280,48026,55730,45162
 2014,Sales and Related Occupations,9834140,5788675,4045465,41747,50567,32122
 2014,Production Occupations,7047746,5254651,1793095,35891,40113,26561
 2014,Healthcare Practitioners and Technical Occupations,6183734,1732770,4450964,60631,77993,56151
@@ -80,8 +80,8 @@ Year,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_Me
 2020,Business and financial operations occupations,7294000,3312000,3982000,70876,80600,62868
 2020,"Educational Instruction, and Library Occupations",7012000,1870000,5142000,56992,69004,53352
 2020,Computer and Mathematical Occupations,5083000,3838000,1246000,84916,90376,73996
-2020,Transportation Occupations,4749873,3608422.4,1141450.6,52862,55515.4,46280.4
-2020,Office and Administrative Support Occupations,"12,207,000","3,445,000","8,762,000",40612,45136,39312
+2020,Transportation Occupations,4749873,3608422,1141451,52862,55515,46280
+2020,Office and Administrative Support Occupations,12207000,3445000,8762000,40612,45136,39312
 2021,Office and Administrative Support Occupations,3138000,2051000,1087000,31356,33852,26572
 2021,Sales and Related Occupations,5826000,5635000,191000,47112,47320,41392
 2021,Business and Financial Operations Occupations,4077000,3917000,160000,51168,51532,41652
@@ -115,8 +115,8 @@ Year,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_Me
 2023,"Installation, Maintenance, and Repair Occupations",4120000,3968000,152000,56784,57408,45500
 2023,Building and Grounds Cleaning and Maintenance Occupations,3520000,2161000,1359000,35984,38948,32292
 2023,Transportation Occupations,5494759,5330382,167377,47210,47449,40146
-2020,Building and Grounds Cleaning and Maintenance Occupations,"3,138,000","2,051,000","1,087,000",31356,33852,26572
-2020,Construction and Extraction Occupations,"5,826,000","5,635,000",191000,47112,47320,41392
-2020,"Installation, Maintenance, and Repair Occupations","4,077,000","3,917,000",160000,51168,51532,41652
-2020,Production Occupations,"6,820,000","5,055,000","1,765,000",40300,43732,32760
-2020,Sales and Related Occupations,"8,958,000","4,991,000","3,967,000",45760,"54,392",37180
+2020,Building and Grounds Cleaning and Maintenance Occupations,3138000,2051000,1087000,31356,33852,26572
+2020,Construction and Extraction Occupations,5826000,5635000,191000,47112,47320,41392
+2020,"Installation, Maintenance, and Repair Occupations",4077000,3917000,160000,51168,51532,41652
+2020,Production Occupations,6820000,5055000,1765000,40300,43732,32760
+2020,Sales and Related Occupations,8958000,4991000,3967000,45760,54392,37180
