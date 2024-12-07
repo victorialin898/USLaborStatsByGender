@@ -4,7 +4,7 @@ Year,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_Me
 2013,"Education, Legal, Community Service, Arts, and Media Occupations:",9946980,3873198,6073782,49461,56887,45482
 2013,Healthcare Practitioners and Technical Occupations:,5784959,1647689,4137270,61014,80723,56710
 2013,Sales and Related Occupations:,9763412,5776608,3986804,41300,50259,31747
-2013,"Education, Training, and Library Occupations:",5123204,1512120,3611084,47331,55349,44667
+2013,"Education, Training, and Library Occupations",5123204,1512120,3611084,47331,55349,44667
 2013,Business and Financial Operations Occupations:,5677671,2607609,3070062,60692,70670,52958
 2013,Secretaries and administrative assistants,2402826,112008,2290818,35814,40599,35677
 2013,Healthcare Support Occupations:,2235372,331472,1903900,27158,30838,26743
@@ -19,7 +19,7 @@ Year,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_Me
 2014,"Education, Legal, Community Service, Arts, and Media Occupations:",10164825,3895376,6269449,50057,57516,45789
 2014,Healthcare Practitioners and Technical Occupations:,6183734,1732770,4450964,60631,77993,56151
 2014,Sales and Related Occupations:,9834140,5788675,4045465,41747,50567,32122
-2014,"Education, Training, and Library Occupations:",5211831,1513551,3698280,48026,55730,45162
+2014,"Education, Training, and Library Occupations",5211831,1513551,3698280,48026,55730,45162
 2014,Business and Financial Operations Occupations:,5809077,2672417,3136660,60934,70728,54018
 2014,Secretaries and administrative assistants,2267963,109810,2158153,36141,41073,36004
 2014,Registered nurses,2183447,253618,1929829,62280,67965,61961
@@ -108,7 +108,7 @@ Year,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_Me
 2020,Sales and office occupations,21165,8435,12729,809,956,746
 2020,Office and administrative support occupations,12207,3445,8762,781,868,756
 2020,Healthcare practitioners and technical occupations,7504,1921,5584,1227,1506,1153
-2020,"Education, training, and library occupations",7012,1870,5142,1096,1327,1026
+2020,"Education, Training, and Library Occupations",7012,1870,5142,1096,1327,1026
 2020,Business and financial operations occupations,7294,3312,3982,1363,1550,1209
 2020,Sales and related occupations,8958,4991,3967,880,1046,715
 2020,Healthcare support occupations,3210,532,2678,606,640,600
@@ -148,11 +148,11 @@ Year,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_Me
 2022,Elementary and middle school teachers,2267573,467639,1799934,58625,62514,57590
 2022,Food Preparation and Serving Related Occupations:,3352373,1759798,1592575,30448,32097,27393
 2022,"Managers, all other",3971697,2455515,1516182,93144,102003,80164
-2022,Transportation and Material Moving Occupations:12,8331203,6823161,1508042,42070,44860,33560
+2022,Transportation and Material Moving Occupations,8331203,6823161,1508042,42070,44860,33560
 2023,Professional and related occupations,32088,14645,17443,1458,1736,1278
 2023,Office and administrative support occupations,12519,3777,8743,891,983,864
 2023,Healthcare practitioners and technical occupations,7795,1963,5832,1404,1682,1341
-2023,"Education, training, and library occupations",7524,2070,5455,1180,1376,1134
+2023,"Education, Training, and Library Occupations",7524,2070,5455,1180,1376,1134
 2023,Business and financial operations occupations,8227,3694,4533,1517,1674,1406
 2023,Sales and related occupations,9148,5099,4049,1001,1196,830
 2023,Healthcare support occupations,3467,578,2890,713,794,704
@@ -166,7 +166,7 @@ Year,Occupation,Total_Number,Men_Number,Women_Number,Total_MedianEarnings,Men_Me
 2023,Community and social service occupations,2334,735,1599,1147,1157,1144
 2013,Sales and Office Occupations,23024430,9483428,13541002,36667,44622,32972
 2013,"Natural Resources, Construction, and Maintenance Occupations:",9447149,9083555,363594,40492,40696,30351
-2013,Sales and Related Occupations:,9763412,5776608,3986804,41300,50259,31747
+2013,Sales and Related Occupations,9763412,5776608,3986804,41300,50259,31747
 2013,Production Occupations:,6900369,5123473,1776896,35478,39170,26544
 2013,"Computer, Engineering, and Science Occupations:",6587606,5025859,1561747,75222,78480,65160
 2013,Construction and Extraction Occupations:,4960836,4841705,119131,40003,40078,33236

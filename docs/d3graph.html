@@ -170,35 +170,55 @@ ul.task-list li input[type="checkbox"] {
 
 
 <style>
+  * {
+    font-family: sans-serif;
+  }
+  .bar-men {
+    fill: blue;
+  }
+  .bar-women {
+    fill: pink;
+  }
+  .bar:hover {
+    opacity: 0.8;
+  }
   #year-slider {
     width: 300px;
     margin-bottom: 20px;
   }
-
-  /* Tooltip styles */
-  #tooltip {
-    position: absolute;
-    opacity: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid #ccc;
-    padding: 8px;
-    border-radius: 4px;
-    pointer-events: none;
-    font-size: 12px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-
   .axis-label {
     font-size: 14px;
   }
+  .job-label {
+    font-size: 12px;
+    font-weight: bold;
+    fill: black;
+    text-anchor: middle;
+  }
+  /* Tooltip Styling */
+  .tooltip {
+    background-color: #f4f4f4;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0.9;
+    position: absolute;
+    z-index: 10;
+  }
+
+.wage-gap-box {
+  fill: blue;
+  opacity: 0.6;
+}
+
 </style>
-<div id="plot">
-<div id="tooltip">
+<div id="plot" style="padding:30px 5px;">
+<div id="tooltip" style="position: absolute; visibility: hidden; background: #fff; border: 1px solid #ccc; padding: 10px; border-radius: 5px; font-size: 12px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);">
 
 </div>
 </div>
 <p><label for="year-slider">Select Year:</label> <input type="range" id="year-slider" min="2013" max="2023" step="1" value="2023"> <span id="selected-year">2023</span></p>
-<!-- Tooltip Div -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="scripts/myscript.js"></script>
 
