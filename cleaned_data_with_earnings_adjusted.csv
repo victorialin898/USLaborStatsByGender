@@ -1,6 +1,4 @@
 "Year","Occupation","Total_Number","Men_Number","Women_Number","Total_MedianEarnings","Men_MedianEarnings","Women_MedianEarnings"
-2013,"..Office and Administrative Support Occupations:",13261018,3706820,9554198,35120,38713,33637
-2013,"..Education, Legal, Community Service, Arts, and Media Occupations:",9946980,3873198,6073782,49461,56887,45482
 2013,"..Healthcare Practitioners and Technical Occupations:",5784959,1647689,4137270,61014,80723,56710
 2013,"..Sales and Related Occupations:",9763412,5776608,3986804,41300,50259,31747
 2013,"...Education, Training, and Library Occupations:",5123204,1512120,3611084,47331,55349,44667
@@ -12,7 +10,6 @@
 2013,"Elementary and middle school teachers",2282888,503434,1779454,48874,51986,47521
 2013,"..Production Occupations:",6900369,5123473,1776896,35478,39170,26544
 2013,"..Food Preparation and Serving Related Occupations:",3428600,1846291,1582309,21343,22483,20049
-2013,"..Computer, Engineering, and Science Occupations:",6587606,5025859,1561747,75222,78480,65160
 2013,"...Nursing, psychiatric, and home health aides",1397113,219944,1177169,25909,30408,25362
 2013,"...First-line supervisors of retail sales workers",2563806,1465356,1098450,38265,44856,31897
 2013,"...Community and Social Service Occupations:",1772184,685908,1086276,42023,43927,41485
@@ -46,7 +43,6 @@
 2013,"Postsecondary teachers",836986,457786,379200,65463,71414,60359
 2013,"....Medical and health services managers",546042,171661,374381,69563,84450,64765
 2013,"...Janitors and building cleaners",1519858,1149371,370487,26845,29685,21592
-2013,".Natural Resources, Construction, and Maintenance Occupations:",9447149,9083555,363594,40492,40696,30351
 2013,"...Billing and posting clerks",386492,39847,346645,32487,37351,32267
 2013,"..Transportation Occupations:",3637658,3296719,340939,40594,41222,30304
 2013,"Counselors",482328,146849,335479,42349,42299,42369
@@ -591,7 +587,6 @@
 2014,"Tax examiners and collectors, and revenue agents",50454,18782,31672,51944,63606,47747
 2014,"Tax preparers",52982,24476,28506,52451,56832,50927
 2014,"Financial specialists, all other",54692,26082,28610,61982,91705,49220
-2014,"..Computer, Engineering, and Science Occupations:",6853148,5216177,1636971,76036,79847,66500
 2014,"...Computer and mathematical occupations:",3556981,2670024,886957,77975,81043,70786
 2014,"Computer and information research scientists",13529,11168,2361,102201,103624,91426
 2014,"Computer systems analysts",473960,302291,171669,76506,81294,69406
@@ -654,7 +649,6 @@
 2014,"Nuclear technicians",3322,2899,423,81607,81518,120118
 2014,"Social science research assistants",1666,582,1084,41279,62318,33376
 2014,"Miscellaneous life, physical, and social science technicians",134477,73486,60991,42097,45391,40335
-2014,"..Education, Legal, Community Service, Arts, and Media Occupations:",10164825,3895376,6269449,50057,57516,45789
 2014,"...Community and Social Service Occupations:",1872494,702106,1170388,42238,44335,41657
 2014,"Counselors",499447,151784,347663,43086,42943,43144
 2014,"Social workers",662207,133598,528609,42403,44262,42201
@@ -824,7 +818,6 @@
 2014,"...Telemarketers",38731,15021,23710,25063,27405,22793
 2014,"...Door-to-door sales workers, news and street vendors, and related workers",54795,32505,22290,27326,29807,24704
 2014,"...Sales and related workers, all other",187100,107761,79339,51804,60938,44199
-2014,"..Office and Administrative Support Occupations:",13145902,3772191,9373711,35365,38667,34069
 2014,"...First-line supervisors of office and administrative support workers",1146803,449090,697713,47166,52192,44181
 2014,"...Switchboard operators, including answering service",18557,3038,15519,26952,27978,26883
 2014,"...Telephone operators",28220,5516,22704,30644,35392,29157
@@ -877,7 +870,6 @@
 2014,"...Proofreaders and copy markers",6117,1817,4300,36265,36679,36101
 2014,"...Statistical assistants",13979,5360,8619,45281,60366,41460
 2014,"...Office and administrative support workers, all other",471807,121141,350666,39222,42369,37669
-2014,".Natural Resources, Construction, and Maintenance Occupations:",9807518,9424631,382887,40609,40818,30881
 2014,"..Farming, Fishing, and Forestry Occupations:",644459,536156,108303,25282,26500,18915
 2014,"...First-line supervisors of farming, fishing, and forestry workers",44409,38603,5806,40046,40935,27206
 2014,"...Agricultural inspectors",10560,6890,3670,50215,47665,58503
@@ -1124,7 +1116,6 @@
 2015,"Tax examiners and collectors, and revenue agents",50457,16381,34076,51028,62186,47388
 2015,"Tax preparers",52627,22243,30384,52136,62228,45869
 2015,"Financial specialists, all other",49449,21315,28134,64187,92271,50356
-2015,"Computer, Engineering, and Science Occupations",7040467,5355898,1684569,77400,81089,68236
 2015,"Computer and Mathematical Occupations",3679444,2766278,913166,80339,82130,71378
 2015,"Computer and information research scientists",16892,12047,4845,80981,85716,71493
 2015,"Computer systems analysts",426775,265833,160942,77420,82774,70706
@@ -1187,7 +1178,6 @@
 2015,"Nuclear technicians",3383,2432,951,71703,75769,61483
 2015,"Social science research assistants",2205,775,1430,42435,52552,42284
 2015,"Miscellaneous life, physical, and social science technicians",132230,69433,62797,42427,46514,40928
-2015,"Education, Legal, Community Service, Arts, and Media Occupations",10353405,3948912,6404493,50417,57809,46386
 2015,"Community and Social Service Occupations",1937719,694893,1242826,42461,45658,41893
 2015,"Counselors",547839,159706,388133,44100,45444,43490
 2015,"Social workers",693187,129081,564106,42350,45076,42172
@@ -1358,7 +1348,6 @@
 2015,"Telemarketers",36741,13319,23422,25385,26129,25044
 2015,"Door-to-door sales workers, news and street vendors, and related workers",56544,31987,24557,26639,28591,25196
 2015,"Sales and related workers, all other",195098,111117,83981,52342,65423,47024
-2015,"Office and Administrative Support Occupations",13432640,3885270,9547370,35770,39077,34962
 2015,"First-line supervisors of office and administrative support workers",1172641,469845,702796,47727,54330,43758
 2015,"Switchboard operators, including answering service",19750,4433,15317,28733,37955,27348
 2015,"Telephone operators",25954,6600,19354,30710,31920,30368
@@ -1411,7 +1400,6 @@
 2015,"Proofreaders and copy markers",6526,2181,4345,34559,36940,31797
 2015,"Statistical assistants",14662,5747,8915,48936,55617,46423
 2015,"Office and administrative support workers, all other",487520,118499,369021,39843,44329,37840
-2015,"Natural Resources, Construction, and Maintenance Occupations",10253555,9860449,393106,40928,41124,31210
 2015,"Farming, Fishing, and Forestry Occupations",663998,544237,119761,25822,26962,20606
 2015,"First-line supervisors of farming, fishing, and forestry workers",50333,43275,7058,40351,40904,36592
 2015,"Agricultural inspectors",11709,8054,3655,45894,47088,39794
@@ -1565,7 +1553,6 @@
 2015,"Tire builders",13082,11555,1527,44488,43854,52037
 2015,"Helpers--production workers",28476,22505,5971,27299,30720,20670
 2015,"Production workers, all other",1012384,748271,264113,33905,37051,26948
-2015,"Transportation and Material Moving Occupations",6498781,5641758,857023,36283,37486,27072
 2015,"Transportation Occupations",3927349,3535497,391852,41549,42204,31533
 2015,"Supervisors of transportation and material moving workers",191955,152014,39941,50083,51175,40475
 2015,"Aircraft pilots and flight engineers",96406,91827,4579,100744,101122,67089
@@ -1659,7 +1646,6 @@
 2016,"Tax examiners and collectors, and revenue agents",42395,15901,26494,51797,61586,50296
 2016,"Tax preparers",55325,23690,31635,55336,70019,48033
 2016,"Financial specialists, all other",47467,22881,24586,61271,85274,50828
-2016,"Computer, Engineering, and Science Occupations",7336002,5591448,1744554,80279,82347,70044
 2016,"Computer and Mathematical Occupations",3884352,2925768,958584,81760,85427,72472
 2016,"Computer and information research scientists",16406,13203,3203,101205,102464,90480
 2016,"Computer systems analysts",448325,267043,181282,80219,85192,72409
@@ -1721,7 +1707,6 @@
 2016,"Nuclear technicians",3432,3144,288,84688,87628,78893
 2016,"Social science research assistants",1723,219,1504,41644,50617,41419
 2016,"Miscellaneous life, physical, and social science technicians",127222,69211,58011,42673,45323,41614
-2016,"Education, Legal, Community Service, Arts, and Media Occupations",10566994,3984993,6582001,50890,59998,47103
 2016,"Community and Social Service Occupations",1965931,706430,1259501,44265,45984,42947
 2016,"Counselors",536072,148955,387117,45356,46279,45007
 2016,"Social workers",704192,133995,570197,44669,44973,44603
@@ -1891,7 +1876,6 @@
 2016,"Telemarketers",41866,16569,25297,25732,27152,25125
 2016,"Door-to-door sales workers, news and street vendors, and related workers",49513,25691,23822,30475,35417,25753
 2016,"Sales and related workers, all other",178931,101250,77681,54472,61262,48884
-2016,"Office and Administrative Support Occupations",13475419,3953161,9522258,36290,40053,35548
 2016,"First-line supervisors of office and administrative support workers",1187429,479925,707504,50070,56346,45996
 2016,"Switchboard operators, including answering service",17734,3612,14122,30456,32279,29428
 2016,"Telephone operators",24570,7004,17566,31443,36713,30077
@@ -1944,7 +1928,6 @@
 2016,"Proofreaders and copy markers",6113,2139,3974,40435,38538,41357
 2016,"Statistical assistants",15243,6858,8385,50405,52172,47920
 2016,"Office and administrative support workers, all other",449803,111506,338297,41080,46448,40209
-2016,"Natural Resources, Construction, and Maintenance Occupations",10336235,9943126,393109,41407,41612,31194
 2016,"Farming, Fishing, and Forestry Occupations",644116,533883,110233,26661,28231,21214
 2016,"First-line supervisors of farming, fishing, and forestry workers",50964,44390,6574,41273,42138,31416
 2016,"Agricultural inspectors",12725,7187,5538,49889,47000,52455
@@ -2098,7 +2081,6 @@
 2016,"Tire builders",12530,11501,1029,41969,41952,45525
 2016,"Helpers--production workers",23695,19206,4489,28256,30140,25318
 2016,"Production workers, all other",953539,704041,249498,35030,37414,27236
-2016,"Transportation and Material Moving Occupations",6605581,5722980,882601,36644,38520,27349
 2016,"Transportation Occupations",4017489,3621746,395743,41788,42389,31991
 2016,"Supervisors of transportation and material moving workers",196226,156914,39312,51318,53614,40710
 2016,"Aircraft pilots and flight engineers",102512,96231,6281,102155,102479,90665
@@ -2191,7 +2173,6 @@
 2017,"Tax examiners and collectors, and revenue agents",44684,16612,28072,52704,63310,50638
 2017,"Tax preparers",51718,21021,30697,56143,71730,47886
 2017,"Financial specialists, all other",39668,18553,21115,66322,100619,49486
-2017,"Computer, Engineering, and Science Occupations",7632074,5800427,1831647,81256,84802,71502
 2017,"Computer and Mathematical Occupations",4091529,3091982,999547,83469,87012,75555
 2017,"Computer and information research scientists",22129,16418,5711,105949,111254,96090
 2017,"Computer systems analysts",478879,297409,181470,80145,84033,73321
@@ -2253,7 +2234,6 @@
 2017,"Nuclear technicians",3573,3110,463,71454,71771,67135
 2017,"Social science research assistants",3301,1276,2025,47047,53974,40933
 2017,"Miscellaneous life, physical, and social science technicians",132788,71471,61317,46218,49834,42462
-2017,"Education, Legal, Community Service, Arts, and Media Occupations",10873395,4072646,6800749,51525,60609,48245
 2017,"Community and Social Service Occupations",2029745,718847,1310898,45541,47178,44800
 2017,"Counselors",572271,155941,416330,46346,47207,46104
 2017,"Social workers",722010,135139,586871,45835,46906,45644
@@ -2424,7 +2404,6 @@
 2017,"Telemarketers",30173,12789,17384,27551,32194,25227
 2017,"Door-to-door sales workers, news and street vendors, and related workers",46425,23880,22545,30808,35569,27070
 2017,"Sales and related workers, all other",195122,112016,83106,57842,67634,47543
-2017,"Office and Administrative Support Occupations",13620469,4034756,9585713,37050,40709,36261
 2017,"First-line supervisors of office and administrative support workers",1203016,473031,729985,50699,57466,46555
 2017,"Switchboard operators, including answering service",16429,3478,12951,31878,40768,30888
 2017,"Telephone operators",31805,10549,21256,31268,35751,30394
@@ -2477,7 +2456,6 @@
 2017,"Proofreaders and copy markers",6550,2307,4243,42082,46324,40192
 2017,"Statistical assistants",22427,10721,11706,51388,55572,46920
 2017,"Office and administrative support workers, all other",439950,110470,329480,41697,49019,40437
-2017,"Natural Resources, Construction, and Maintenance Occupations",10665395,10227297,438098,41963,42203,31725
 2017,"Farming, Fishing, and Forestry Occupations",654874,529575,125299,27462,30115,21200
 2017,"First-line supervisors of farming, fishing, and forestry workers",47294,42194,5100,44527,45186,40951
 2017,"Agricultural inspectors",9462,5085,4377,50684,52859,50264
@@ -2631,7 +2609,6 @@
 2017,"Tire builders",11883,10207,1676,45809,45035,50549
 2017,"Helpers--production workers",28502,21325,7177,27776,28127,26907
 2017,"Production workers, all other",1012889,745978,266911,35511,38037,28956
-2017,"Transportation and Material Moving Occupations",6852836,5871227,981609,37079,39715,28344
 2017,"Transportation Occupations",4118728,3667169,451559,42227,44173,31941
 2017,"Supervisors of transportation and material moving workers",200528,153843,46685,51106,53250,41077
 2017,"Aircraft pilots and flight engineers",102013,96577,5436,110765,111715,100611
@@ -2732,7 +2709,6 @@
 2018,"Tax examiners and collectors, and revenue agents",45644,16952,28692,54651,61774,50723
 2018,"Tax preparers",54035,20663,33372,57151,67983,50105
 2018,"Other financial specialists",50891,26957,23934,71526,90593,55664
-2018,"Computer, Engineering, and Science Occupations:",8095862,6081337,2014525,81695,85843,72103
 2018,"Computer and Mathematical Occupations:",4371077,3255410,1115667,85063,89396,75914
 2018,"Computer and information research scientists",26610,19872,6738,109034,117799,91127
 2018,"Computer systems analysts",487730,290003,197727,80814,85856,74558
@@ -2804,7 +2780,6 @@
 2018,"Social science research assistants",2902,1617,1285,60525,56435,61097
 2018,"Other life, physical, and social science technicians",129366,70932,58434,44695,47010,41405
 2018,"Occupational health and safety specialists and technicians",59994,40551,19443,70102,71524,66575
-2018,"Education, Legal, Community Service, Arts, and Media Occupations:",11008551,4107006,6901545,52372,61666,49995
 2018,"Community and Social Service Occupations:",2016345,712787,1303558,46717,48773,45904
 2018,"Substance abuse and behavioral disorder counselors",68090,21225,46865,42090,42305,42012
 2018,"Educational, guidance, and career counselors and advisors",243595,57568,186027,51145,50568,51297
@@ -3015,7 +2990,6 @@
 2018,"Telemarketers",26295,9526,16769,27160,33050,25722
 2018,"Door-to-door sales workers, news and street vendors, and related workers",50224,28217,22007,32588,36154,28384
 2018,"Sales and related workers, all other",206721,109187,97534,56429,67511,50029
-2018,"Office and Administrative Support Occupations:",12527103,3409297,9117806,39013,44296,37220
 2018,"First-Line supervisors of office and administrative support workers",1134385,429283,705102,51626,60909,47857
 2018,"Switchboard operators, including answering service",13931,2202,11729,33042,40896,32030
 2018,"Telephone operators",21459,6344,15115,31801,39792,30999
@@ -3070,7 +3044,6 @@
 2018,"Proofreaders and copy markers",4601,1071,3530,45383,42028,45821
 2018,"Statistical assistants",24262,12545,11717,53632,58914,50311
 2018,"Office and administrative support workers, all other",393937,99250,294687,42160,47940,41095
-2018,"Natural Resources, Construction, and Maintenance Occupations:",10852297,10398640,453657,42822,43592,33877
 2018,"Farming, Fishing, and Forestry Occupations:",686487,558469,128018,30365,31411,22783
 2018,"First-line supervisors of farming, fishing, and forestry workers",60475,53941,6534,45625,46075,36477
 2018,"Agricultural inspectors",11009,7102,3907,47048,50279,44095
@@ -3209,7 +3182,6 @@
 2018,"Helpers--production workers",30689,23120,7569,29497,30710,24951
 2018,"Other production equipment operators and tenders",9469,8030,1439,41602,43086,33141
 2018,"Other production workers",1061275,773377,287898,35974,39470,29307
-2018,"Transportation and Material Moving Occupations:",8119366,6745419,1373947,36551,39189,28339
 2018,"Transportation Occupations:",4376399,3894093,482306,44469,46008,32858
 2018,"Supervisors of transportation and material moving workers",265522,207618,57904,50604,52109,41468
 2018,"Aircraft pilots and flight engineers",109135,103138,5997,110636,111576,85645
@@ -3307,7 +3279,6 @@
 2019,"Tax examiners and collectors, and revenue agents",52223,19889,32334,55733,65036,51038
 2019,"Tax preparers",47641,18777,28864,52421,62394,45106
 2019,"Other financial specialists",86667,38499,48168,67805,99232,59726
-2019,"Computer, Engineering, and Science Occupations:",8747777,6532159,2215618,84801,88755,75030
 2019,"Computer and Mathematical Occupations:",4554097,3375006,1179091,87148,91377,77356
 2019,"Computer and information research scientists",29036,20124,8912,115444,121128,102179
 2019,"Computer systems analysts",541210,324263,216947,81998,89427,75628
@@ -3380,7 +3351,6 @@
 2019,"Social science research assistants",6191,2601,3590,51958,57742,51324
 2019,"Other life, physical, and social science technicians",139917,70254,69663,46396,49080,43812
 2019,"Occupational health and safety specialists and technicians",65744,46732,19012,67055,72319,58289
-2019,"Education, Legal, Community Service, Arts, and Media Occupations:",11641414,4250685,7390729,53149,61996,50476
 2019,"Community and Social Service Occupations:",2135382,745802,1389580,47751,49699,47043
 2019,"Substance abuse and behavioral disorder counselors",88750,24017,64733,42210,40951,44139
 2019,"Educational, guidance, and career counselors and advisors",271368,63280,208088,52143,51760,52226
@@ -3590,7 +3560,6 @@
 2019,"Telemarketers",25495,9617,15878,26440,31529,22974
 2019,"Door-to-door sales workers, news and street vendors, and related workers",47986,26273,21713,31556,31980,31099
 2019,"Sales and related workers, all other",211531,113081,98450,55462,70623,45856
-2019,"Office and Administrative Support Occupations:",12078551,3204456,8874095,39299,43475,37457
 2019,"First-Line supervisors of office and administrative support workers",930606,313684,616922,50776,59283,47222
 2019,"Switchboard operators, including answering service",16562,3426,13136,33844,40660,32832
 2019,"Telephone operators",26230,7166,19064,31099,43581,29492
@@ -3645,7 +3614,6 @@
 2019,"Proofreaders and copy markers",6731,2213,4518,51454,62628,50264
 2019,"Statistical assistants",23753,10134,13619,58497,60893,57406
 2019,"Office and administrative support workers, all other",509775,127935,381840,42205,49217,41197
-2019,"Natural Resources, Construction, and Maintenance Occupations:",11085254,10626018,459236,45217,45682,32398
 2019,"Farming, Fishing, and Forestry Occupations:",637767,517415,120352,30463,31640,23252
 2019,"First-line supervisors of farming, fishing, and forestry workers",42382,36857,5525,42287,44997,29427
 2019,"Agricultural inspectors",10242,5945,4297,51003,51791,47435
@@ -3787,7 +3755,6 @@
 2019,"Helpers--production workers",39451,29474,9977,31562,32321,30300
 2019,"Other production equipment operators and tenders",10557,7909,2648,37152,40795,27565
 2019,"Other production workers",1062679,758700,303979,37043,40772,30093
-2019,"Transportation and Material Moving Occupations:",8237468,6827934,1409534,37188,40383,28923
 2019,"Transportation Occupations:",4454627,3959754,494873,45487,46894,32462
 2019,"Supervisors of transportation and material moving workers",237932,191253,46679,51291,53239,40954
 2019,"Aircraft pilots and flight engineers",112215,107162,5053,120784,121458,100568
@@ -3929,7 +3896,6 @@
 2020,"Sales representatives, wholesale and manufacturing",1073,758,315,66300,71656,55380
 2020,"Real estate brokers and sales agents",498,215,283,56368,70304,48724
 2020,"Sales and related workers, all other",206,100,106,49400,54028,43576
-2020,"Office and administrative support occupations",12207,3445,8762,40612,45136,39312
 2020,"First-line supervisors of office and administrative support workers",1129,395,734,50232,59540,48100
 2020,"Bookkeeping, accounting, and auditing clerks",741,105,636,42848,57252,42068
 2020,"Customer service representatives",1814,655,1160,37492,40092,36296
@@ -3943,7 +3909,6 @@
 2020,"Data entry keyers",180,51,128,36920,41756,36400
 2020,"Office clerks, general",912,153,759,38272,41080,37752
 2020,"Office and administrative support workers, all other",437,107,330,45084,43472,45500
-2020,"Natural resources, construction, and maintenance occupations",10690,10152,538,47060,47684,35464
 2020,"Farming, fishing, and forestry occupations",787,600,187,30628,31616,27456
 2020,"Miscellaneous agricultural workers",628,491,137,29848,30628,26988
 2020,"Construction and extraction occupations",5826,5635,191,47112,47320,41392
@@ -3957,7 +3922,6 @@
 2020,"Inspectors, testers, sorters, samplers, and weighers",684,418,266,42328,47320,36920
 2020,"Packaging and filling machine operators and tenders",224,126,98,32240,34684,28288
 2020,"Other production workers",957,706,251,38428,41496,33124
-2020,"Transportation and material moving occupations",7917,6439,1478,37388,39468,31200
 2020,"Bus drivers, school",105,52,53,33644,36816,32344
 2020,"Bus drivers, transit and intercity",146,89,57,40716,40248,41132
 2020,"Driver/sales workers and truck drivers",2592,2409,183,46592,47632,34632
@@ -4027,7 +3991,6 @@
 2021,"Tax examiners and collectors, and revenue agents",57619,19259,38360,56182,66883,50110
 2021,"Tax preparers",52019,22692,29327,56313,65542,51768
 2021,"Other financial specialists",99158,48153,51005,78146,101339,63562
-2021,"Computer, Engineering, and Science Occupations:",9540113,7130087,2410026,90974,94701,80406
 2021,"Computer and Mathematical Occupations:",5029627,3776648,1252979,94409,99619,83834
 2021,"Computer and information research scientists",22546,16075,6471,104855,119487,89702
 2021,"Computer systems analysts",513719,315855,197864,86616,92841,79958
@@ -4100,7 +4063,6 @@
 2021,"Social science research assistants",8491,3761,4730,57975,63352,56896
 2021,"Other life, physical, and social science technicians",160372,76172,84200,48994,50540,46946
 2021,"Occupational health and safety specialists and technicians",79263,55275,23988,70045,73792,61184
-2021,"Education, Legal, Community Service, Arts, and Media Occupations:",11786704,4282233,7504471,58230,67526,54006
 2021,"Community and Social Service Occupations:",2084760,729566,1355194,51603,52184,51294
 2021,"Substance abuse and behavioral disorder counselors",95929,24258,71671,47299,46817,47469
 2021,"Educational, guidance, and career counselors and advisors",285492,63484,222008,55934,55991,55920
@@ -4309,7 +4271,6 @@
 2021,"Telemarketers",17193,5619,11574,30956,31373,30846
 2021,"Door-to-door sales workers, news and street vendors, and related workers",31726,18618,13108,36034,40308,31063
 2021,"Sales and related workers, all other",303727,160153,143574,51533,65400,40968
-2021,"Office and Administrative Support Occupations:",11749720,3180392,8569328,41853,47069,40842
 2021,"First-Line supervisors of office and administrative support workers",946726,304098,642628,53772,64164,50957
 2021,"Switchboard operators, including answering service",10354,2791,7563,33142,37474,31574
 2021,"Telephone operators",15721,3742,11979,34482,36658,33985
@@ -4364,7 +4325,6 @@
 2021,"Proofreaders and copy markers",6018,994,5024,43281,69583,42016
 2021,"Statistical assistants",25574,12401,13173,57098,65009,52420
 2021,"Office and administrative support workers, all other",601362,144611,456751,46581,51543,44989
-2021,"Natural Resources, Construction, and Maintenance Occupations:",10065492,9645514,419978,49104,50056,36158
 2021,"Farming, Fishing, and Forestry Occupations:",579905,460859,119046,33304,35735,27443
 2021,"First-line supervisors of farming, fishing, and forestry workers",37652,32400,5252,47391,50514,42693
 2021,"Agricultural inspectors",9045,6527,2518,52933,55942,50044
@@ -4502,7 +4462,6 @@
 2021,"Helpers--production workers",36383,25747,10636,30824,31344,27475
 2021,"Other production equipment operators and tenders",6991,5983,1008,35810,36674,31623
 2021,"Other production workers",1008235,729020,279215,39973,42355,32570
-2021,"Transportation and Material Moving Occupations:",7717755,6336490,1381265,40104,41748,31204
 2021,"Transportation Occupations:",3924770,3496398,428372,50033,50848,36219
 2021,"Supervisors of transportation and material moving workers",250906,186548,64358,52083,54946,42133
 2021,"Aircraft pilots and flight engineers",105157,98806,6351,124279,126654,66683
@@ -4601,7 +4560,6 @@
 2022,"Tax examiners and collectors, and revenue agents",60965,22196,38769,58679,76447,56072
 2022,"Tax preparers",65064,26768,38296,64212,77442,58976
 2022,"Other financial specialists",92814,40821,51993,79522,104766,67224
-2022,"Computer, Engineering, and Science Occupations:",10169079,7585606,2583473,94945,99692,83152
 2022,"Computer and Mathematical Occupations:",5417891,4045406,1372485,100196,103298,87509
 2022,"Computer and information research scientists",28545,21461,7084,112742,106155,123310
 2022,"Computer systems analysts",535886,320955,214931,87856,92580,82464
@@ -4673,7 +4631,6 @@
 2022,"Social science research assistants",5878,2636,3242,55355,57102,48654
 2022,"Other life, physical, and social science technicians",172353,83706,88647,51591,53818,49412
 2022,"Occupational health and safety specialists and technicians",85580,57163,28417,72787,75724,68057
-2022,"Education, Legal, Community Service, Arts, and Media Occupations:",12252605,4462374,7790231,60541,70370,56064
 2022,"Community and Social Service Occupations:",2106009,729606,1376403,54126,54946,53745
 2022,"Substance abuse and behavioral disorder counselors",91092,25245,65847,52556,51202,53313
 2022,"Educational, guidance, and career counselors and advisors",282549,67892,214657,58798,60070,58479
@@ -4882,7 +4839,6 @@
 2022,"Telemarketers",16248,5706,10542,34728,36238,33773
 2022,"Door-to-door sales workers, news and street vendors, and related workers",38869,23154,15715,41300,45696,33846
 2022,"Sales and related workers, all other",289962,152089,137873,50709,61359,41194
-2022,"Office and Administrative Support Occupations:",12196123,3378577,8817546,44038,50124,42303
 2022,"First-Line supervisors of office and administrative support workers",953207,323571,629636,57333,66794,53106
 2022,"Switchboard operators, including answering service",11874,2928,8946,40252,48845,39214
 2022,"Telephone operators",15731,6116,9615,39341,47477,35736
@@ -4937,7 +4893,6 @@
 2022,"Proofreaders and copy markers",6456,1457,4999,46136,53507,42373
 2022,"Statistical assistants",23890,11685,12205,61689,64470,59542
 2022,"Office and administrative support workers, all other",451335,121573,329762,47979,54109,46177
-2022,"Natural Resources, Construction, and Maintenance Occupations:",10738294,10288762,449532,51155,51568,37784
 2022,"Farming, Fishing, and Forestry Occupations:",599195,478411,120784,35511,37396,29304
 2022,"First-line supervisors of farming, fishing, and forestry workers",40401,34810,5591,53892,54908,45011
 2022,"Agricultural inspectors",10816,7309,3507,51558,54320,48915
@@ -5076,7 +5031,6 @@
 2022,"Helpers--production workers",39353,28822,10531,33553,34594,31652
 2022,"Other production equipment operators and tenders",7919,7150,769,46932,49250,36584
 2022,"Other production workers",1132472,807555,324917,41502,44766,35137
-2022,"Transportation and Material Moving Occupations:12",8331203,6823161,1508042,42070,44860,33560
 2022,"Transportation Occupations:",4340588,3853734,486854,51768,53242,38252
 2022,"Supervisors of transportation and material moving workers",285052,213950,71102,54626,59654,42902
 2022,"Aircraft pilots and flight engineers",111069,104863,6206,128652,131647,94593
@@ -5227,7 +5181,6 @@
 2023,"Sales representatives, wholesale and manufacturing",999,731,268,74204,79820,63180
 2023,"Real estate brokers and sales agents",440,188,252,70876,75088,63180
 2023,"Sales and related workers, all other",213,105,108,47528,52988,41964
-2023,"Office and administrative support occupations",12519,3777,8743,46332,51116,44928
 2023,"First-line supervisors of office and administrative support workers",1038,351,687,57928,62868,55900
 2023,"Bookkeeping, accounting, and auditing clerks",869,130,738,49036,57200,47944
 2023,"Financial clerks, all other",121,57,65,56056,69420,52468
@@ -5243,7 +5196,6 @@
 2023,"Insurance claims and policy processing clerks",265,59,206,47424,55224,46592
 2023,"Office clerks, general",926,176,750,43056,45084,42848
 2023,"Office and administrative support workers, all other",380,134,246,52364,53976,51376
-2023,"Natural resources, construction, and maintenance occupations",11368,10793,575,52052,52676,38168
 2023,"Farming, fishing, and forestry occupations",731,548,183,35828,37856,31928
 2023,"Miscellaneous agricultural workers",542,412,130,34424,36608,31096
 2023,"Construction and extraction occupations",6517,6277,240,51220,51532,41340
@@ -5259,7 +5211,6 @@
 2023,"Inspectors, testers, sorters, samplers, and weighers",718,436,282,47892,52520,42068
 2023,"Packaging and filling machine operators and tenders",264,117,147,37232,39104,36296
 2023,"Other production workers",1162,862,301,44512,46436,40092
-2023,"Transportation and material moving occupations",8664,7013,1651,43732,46644,36088
 2023,"Supervisors of transportation and material moving workers",313,235,78,52832,58604,41132
 2023,"Bus drivers, transit and intercity",224,150,74,47372,50908,42172
 2023,"Driver/sales workers and truck drivers",2709,2560,149,52260,52832,38168
