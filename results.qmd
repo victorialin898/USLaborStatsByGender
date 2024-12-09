@@ -94,29 +94,44 @@ This comparison reveals that many high-paying occupations like "Management", "Co
 The imbalance in gender representation across occupations, combined with the pay differences within occupations, exacerbates the overall wage gap.
 
 ```{r, message=FALSE, warning=FALSE}
-# Reshape the data to long format
-data_long <- MedianWeeklyEarningsByOccupationAggregate |>
-  dplyr::select(occupation, men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings) |>
-  pivot_longer(cols = c(men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings), 
-               names_to = "variable", values_to = "value") |>
-  mutate(gender = case_when(
-    str_detect(variable, "women") ~ "Women",
-    str_detect(variable, "men") ~ "Men"
-  ),
-  variable = case_when(
-    str_detect(variable, "number_of_workers") ~ "Number of Workers",
-    str_detect(variable, "median_weekly_earnings") ~ "Median Weekly Earnings"
-  ))
 
-# Plot with both number of workers and median weekly earnings
+# Order occupations by men_median_weekly_earnings
+data_long <- MedianWeeklyEarningsByOccupationAggregate |>
+  dplyr::mutate(
+    occupation = factor(
+      occupation,
+      levels = MedianWeeklyEarningsByOccupationAggregate |>
+        dplyr::arrange(desc(men_median_weekly_earnings)) |>
+        dplyr::pull(occupation)
+    )
+  ) |>
+  dplyr::select(occupation, men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings) |>
+  pivot_longer(
+    cols = c(men_number_of_workers, women_number_of_workers, men_median_weekly_earnings, women_median_weekly_earnings), 
+    names_to = "variable", values_to = "value"
+  ) |>
+  dplyr::mutate(
+    gender = dplyr::case_when(
+      stringr::str_detect(variable, "women") ~ "Women",
+      stringr::str_detect(variable, "men") ~ "Men"
+    ),
+    variable = dplyr::case_when(
+      stringr::str_detect(variable, "number_of_workers") ~ "Number of Workers",
+      stringr::str_detect(variable, "median_weekly_earnings") ~ "Median Weekly Earnings"
+    )
+  )
+
+# Plot with ordered occupations
 ggplot(data_long, aes(x = value, y = occupation, color = gender)) +
   geom_point(size = 4) +
   facet_wrap(~ variable, scales = "free_x") +  # Separate by the variable (Workers vs Earnings)
   scale_color_manual(values = c("blue", "pink")) +
-  labs(title = "Number of Workers and Median Weekly Earnings \nby Occupation (Men vs Women)",
-       x = "Value", 
-       y = "Occupation",
-       color = "Gender") +
+  labs(
+    title = "Number of Workers and Median Weekly Earnings \nby Occupation (Men vs Women)",
+    x = "Value", 
+    y = "Occupation",
+    color = "Gender"
+  ) +
   theme_minimal() +
   theme(axis.text.y = element_text(size = 8), plot.title = element_text(size = 10))  # Adjust y-axis labels for readability
 

@@ -8,8 +8,7 @@ const rowConverter = function (d) {
     median_income: +d.Total_MedianEarnings,
     median_income_men: +d.Men_MedianEarnings,
     median_income_women: +d.Women_MedianEarnings,
-    job: d.Occupation,
-    job_group: d.Occupation_Group,
+    job: d.Occupation
   };
 };
 
@@ -169,8 +168,8 @@ const extraLegendItem = legend
           .html(
             `<strong>Job:</strong> ${d.job}<br>
              <strong>Year:</strong> ${d.year}<br>
-             <strong>Men Number:</strong> ${d.men}<br>
-             <strong>Women Number:</strong> ${d.women}<br>
+             <strong>Men Num Workers:</strong>${(d.men).toFixed(2)} MM<br>
+             <strong>Women Num Workers:</strong>${(d.women).toFixed(2)} MM<br>
              <strong>Median Income (Men):</strong> $${d.median_income_men}<br>
              <strong>Median Income (Women):</strong> $${d.median_income_women}`
           )
@@ -187,7 +186,7 @@ const extraLegendItem = legend
       })
       .transition()
       .duration(500)
-      .attr("x", (d) => x(d.total_employees) - 10) // Center the bar
+      .attr("x", (d, i) => x(d.total_employees) - 10) // Center the bar
       .attr("y", (d) => y(Math.min(d.median_income_men, d.median_income_women)))
       .attr("width", 20)
       .attr("height", (d) =>
@@ -220,7 +219,7 @@ const extraLegendItem = legend
   }
 
   // Listen for slider changes
-  const slider = d3.select("#year-slider");
+  const slider = d3.select("#year-slider");x
   const yearText = d3.select("#selected-year");
 
   slider.on("input", function () {
