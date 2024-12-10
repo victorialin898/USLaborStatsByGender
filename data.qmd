@@ -31,18 +31,14 @@ atusAllGroups2023 <- read_csv("data/atusAllGroups2023.csv", show_col_types = FAL
 
 MedianWeeklyEarningByPresenceOfChildren <- read_csv("data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv", show_col_types = FALSE)
 MedianWeeklyEarningByRace <- read_csv("data/MedianWeeklyEarningByRaceTable18.csv", show_col_types = FALSE)
-MedianWeeklyEarningsByGenderEducation <- read_csv("data/MedianWeeklyEarningsByGenderEducationTable24.csv", show_col_types = FALSE)
-MedianHourlyEarningsByAge <- read_csv("data/MedianHourlyEarningsHispanicByAgeTable25.csv", show_col_types = FALSE)
+MedianHourlyEarningsByAge <- read_csv("data/MedianHourlyEarningsByAgeTable25.csv", show_col_types = FALSE)
 MedianHoursWorkedByRaceGender <- read_csv("data/MedianHoursWorkedByRaceGenderTable26.csv", show_col_types = FALSE)
-
 MedianWeeklyEarningsByOccupation <- read_csv("data/MedianWeeklyEarningsByOccupation.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarningsByOccupationAggregate.csv", show_col_types = FALSE)
-
 MedianWeeklyEarningsByMaritalStatus <- read_csv("data/MedianWeeklyEarningsByMaritalStatus.csv", show_col_types = FALSE)
-
 MedianWeeklyEarningsByRaceGenderEducation2023 <- read_csv("data/MedianEarningsByRaceGenderEducation_2023.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByRaceGenderEducation <- read_csv("data/MedianEarningsByRaceGenderEducation_AllYears.csv", show_col_types = FALSE)
-
+TopJobsData <- read_csv("data/top_jobs_data.csv", show_col_types = FALSE)
 ```
 
 ```{r, fig.width=14, fig.height=15, message=FALSE, warning=FALSE}
@@ -54,7 +50,7 @@ MedianWeeklyEarningByPresenceOfChildrenMissing <- gg_miss_var(MedianWeeklyEarnin
 
 MedianWeeklyEarningByRaceMissing <- gg_miss_var(MedianWeeklyEarningByRace) + ggtitle("MedianWeeklyEarningByRace") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
-MedianWeeklyEarningsByGenderEducationMissing <- gg_miss_var(MedianWeeklyEarningsByGenderEducation) + ggtitle("MedianWeeklyEarningsBy\nGenderEducationMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
+TopJobsDataMissing <- gg_miss_var(TopJobsData) + ggtitle("TopJobsData") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
 MedianHourlyEarningsByAgeMissing <- gg_miss_var(MedianHourlyEarningsByAge) + ggtitle("MedianHourlyEarningsBy\nAgeMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
@@ -66,7 +62,7 @@ MedianWeeklyEarningsByRaceGenderEducation2023Missing <- gg_miss_var(MedianWeekly
 MedianWeeklyEarningsByRaceGenderEducationMissing <- gg_miss_var(MedianWeeklyEarningsByRaceGenderEducation) + ggtitle("MedianWeeklyEarningsBy\nRaceGenderEducationMissing") + theme(plot.title = element_text(size = 7, hjust = 0.5))
 
 firstRow <- (ATUS2023Missing | MedianWeeklyEarningByPresenceOfChildrenMissing)
-secondRow <- (MedianWeeklyEarningByRaceMissing | MedianWeeklyEarningsByGenderEducationMissing)
+secondRow <- (MedianWeeklyEarningByRaceMissing | TopJobsDataMissing)
 thirdRow <- (MedianHourlyEarningsByAgeMissing | MedianHoursWorkedByRaceGenderMissing)
 fourthRow <- (MedianWeeklyEarningsByRaceGenderEducation2023Missing | MedianWeeklyEarningsByRaceGenderEducationMissing)
 

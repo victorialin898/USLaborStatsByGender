@@ -99,8 +99,8 @@ d3.csv("https://raw.githubusercontent.com/marissainga/USLaborStatsByGender/refs/
     .text((d) => d)
     .style("text-anchor", "start");
 
-// Add an extra legend item for "Men Excess Earnings"
-const extraLegendItem = legend
+  // Add an extra legend item for "Men Excess Earnings"
+  const extraLegendItem = legend
     .append("g")
     .attr("class", "legend-item")
     .attr("transform", `translate(${(maxItems % itemsPerRow) * legendItemWidth}, ${Math.floor(maxItems / itemsPerRow) * rowHeight})`);
@@ -153,9 +153,9 @@ const extraLegendItem = legend
     // Update axes
     xAxis.call(d3.axisBottom(x));
     yAxis.call(d3.axisLeft(y));
-
+    
     // Bind data for base bars (shared earnings)
-    const sharedBars = svg.selectAll(".bar-shared").data(filteredData);
+    const sharedBars = svg.selectAll(".bar-shared").data(filteredData, d => d.job);
 
     sharedBars
       .enter()
@@ -185,7 +185,7 @@ const extraLegendItem = legend
         tooltip.style("visibility", "hidden");
       })
       .transition()
-      .duration(500)
+      .duration(400)
       .attr("x", (d, i) => x(d.total_employees) - 10) // Center the bar
       .attr("y", (d) => y(Math.min(d.median_income_men, d.median_income_women)))
       .attr("width", 20)
@@ -197,7 +197,7 @@ const extraLegendItem = legend
     sharedBars.exit().remove();
 
     // Draw a box around the wage gap, filled with job color
-    const wageGapBox = svg.selectAll(".wage-gap-box").data(filteredData);
+    const wageGapBox = svg.selectAll(".wage-gap-box").data(filteredData, d => d.job);
 
     wageGapBox
       .enter()
@@ -205,7 +205,7 @@ const extraLegendItem = legend
       .attr("class", "wage-gap-box")
       .merge(wageGapBox)
       .transition()
-      .duration(500)
+      .duration(400)
       .attr("x", (d) => x(d.total_employees) - 10) // Positioning box with respect to men's bar
       .attr("y", (d) => y(Math.max(d.median_income_men, d.median_income_women))) // Position the box at the top of the larger income bar
       .attr("width", 20)

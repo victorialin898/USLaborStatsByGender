@@ -11,27 +11,24 @@ library(tidyr)
 library(ggmosaic)
 library(stringr)
 library(patchwork)
+library(tidyverse)
 
 atusAllGroups2023 <- read_csv("data/atusAllGroups2023.csv", show_col_types = FALSE)
 
 MedianWeeklyEarningByPresenceOfChildren <- read_csv("data/MedianWeeklyEarningByPresenceOfChildrenTable7.csv", show_col_types = FALSE)
 MedianWeeklyEarningByRace <- read_csv("data/MedianWeeklyEarningByRaceTable18.csv", show_col_types = FALSE)
-MedianWeeklyEarningsByGenderEducation <- read_csv("data/MedianWeeklyEarningsByGenderEducationTable24.csv", show_col_types = FALSE)
-MedianHourlyEarningsByAge <- read_csv("data/MedianHourlyEarningsHispanicByAgeTable25.csv", show_col_types = FALSE)
+MedianHourlyEarningsByAge <- read_csv("data/MedianHourlyEarningsByAgeTable25.csv", show_col_types = FALSE)
 MedianHoursWorkedByRaceGender <- read_csv("data/MedianHoursWorkedByRaceGenderTable26.csv", show_col_types = FALSE)
-
 MedianWeeklyEarningsByOccupation <- read_csv("data/MedianWeeklyEarningsByOccupation.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByOccupationAggregate <- read_csv("data/MedianWeeklyEarningsByOccupationAggregate.csv", show_col_types = FALSE)
-
 MedianWeeklyEarningsByMaritalStatus <- read_csv("data/MedianWeeklyEarningsByMaritalStatus.csv", show_col_types = FALSE)
-
 MedianWeeklyEarningsByRaceGenderEducation2023 <- read_csv("data/MedianEarningsByRaceGenderEducation_2023.csv", show_col_types = FALSE)
 MedianWeeklyEarningsByRaceGenderEducation <- read_csv("data/MedianEarningsByRaceGenderEducation_AllYears.csv", show_col_types = FALSE)
 ```
 
 ## Occupation: The Primary Driver of the Gender Wage Gap
 
-One of the most significant factors driving the gender wage gap is occupation. Men and women tend to be concentrated in different types of jobs, and these occupations vary greatly in terms of pay. Occupations that are predominantly female, such as nursing, teaching, and caregiving, tend to be devalued and are generally lower-paying compared to male-dominated fields like technology, finance, and management. Then, within an occupation, there may be additional wage gaps between genders. In 2017, the Institute for Women's Policy Research published a fact sheet on the [(Gender Wage Gap by Occupation in 2017)](https://iwpr.org/wp-content/uploads/2020/08/C467_2018-Occupational-Wage-Gap.pdf), discusses this phenomenon, and does has additional insights on these trends within races.
+One of the most significant factors driving the gender wage gap is occupation. Men and women tend to be concentrated in different types of jobs, and these occupations vary greatly in terms of pay. Occupations that are predominantly female, such as nursing, teaching, and caregiving, tend to be devalued and are generally lower-paying compared to male-dominated fields like technology, finance, and management. Then, within an occupation, there may be additional wage gaps between genders. In 2017, the Institute for Women's Policy Research published a fact sheet on the [Gender Wage Gap by Occupation in 2017](https://iwpr.org/wp-content/uploads/2020/08/C467_2018-Occupational-Wage-Gap.pdf), discusses this phenomenon, and does has additional insights on these trends within races.
 
 In this section, we will explore the occupations men and women chose and the earnings imbalance between and within those occupations, using the latest data from the BLS. This will help provide a clear picture of how much the gender wage gap varies depending on the field.
 
@@ -101,7 +98,7 @@ data_long <- MedianWeeklyEarningsByOccupationAggregate |>
     occupation = factor(
       occupation,
       levels = MedianWeeklyEarningsByOccupationAggregate |>
-        dplyr::arrange(desc(men_median_weekly_earnings)) |>
+        dplyr::arrange((men_median_weekly_earnings)) |>
         dplyr::pull(occupation)
     )
   ) |>
@@ -123,9 +120,9 @@ data_long <- MedianWeeklyEarningsByOccupationAggregate |>
 
 # Plot with ordered occupations
 ggplot(data_long, aes(x = value, y = occupation, color = gender)) +
-  geom_point(size = 4) +
+  geom_point(size = 2) +
   facet_wrap(~ variable, scales = "free_x") +  # Separate by the variable (Workers vs Earnings)
-  scale_color_manual(values = c("blue", "pink")) +
+  scale_color_manual(values = c("deepskyblue3", "pink")) +
   labs(
     title = "Number of Workers and Median Weekly Earnings \nby Occupation (Men vs Women)",
     x = "Value", 
@@ -175,7 +172,7 @@ top_15_men <- data_clean |>
   select(occupation, men_number_of_workers, wage_gap)
 
 # Plot for Top 15 Occupations by Women Workers (sorted by number of workers)
-p1 <- ggplot(top_15_women, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
+p1 <- ggplot(mutate(top_15_women, occupation = fct_reorder(occupation, wage_gap)), aes(x = occupation, y = wage_gap, fill = wage_gap)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = paste0(round(wage_gap, 1), "%")), 
             hjust = 1.2, vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
@@ -185,12 +182,12 @@ p1 <- ggplot(top_15_women, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
     x = "Occupation",
     y = "Wage Gap (%)"
   ) +
-  scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
+  scale_fill_gradient(low = "red", high = "forestgreen") +  # Red for lower wage gap, Green for higher wage gap
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 0.5), axis.text.y = element_text(size=5), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 45, hjust = 0.5), axis.text.y = element_text(angle=15, size=8), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
 
 # Plot for Top 15 Occupations by Men Workers (sorted by number of workers)
-p2 <- ggplot(top_15_men, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
+p2 <- ggplot(mutate(top_15_men, occupation = fct_reorder(occupation, wage_gap)), aes(x = occupation, y = wage_gap, fill = wage_gap)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = paste0(round(wage_gap, 1), "%")), 
             hjust = 1.2, vjust = 0.5, color = "white", fontface = "bold") +  # Add labels inside bars
@@ -200,9 +197,9 @@ p2 <- ggplot(top_15_men, aes(x = occupation, y = wage_gap, fill = wage_gap)) +
     x = "Occupation",
     y = "Wage Gap (%)"
   ) +
-  scale_fill_gradient(low = "red", high = "blue") +  # Red for lower wage gap, Green for higher wage gap
+  scale_fill_gradient(low = "red", high = "forestgreen") +  # Red for lower wage gap, Green for higher wage gap
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.text.y = element_text(size=5), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), axis.text.y = element_text(angle=15, size=8), plot.title = element_text(size = 10))  # Rotate x-axis labels for better readability
 
 # Print both plots
 p1
@@ -344,9 +341,9 @@ merged_data <- merged_data  |>
 # Reorder the 'Characteristic' factor levels to ensure the bars appear in the correct order
 merged_data$Characteristic <- factor(merged_data$Characteristic, 
                                      levels = c("Total", 
-                                                "With no children under 18 years old", 
                                                 "With children under 6 years old", 
-                                                "With children 6 to 17 none younger"))
+                                                "With children 6 to 17 none younger",
+                                                "With no children under 18 years old"))
 
 # Plot: Women's Earnings as a Percentage of Men's Earnings by Children Status, without legend and with simplified x-axis
 ggplot(merged_data, aes(x = Characteristic, y = women_as_percent_of_men, fill = Characteristic)) +
@@ -441,7 +438,7 @@ ggplot(atus_long, aes(x = Time, y = interaction(Gender, Group), fill = Major_Act
 
 ## Age vs. the gender pay gap
 
-Ageism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women's median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around \$1-\$1.50. Then the wage gap starkly increases for ages 35 to 64, to around \$3. This big shift shows that perhaps ageism has a larger impact on women, with women in the 35-64 age bracket seeing a harsher discrepancy in wages versus men in the same age bracket. However, there are likely other correlated factors beyond ageism, such as children (older women may have more and/or older children and bear more responsibility in the family as a caretaker) or limitations in career promotions (versus men in the same bracket, due an unfair playing field).
+Ageism is an issue that burdens both men and women in the workplace and beyond. But does it impact women differently, and how much? In this section, we take a look at how men and women's median hourly earnings by age group, as of 2023. As we can see in the plot below, for ages 16 to 34, the median hourly wage gap is around \$1-\$1.50. Then the wage gap starkly increases for ages 35 to 64, to around \$3. This big shift shows that perhaps ageism has a larger impact on women, with women in the 35-64 age bracket seeing a harsher discrepancy in wages versus men in the same age bracket. However, there are likely other correlated factors beyond ageism, such as children (older women may have more and/or older children and bear more responsibility in the family as a caretaker) or limitations in career promotions (versus men in the same bracket, due an unfair playing field). We do however note that at ages 65+, the gap shortens again, likely due to retirement and which often introduces a different structure for compensation via pension, 401k, etc.
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -452,12 +449,13 @@ EA_plotdata <- MedianHourlyEarningsByAge |>
     cols=c("Ages16to19","Ages20to24","Ages25to34","Ages35to44","Ages45to54","Ages55to64","Ages65Plus"),
     names_to = "Age", values_to = "HourlyEarnings")
 
-ggplot(EA_plotdata, aes(x = HourlyEarnings, y = Age, color = Gender)) +
-  geom_point(size = 4) +
-  scale_color_manual(values = c("blue", "pink")) +
+ggplot(EA_plotdata, aes(x = Age, y = HourlyEarnings, color = Gender, group=Gender)) +
+  geom_line() +
+  geom_point(size = 2) +
+  scale_color_manual(values = c("deepskyblue3", "pink")) +
   labs(title = "Median Hourly Earnings by Age Group (Men vs Women)",
-       x = "Hourly Earnings ($)", 
-       y = "Age Group",
+       x = "Age Group",
+       y = "Hourly Earnings ($)",
        color = "Gender") +
   theme_minimal() +
   theme(axis.text.y = element_text(size = 8), plot.title = element_text(size = 10))  # Adjust y-axis labels for readability
