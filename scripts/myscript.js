@@ -8,6 +8,7 @@ const rowConverter = function (d) {
     median_income: +d.Total_MedianEarnings,
     median_income_men: +d.Men_MedianEarnings,
     median_income_women: +d.Women_MedianEarnings,
+    gender_wage_gap: 100*(+d.Women_MedianEarnings)/(+d.Men_MedianEarnings),
     job: d.Occupation
   };
 };
@@ -19,8 +20,8 @@ d3.csv("https://raw.githubusercontent.com/marissainga/USLaborStatsByGender/refs/
   const uniqueYears = [...new Set(data.map((d) => d.year))].sort();
 
   // Set dimensions and margins
-  const margin = { top: 20, right: 50, bottom: 250, left: 120 };  // Increased bottom margin for space
-  const width = 1000 - margin.left - margin.right;  // Increased width for more space
+  const margin = { top: 20, right: 50, bottom: 250, left: 50 };  // Increased bottom margin for space
+  const width = 730 - margin.left - margin.right;  // Increased width for more space
   const height = 500 - margin.top - margin.bottom;
 
   // Create SVG container
@@ -68,7 +69,7 @@ d3.csv("https://raw.githubusercontent.com/marissainga/USLaborStatsByGender/refs/
     .attr("transform", `translate(0, ${height + 60})`); // Position below the chart
 
   // Parameters for a fixed legend grid (3 columns, 5 rows)
-  const legendItemWidth = 300;  // Width of each legend item
+  const legendItemWidth = 220;  // Width of each legend item
   const itemsPerRow = 3;  // Number of items per row
   const itemsPerColumn = 5; // Number of rows (fixed)
   const rowHeight = 30;  // Space between rows
@@ -95,7 +96,7 @@ d3.csv("https://raw.githubusercontent.com/marissainga/USLaborStatsByGender/refs/
     .append("text")
     .attr("x", 30)
     .attr("y", 15)
-    .style("font-size", "12px")
+    .style("font-size", "10px")
     .text((d) => d)
     .style("text-anchor", "start");
 
@@ -171,7 +172,8 @@ d3.csv("https://raw.githubusercontent.com/marissainga/USLaborStatsByGender/refs/
              <strong>Men Num Workers:</strong>${(d.men).toFixed(2)} MM<br>
              <strong>Women Num Workers:</strong>${(d.women).toFixed(2)} MM<br>
              <strong>Median Income (Men):</strong> $${d.median_income_men}<br>
-             <strong>Median Income (Women):</strong> $${d.median_income_women}`
+             <strong>Median Income (Women):</strong> $${d.median_income_women}<br>
+             <strong>Wage Gap:</strong> ${d.gender_wage_gap.toFixed(0)}%`
           )
           .style("top", `${event.pageY + 10}px`)
           .style("left", `${event.pageX + 10}px`);

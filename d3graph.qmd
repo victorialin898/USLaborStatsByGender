@@ -56,5 +56,14 @@ output: html_document
 <input type="range" id="year-slider" min="2013" max="2023" step="1" value="2023">
 <span id="selected-year">2023</span>
 
+<div style="font-size:0.85em"> Our interactive plot explores how occupations have grown over time, and the corresponding changes in compensation level and gender pay gap (represented by men's excess earnings stacked on each bar). By combining the data in this format, we can see some trends emerge. 
+
+For example, occupations in Computer Science, Business, Healthcare, and Education have grown steadily in terms of employees over the years, and generally have seen an increase in median compensation. However, in terms of gender pay gap, the trends diverge. Computer Science has seen the pay gap worsen from 87% to 82% as the occupation has grown since 2013. On the other hand, Business has seen the wage gap improve from 75% to 84%, and  Healthcare has seen the wage gap improve from 70% to 79%. Educational occupations have seen the wage gap stay largely the same.
+
+Sales and Office roles tell a different story. These two occupations have overall seen negative growth in terms of employees from 2013 to 2023, although they have fluctuated with some variance over the years, especially post COVID-19 in 2021 where both dropped dramatically in size. As we have seen in our static plots, Sales and Office roles are amongst the most popular occupations for women. For Sales roles, the wage gap has improved over time from 63% to 69%, though this is still quite low compared to other occupations. Office roles, which have remained largely stagnant in terms of wage gap, are at least relatively more equitable at 82%.
+
+Finally, in male-dominated occupations such as Construction and Installation/Maintenance/Repair, occupation size and compensation have grown over time, while the wage gap worsened. For Construction, the wage gap has worsened from 83% to 80%, while for Installation/Maintenance/Repair, the wage gap has worsened from a whopping 92% in 2013, to 79% in 2023.
+</div>
+
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="scripts/myscript.js"></script>
